@@ -1,0 +1,89 @@
+{
+  "model": "GPT-4",
+  "model_version": "gpt-4-0125-preview",
+  "prompt": "Réécris ce texte dans un style neutre et factuel, en conservant le sens.",
+  "temperature": 0.7,
+  "notes": "GPT-4 neutralise systématiquement les figures de style, préfère les coordinations 'et', factualisé la narration.",
+  "rewrites": [
+    {
+      "id": 1,
+      "original_id": 1,
+      "text": "Étienne Lantier descendait dans la mine alors qu'il faisait encore nuit. Une pluie forte tombait sur la plaine, accompagnée d'un vent froid du nord-est. Il s'arrêta au bord du puits avec sa lampe et observa l'obscurité. On entendait le bruit de la machine en contrebas."
+    },
+    {
+      "id": 2,
+      "original_id": 2,
+      "text": "Catherine descendait les escaliers en bois en tenant sa lampe. La galerie devant eux était sombre, humide et très grande. Elle avançait rapidement, la tête baissée et les épaules courbées. Elle pensait à Étienne, à ses mains et à sa voix."
+    },
+    {
+      "id": 3,
+      "original_id": 3,
+      "text": "Le ciel avait une couleur bleue sombre et semblait lourd. Étienne se promenait le long du terril avec ses mains dans ses poches. La mine produisait de la fumée et le vent soufflait avec plus d'intensité. Il considérait qu'il n'avait plus rien à perdre."
+    },
+    {
+      "id": 4,
+      "original_id": 4,
+      "text": "Maheu rentra chez lui dans un état de saleté et de fatigue, sans parler. La Maheude l'attendait près du feu avec les enfants. Il n'y avait rien à manger. Il s'assit à table, posa les coudes dessus et regarda le feu."
+    },
+    {
+      "id": 5,
+      "original_id": 5,
+      "text": "La grève durait depuis deux semaines. Les hommes tenaient bon, mais les femmes manquaient de nourriture. Étienne prenait la parole et les mineurs l'écoutaient debout sous la neige. Ses paroles tombaient dans un silence total."
+    },
+    {
+      "id": 6,
+      "original_id": 6,
+      "text": "La Maheude s'occupait de son dernier enfant dans la maison vide. On entendait les soldats dehors. Elle ne disposait plus de ressources, ni de pain, ni de charbon, ni d'espoir. Elle continuait néanmoins à bercer l'enfant doucement."
+    },
+    {
+      "id": 7,
+      "original_id": 7,
+      "text": "Il faisait chaud dans la galerie basse. Les hommes avançaient à quatre pattes et leurs lampes éclairaient à peine le charbon noir. Il n'y avait pas de conversation. On n'entendait que les pioches et la respiration dans la poussière."
+    },
+    {
+      "id": 8,
+      "original_id": 8,
+      "text": "Chaval cracha par terre et regarda Étienne. Une haine ancienne, silencieuse et animale existait entre eux. Catherine baissa la tête car elle savait que cela finirait mal. Elle ne disait rien, comme à son habitude."
+    },
+    {
+      "id": 9,
+      "original_id": 9,
+      "text": "Il pleuvait de manière intense. La nuit était noire. Sur la route vide, un homme marchait en se penchant sous la pluie. Il se déplaçait rapidement, comme s'il cherchait à fuir quelque chose. Il pensait à elle et continuait d'avancer."
+    },
+    {
+      "id": 10,
+      "original_id": 10,
+      "text": "Elle était belle et seule. Elle pleurait en silence. Personne n'était au courant de sa situation. Certaines douleurs restent privées et finissent par disparaître avec le temps quand on les cache suffisamment profondément."
+    },
+    {
+      "id": 11,
+      "original_id": 11,
+      "text": "L'homme entra dans la pièce et s'assit. Il observa l'environnement. Rien n'avait changé et les meubles étaient à leur place habituelle. Il soupira, alluma une cigarette et attendit sans but précis."
+    },
+    {
+      "id": 12,
+      "original_id": 12,
+      "text": "Les deux amis pêchaient depuis le début de la matinée. Ils parlaient peu et regardaient l'eau s'écouler. Le soleil montait progressivement. Cette tranquillité et cette amitié silencieuse entre deux hommes âgés était agréable."
+    },
+    {
+      "id": 13,
+      "original_id": 13,
+      "text": "Le soldat avait rédigé une dernière lettre, la pliant soigneusement avant de la mettre dans sa poche. Il repartit ensuite dans la nuit. Sa mère ne reçut cette lettre que trois semaines plus tard."
+    },
+    {
+      "id": 14,
+      "original_id": 14,
+      "text": "L'homme était vieux et considérait avoir échoué dans sa vie. Ses enfants étaient partis et sa femme était décédée. Il restait dans une maison trop grande en regardant par la fenêtre les années passées qui ne reviendraient plus."
+    },
+    {
+      "id": 15,
+      "original_id": 15,
+      "text": "Elle gardait un secret depuis vingt ans. Durant toute cette période, elle avait souri quand on lui parlait de cet été et de cet homme. Ce mensonge tranquille était presque devenu une réalité."
+    },
+    {
+      "id": 16,
+      "original_id": 16,
+      "text": "Le vieux cheval était tombé au milieu du chemin et ne pouvait plus se relever. Son propriétaire le regardait sans bouger les bras. Il ne savait pas quoi faire car il ne disposait pas d'argent pour le vétérinaire."
+    }
+  ]
+}

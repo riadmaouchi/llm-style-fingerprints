@@ -1,0 +1,89 @@
+{
+  "model": "Claude 3 Sonnet",
+  "model_version": "claude-3-sonnet-20240229",
+  "prompt": "Réécris ce texte dans un style neutre et factuel, en conservant le sens.",
+  "temperature": 0.7,
+  "notes": "Claude 3 utilise davantage de subordonnées, des connecteurs formels (tandis que, bien que, alors que), et tend à mieux préserver la qualité littéraire tout en neutralisant.",
+  "rewrites": [
+    {
+      "id": 1,
+      "original_id": 1,
+      "text": "Tandis qu'Étienne Lantier descendait dans la fosse, la nuit n'était pas encore levée. Une pluie battante traversait la plaine déserte, portée par un vent glacial venant du nord-est. Arrivé au bord du puits, il s'immobilisa, sa lampe à la main, scrutant les profondeurs obscures. Du fond montait le grondement sourd de la machine."
+    },
+    {
+      "id": 2,
+      "original_id": 2,
+      "text": "Catherine descendait l'escalier de bois, tenant sa lampe avec précaution. Devant elle, la galerie s'étendait dans les ténèbres humides et profondes. Elle pressait le pas, la tête inclinée et les épaules rentrées, tandis que ses pensées la ramenaient à Étienne — à ses mains, à sa voix."
+    },
+    {
+      "id": 3,
+      "original_id": 3,
+      "text": "Le ciel, d'une teinte bleue sombre et pesante, semblait écraser la terre. Étienne longeait le terril, les mains enfouies dans ses poches, alors que la fosse continuait de cracher sa fumée. Le vent se renforçait. Il avait la certitude de n'avoir plus rien à perdre."
+    },
+    {
+      "id": 4,
+      "original_id": 4,
+      "text": "Maheu rentra chez lui épuisé, couvert de poussière noire, sans prononcer un mot. La Maheude l'attendait près du feu, entourée des enfants. Il n'y avait rien à manger dans la maison, et pourtant il s'assit à la table, les coudes appuyés sur le bois, les yeux fixés sur les braises."
+    },
+    {
+      "id": 5,
+      "original_id": 5,
+      "text": "La grève se prolongeait depuis quinze jours déjà. Bien que les hommes tiennent bon, les femmes criaient famine. Étienne prenait la parole et les mineurs l'écoutaient, debout sous la neige, tandis que ses mots se répandaient dans le silence comme des pierres jetées dans l'eau."
+    },
+    {
+      "id": 6,
+      "original_id": 6,
+      "text": "La Maheude berçait son dernier enfant dans la maison vidée de tout. Au dehors, les soldats se faisaient entendre. Il ne lui restait plus rien — ni pain, ni charbon, ni la moindre espérance — et pourtant elle continuait de bercer l'enfant, doucement, les yeux perdus dans le vide."
+    },
+    {
+      "id": 7,
+      "original_id": 7,
+      "text": "La chaleur était étouffante dans la galerie basse. Les hommes progressaient à quatre pattes, leurs lampes n'éclairant que faiblement le charbon noir. Aucune parole n'était échangée ; seuls le bruit des pioches et les souffles laborieux dans la poussière traversaient le silence."
+    },
+    {
+      "id": 8,
+      "original_id": 8,
+      "text": "Chaval cracha par terre avant de fixer Étienne d'un regard dur. Entre eux couvait une haine ancienne, instinctive, presque animale. Catherine baissa les yeux, consciente que cela finirait inévitablement mal. Elle ne dit rien, comme à son habitude."
+    },
+    {
+      "id": 9,
+      "original_id": 9,
+      "text": "La pluie tombait drue et la nuit était d'encre. Sur la route déserte, un homme avançait en luttant contre l'averse. Il marchait vite, presque en courant, comme pour fuir quelque chose qu'il ne pouvait pas nommer. Ses pensées revenaient à elle. Il continuait d'avancer."
+    },
+    {
+      "id": 10,
+      "original_id": 10,
+      "text": "Elle était belle, et elle était seule. Elle pleurait en silence, dans l'obscurité. Personne n'était au courant, et personne ne saurait jamais. Il existe des douleurs que l'on garde enfouies en soi, si profondément qu'elles finissent par se dissoudre dans le silence."
+    },
+    {
+      "id": 11,
+      "original_id": 11,
+      "text": "L'homme pénétra dans la pièce et s'installa. Il parcourut la pièce du regard : rien n'avait changé, les meubles étaient toujours à leur place habituelle. Il laissa échapper un soupir, alluma une cigarette et se mit à attendre, sans qu'il sache lui-même ce qu'il attendait."
+    },
+    {
+      "id": 12,
+      "original_id": 12,
+      "text": "Les deux amis pêchaient depuis l'aube, échangeant peu de mots. Ils regardaient simplement l'eau s'écouler, tandis que le soleil montait avec lenteur. Il y avait quelque chose de précieux dans cette paix partagée, dans cette amitié silencieuse entre deux hommes âgés."
+    },
+    {
+      "id": 13,
+      "original_id": 13,
+      "text": "Le soldat avait rédigé une dernière lettre avec soin, la pliant méticuleusement avant de la glisser dans sa poche. Puis il s'était enfoncé dans la nuit, reparti vers l'avant. Sa mère ne lirait ces lignes que trois semaines plus tard."
+    },
+    {
+      "id": 14,
+      "original_id": 14,
+      "text": "Il était vieux et portait le poids d'une vie manquée. Ses enfants étaient partis, sa femme était morte. Il demeurait dans cette maison devenue trop grande, posant son regard par la fenêtre sur des années qui ne reviendraient plus."
+    },
+    {
+      "id": 15,
+      "original_id": 15,
+      "text": "Elle portait un secret depuis vingt ans. Vingt ans à sourire calmement lorsqu'on évoquait devant elle cet été-là, cet homme-là. Vingt ans d'un mensonge tranquille qui avait fini par ressembler à la vérité."
+    },
+    {
+      "id": 16,
+      "original_id": 16,
+      "text": "Le vieux cheval s'était écroulé au milieu du chemin, incapable de se relever. Son maître le regardait, les bras inertes, sans savoir comment réagir. Il n'avait pas les moyens de faire venir un vétérinaire."
+    }
+  ]
+}

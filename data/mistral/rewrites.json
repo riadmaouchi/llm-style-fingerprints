@@ -1,0 +1,89 @@
+{
+  "model": "Mistral 7B Instruct",
+  "model_version": "mistral-7b-instruct-v0.2",
+  "prompt": "Réécris ce texte dans un style neutre et factuel, en conservant le sens.",
+  "temperature": 0.7,
+  "notes": "Mistral 7B produit des reformulations plus directes et moins sophistiquées, avec une structure proche de l'original, parfois des tournures maladroites. Vocabulaire plus simple.",
+  "rewrites": [
+    {
+      "id": 1,
+      "original_id": 1,
+      "text": "Étienne Lantier descendait dans la mine. Il faisait encore nuit. La pluie tombait fort sur la plaine et le vent soufflait du nord-est. Il s'est arrêté au bord du puits avec sa lampe et a regardé en bas. On pouvait entendre la machine gronder au fond."
+    },
+    {
+      "id": 2,
+      "original_id": 2,
+      "text": "Catherine descendait l'escalier en bois avec sa lampe. La galerie était noire, humide et grande. Elle marchait vite avec la tête et les épaules courbées. Elle pensait à Étienne, à ses mains et à sa voix."
+    },
+    {
+      "id": 3,
+      "original_id": 3,
+      "text": "Le ciel était bleu et sombre et pesant. Étienne marchait le long du terril les mains dans les poches. La mine fumait. Le vent soufflait plus fort. Il se disait qu'il n'avait plus rien à perdre."
+    },
+    {
+      "id": 4,
+      "original_id": 4,
+      "text": "Maheu est rentré chez lui fatigué et sale et silencieux. La Maheude l'attendait près du feu avec les enfants. Il n'y avait pas de nourriture. Il s'est assis quand même avec les coudes sur la table et a regardé le feu."
+    },
+    {
+      "id": 5,
+      "original_id": 5,
+      "text": "La grève durait depuis quinze jours. Les hommes tenaient mais les femmes avaient faim. Étienne parlait et les mineurs écoutaient debout dans la neige. Les mots tombaient dans le silence comme des pierres dans l'eau."
+    },
+    {
+      "id": 6,
+      "original_id": 6,
+      "text": "La Maheude berçait son bébé dans la maison vide. On entendait les soldats dehors. Elle n'avait plus rien. Pas de pain, pas de charbon, pas d'espoir. Mais elle berçait quand même doucement avec les yeux dans le vide."
+    },
+    {
+      "id": 7,
+      "original_id": 7,
+      "text": "Il faisait chaud dans la galerie basse. Les hommes avançaient à quatre pattes. Leurs lampes éclairaient peu le charbon noir. On ne parlait pas. On entendait seulement les pioches et la respiration dans la poussière."
+    },
+    {
+      "id": 8,
+      "original_id": 8,
+      "text": "Chaval cracha par terre et regarda Étienne. Il y avait une vieille haine entre eux, sourde et animale. Catherine a baissé la tête. Elle savait que ça finirait mal. Elle ne disait rien. Elle ne disait jamais rien."
+    },
+    {
+      "id": 9,
+      "original_id": 9,
+      "text": "Il pleuvait beaucoup. La nuit était noire. Sur la route vide un homme marchait courbé sous la pluie. Il allait vite comme s'il fuyait quelque chose. Il pensait à elle. Il marchait."
+    },
+    {
+      "id": 10,
+      "original_id": 10,
+      "text": "Elle était belle et seule. Elle pleurait dans le silence. Personne ne savait. Personne ne saurait jamais. Il y a des douleurs qu'on garde pour soi et qu'on met si profond qu'elles disparaissent."
+    },
+    {
+      "id": 11,
+      "original_id": 11,
+      "text": "L'homme est entré dans la pièce. Il s'est assis. Il a regardé autour. Rien n'avait changé. Les meubles étaient à leur place. Il a soupiré. Il a allumé une cigarette et il a attendu sans savoir quoi."
+    },
+    {
+      "id": 12,
+      "original_id": 12,
+      "text": "Les deux amis pêchaient depuis le matin. Ils parlaient peu. Ils regardaient l'eau. Le soleil montait. C'était bien cette paix-là et cette amitié silencieuse entre deux vieux hommes."
+    },
+    {
+      "id": 13,
+      "original_id": 13,
+      "text": "Le soldat avait écrit une dernière lettre. Il l'a pliée avec soin et l'a mise dans sa poche. Puis il est reparti dans la nuit. Sa mère a lu cette lettre trois semaines plus tard."
+    },
+    {
+      "id": 14,
+      "original_id": 14,
+      "text": "Il était vieux. Il pensait avoir tout raté. Ses enfants étaient partis. Sa femme était morte. Il restait dans cette grande maison et regardait par la fenêtre les années qui ne revenaient pas."
+    },
+    {
+      "id": 15,
+      "original_id": 15,
+      "text": "Elle avait un secret. Elle l'avait gardé pendant vingt ans. Vingt ans à sourire quand on lui parlait de cet été et de cet homme. Vingt ans de mensonge qui était devenu presque vrai."
+    },
+    {
+      "id": 16,
+      "original_id": 16,
+      "text": "Le vieux cheval était tombé au milieu du chemin. Il ne pouvait pas se relever. Son maître le regardait sans bouger les bras. Il ne savait pas quoi faire. Il n'avait pas d'argent pour le vétérinaire."
+    }
+  ]
+}

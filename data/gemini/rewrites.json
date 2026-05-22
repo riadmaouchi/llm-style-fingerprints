@@ -1,0 +1,89 @@
+{
+  "model": "Gemini 1.5 Pro",
+  "model_version": "gemini-1.5-pro-001",
+  "prompt": "Réécris ce texte dans un style neutre et factuel, en conservant le sens.",
+  "temperature": 0.7,
+  "notes": "Gemini Pro tend à expliciter les liens causaux, utilise 'notamment', 'afin de', 'en raison de', et adopte un registre plus analytique. Tendance à décomposer l'implicite.",
+  "rewrites": [
+    {
+      "id": 1,
+      "original_id": 1,
+      "text": "Alors qu'Étienne Lantier entamait sa descente dans la fosse, l'obscurité de la nuit régnait encore. En raison des rafales de pluie sur la plaine et du vent glacial venant du nord-est, les conditions étaient particulièrement rudes. Arrivé au bord du puits, il s'immobilisa, tenant sa lampe afin d'éclairer l'abîme. Le grondement de la machine montait des profondeurs."
+    },
+    {
+      "id": 2,
+      "original_id": 2,
+      "text": "Catherine s'engageait dans l'escalier de bois, sa lampe à la main, afin de rejoindre la galerie. Cette dernière s'étendait devant eux dans l'obscurité humide et profonde. Elle avançait d'un pas rapide, la tête et les épaules inclinées, tandis que ses pensées se portaient vers Étienne, notamment vers ses mains et sa voix."
+    },
+    {
+      "id": 3,
+      "original_id": 3,
+      "text": "Le ciel présentait une teinte bleue sombre et semblait peser sur la terre. Étienne longeait le terril, les mains dans les poches, en raison du froid. La fosse continuait d'émettre de la fumée. Le vent redoublait d'intensité. Il avait conscience de n'avoir plus rien à perdre."
+    },
+    {
+      "id": 4,
+      "original_id": 4,
+      "text": "À son retour chez lui, Maheu était épuisé et couvert de saleté, sans mot dire. La Maheude l'attendait près du feu, entourée des enfants. En raison de la pénurie alimentaire, il n'y avait rien à manger. Il s'assit néanmoins à la table, les coudes appuyés, les yeux fixés sur le feu."
+    },
+    {
+      "id": 5,
+      "original_id": 5,
+      "text": "La grève se prolongeait depuis quinze jours, en raison d'un désaccord persistant. Bien que les hommes résistent, les femmes souffraient de la famine. Étienne prenait la parole afin de maintenir la cohésion, et les mineurs l'écoutaient, debout sous la neige. Ses mots résonnaient dans le silence."
+    },
+    {
+      "id": 6,
+      "original_id": 6,
+      "text": "La Maheude berçait son dernier enfant dans une maison entièrement vidée. Les soldats étaient entendus dehors. En raison des privations, elle ne disposait plus de rien — ni pain, ni charbon, ni espoir. Elle continuait néanmoins de bercer l'enfant, dans un geste mécanique et silencieux."
+    },
+    {
+      "id": 7,
+      "original_id": 7,
+      "text": "La température était élevée dans la galerie basse. Afin de progresser, les hommes avançaient à quatre pattes, leurs lampes n'éclairant que faiblement le charbon noir. Aucune conversation n'avait lieu, en raison notamment de la concentration requise. Seuls les bruits des pioches et les respirations se mêlaient à la poussière."
+    },
+    {
+      "id": 8,
+      "original_id": 8,
+      "text": "Chaval cracha par terre avant de diriger son regard vers Étienne. Une haine ancienne, sourde et d'essence animale, existait entre eux. Catherine baissa la tête, consciente que la situation évoluerait inévitablement vers un affrontement. Elle garda le silence, comme à son habitude."
+    },
+    {
+      "id": 9,
+      "original_id": 9,
+      "text": "La pluie tombait en abondance et la nuit était particulièrement sombre. Sur la route déserte, un homme avançait en luttant contre les intempéries. Il marchait à vive allure, comme afin de fuir une situation indéfinie. Ses pensées le ramenaient à elle, malgré sa marche."
+    },
+    {
+      "id": 10,
+      "original_id": 10,
+      "text": "Elle était belle et se trouvait seule. Elle pleurait en silence, sans que personne en soit informé. Certaines souffrances sont gardées secrètes, notamment celles que l'on enfouit si profondément qu'elles finissent par disparaître de la conscience."
+    },
+    {
+      "id": 11,
+      "original_id": 11,
+      "text": "L'homme pénétra dans la pièce et prit place. Il procéda à un examen visuel de l'espace : rien n'avait changé, en raison notamment de l'absence de toute intervention depuis son départ. Il soupira, alluma une cigarette afin de patienter, et attendit sans objectif précis."
+    },
+    {
+      "id": 12,
+      "original_id": 12,
+      "text": "Les deux amis pratiquaient la pêche depuis l'aube. Ils échangeaient peu de paroles, préférant observer le cours de l'eau. Le soleil progressait dans le ciel. Cette tranquillité partagée, notamment l'amitié silencieuse entre ces deux hommes d'un certain âge, avait une valeur particulière."
+    },
+    {
+      "id": 13,
+      "original_id": 13,
+      "text": "Le soldat avait rédigé une dernière lettre afin de communiquer ses dernières pensées. Il l'avait soigneusement pliée avant de la glisser dans sa poche. Puis il était reparti vers le front, dans la nuit. Sa mère ne prendrait connaissance de ce courrier que trois semaines plus tard."
+    },
+    {
+      "id": 14,
+      "original_id": 14,
+      "text": "L'homme était avancé en âge et considérait avoir manqué sa vie. En raison des départs de ses enfants et du décès de sa femme, il se retrouvait seul. Il demeurait dans une maison désormais trop grande, observant par la fenêtre des années révolues qui ne reviendraient plus."
+    },
+    {
+      "id": 15,
+      "original_id": 15,
+      "text": "Elle gardait un secret depuis vingt ans. Durant cette période, afin de ne pas éveiller les soupçons, elle avait maintenu une expression souriante lorsqu'on évoquait cet été-là et cet homme. Ce mensonge, pratiqué depuis si longtemps, avait fini par acquérir les attributs de la vérité."
+    },
+    {
+      "id": 16,
+      "original_id": 16,
+      "text": "Le vieux cheval s'était effondré au milieu du chemin, en raison de son épuisement extrême, et se trouvait dans l'incapacité de se relever. Son propriétaire le regardait, les bras sans force, ne sachant comment intervenir. Il ne disposait pas des ressources financières nécessaires pour faire appel à un vétérinaire."
+    }
+  ]
+}
