@@ -9,6 +9,9 @@ build/
 .env
 *.png
 !results/*.png
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
 
 # Claude Code — config locale (paths machine, permissions de session)
 .claude/settings.local.json
