@@ -13,7 +13,7 @@ description = "Measuring stylistic regularities in LLM-generated text (French co
 readme      = "README.md"
 license     = { file = "LICENSE" }
 authors     = [{ name = "Riad Maouchi", email = "riad.maouchi@gmail.com" }]
-keywords    = ["stylometry", "LLM", "authorship", "NLP", "GPT-4", "Claude", "Mistral"]
+keywords    = ["stylometry", "LLM", "authorship", "NLP", "GPT-4", "Claude", "Mistral", "ai-detection", "text-analysis", "cosine-distance", "change-point-detection", "llm-fingerprinting"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Science/Research",
