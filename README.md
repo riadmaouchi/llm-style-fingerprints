@@ -4,6 +4,8 @@
 [![nbviewer](https://raw.githubusercontent.com/jupyter/design/master/logos/Badges/nbviewer_badge.svg)](https://nbviewer.org/github/riadmaouchi/llm-style-fingerprints/blob/main/notebooks/01_shift_analysis.ipynb)
 [![Tests](https://img.shields.io/badge/tests-21%20passed-brightgreen)](tests/test_stats.py)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![PyPI - stylometry-python](https://img.shields.io/pypi/v/stylometry-python?label=stylometry-python)](https://pypi.org/project/stylometry-python/)
+[![GitHub stars](https://img.shields.io/github/stars/riadmaouchi/llm-style-fingerprints?style=social)](https://github.com/riadmaouchi/llm-style-fingerprints/stargazers)
 
 **Les LLMs ont-ils un style d'écriture détectable ?**
 

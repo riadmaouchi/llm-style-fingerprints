@@ -1,0 +1,23 @@
+name: Feature request
+description: New LLM, corpus text, statistical test, or visualization
+labels: ["enhancement"]
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options: [Add an LLM, Add corpus text, New statistical test, New visualization, Other]
+    validations:
+      required: true
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Motivation
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+    validations:
+      required: true
