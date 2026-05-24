@@ -7,14 +7,42 @@
 [![PyPI - stylometry-python](https://img.shields.io/pypi/v/stylometry-python?label=stylometry-python)](https://pypi.org/project/stylometry-python/)
 [![GitHub stars](https://img.shields.io/github/stars/riadmaouchi/llm-style-fingerprints?style=social)](https://github.com/riadmaouchi/llm-style-fingerprints/stargazers)
 
-**Les LLMs ont-ils un style d'écriture détectable ?**
+**Can ChatGPT erase Zola's writing style?**
 
-Ce dépôt présente une étude reproductible des **régularités stylistiques dans les textes générés par les LLMs**.
-En utilisant l'analyse des fréquences de mots-outils et la distance cosinus dans un espace de style à 57 dimensions,
-nous montrons que GPT-4, Claude 3, Mistral 7B et Gemini Pro produisent des patterns d'écriture statistiquement distincts —
-et que ces patterns sont cohérents entre les textes, les températures et les prompts.
+This project measures the stylistic drift introduced by LLM rewrites —
+using function-word fingerprints and cosine distance in a 57-dimension style space.
+GPT-4, Claude 3, Mistral 7B and Gemini Pro produce measurably distinct stylistic signatures,
+consistent across texts, temperatures, and prompts.
 
-> *"Les LLMs ne neutralisent pas le style littéraire. Ils le remplacent par le leur."*
+> *"LLMs don't erase literary style. They replace it with their own."*
+
+| ![Human vs LLM stylistic clusters](results/pca_clusters.png) | ![Function-word fingerprints per model](results/radar_profiles.png) |
+|:---:|:---:|
+| *Human vs LLM stylistic clusters (PCA)* | *Function-word fingerprints per model* |
+
+---
+
+## Un texte. Quatre réécritures. Quatre styles distincts.
+
+### Original — Zola, *Germinal*
+
+> *Quand Étienne Lantier descendit dans la fosse, il faisait nuit encore. La pluie tombait par rafales sur la plaine rase, un vent du nord-est soufflait, glacial. L'homme s'arrêta au bord du puits, la lampe à la main, et regarda l'abîme. Au fond, dans les ténèbres, on entendait gronder la machine.*
+
+### GPT-4 (shift = 0.21) — neutralisation factuelle, "et" coordinateur dominant
+
+> *Étienne Lantier descendait dans la mine alors qu'il faisait encore nuit. Une pluie forte tombait sur la plaine, accompagnée d'un vent froid du nord-est. Il s'arrêta au bord du puits avec sa lampe et observa l'obscurité. On entendait le bruit de la machine en contrebas.*
+
+### Claude 3 (shift = 0.24) — subordonnées formelles, "tandis que", "bien que"
+
+> *Tandis qu'Étienne Lantier descendait dans la fosse, la nuit n'était pas encore levée. Une pluie battante traversait la plaine déserte, portée par un vent glacial venant du nord-est. Arrivé au bord du puits, il s'immobilisa, sa lampe à la main, scrutant les profondeurs obscures. Du fond montait le grondement sourd de la machine.*
+
+### Mistral 7B (shift = 0.09) — reformulation directe, structure proche, vocabulaire simple
+
+> *Étienne Lantier descendait dans la mine. Il faisait encore nuit. La pluie tombait fort sur la plaine et le vent soufflait du nord-est. Il s'est arrêté au bord du puits avec sa lampe et a regardé en bas. On pouvait entendre la machine gronder au fond.*
+
+### Gemini Pro (shift = 0.33) — liens causaux explicites, "en raison de", "afin de", "notamment"
+
+> *Alors qu'Étienne Lantier entamait sa descente dans la fosse, l'obscurité de la nuit régnait encore. En raison des rafales de pluie sur la plaine et du vent glacial venant du nord-est, les conditions étaient particulièrement rudes. Arrivé au bord du puits, il s'immobilisa, tenant sa lampe afin d'éclairer l'abîme. Le grondement de la machine montait des profondeurs.*
 
 ---
 
@@ -34,8 +62,6 @@ et que ces patterns sont cohérents entre les textes, les températures et les p
 |------------|:--------:|:--------:|
 | Humain vs LLM (2 classes) | **> 75%** | 50% |
 | GPT-4 vs Claude vs Mistral vs Gemini (4 classes) | **32.8%** | 25% |
-
-![Clusters PCA](results/pca_clusters.png)
 
 ---
 
@@ -109,30 +135,6 @@ shift(t, t') = distance_cosinus(v(t), v(t'))
 ```
 
 Un shift de 0 = vecteur de style identique. Un shift de 1 = vecteurs de style maximalement différents.
-
----
-
-## Exemples de réécritures
-
-### Texte original — Zola, *Germinal*
-
-> *Quand Étienne Lantier descendit dans la fosse, il faisait nuit encore. La pluie tombait par rafales sur la plaine rase, un vent du nord-est soufflait, glacial. L'homme s'arrêta au bord du puits, la lampe à la main, et regarda l'abîme. Au fond, dans les ténèbres, on entendait gronder la machine.*
-
-### GPT-4 (shift = 0.21) — neutralisation factuelle, "et" coordinateur dominant
-
-> *Étienne Lantier descendait dans la mine alors qu'il faisait encore nuit. Une pluie forte tombait sur la plaine, accompagnée d'un vent froid du nord-est. Il s'arrêta au bord du puits avec sa lampe et observa l'obscurité. On entendait le bruit de la machine en contrebas.*
-
-### Claude 3 (shift = 0.24) — subordonnées formelles, "tandis que", "bien que"
-
-> *Tandis qu'Étienne Lantier descendait dans la fosse, la nuit n'était pas encore levée. Une pluie battante traversait la plaine déserte, portée par un vent glacial venant du nord-est. Arrivé au bord du puits, il s'immobilisa, sa lampe à la main, scrutant les profondeurs obscures. Du fond montait le grondement sourd de la machine.*
-
-### Mistral 7B (shift = 0.09) — reformulation directe, structure proche, vocabulaire simple
-
-> *Étienne Lantier descendait dans la mine. Il faisait encore nuit. La pluie tombait fort sur la plaine et le vent soufflait du nord-est. Il s'est arrêté au bord du puits avec sa lampe et a regardé en bas. On pouvait entendre la machine gronder au fond.*
-
-### Gemini Pro (shift = 0.33) — liens causaux explicites, "en raison de", "afin de", "notamment"
-
-> *Alors qu'Étienne Lantier entamait sa descente dans la fosse, l'obscurité de la nuit régnait encore. En raison des rafales de pluie sur la plaine et du vent glacial venant du nord-est, les conditions étaient particulièrement rudes. Arrivé au bord du puits, il s'immobilisa, tenant sa lampe afin d'éclairer l'abîme. Le grondement de la machine montait des profondeurs.*
 
 ---
 
@@ -262,10 +264,6 @@ fixées. Les modèles sont mis à jour en continu — les signatures peuvent cha
 **Sur l'usage forensique :** le signal mesuré ici ne constitue pas une preuve d'authorship.
 La variance intra-groupe (0.43–0.65) montre que la méthode produit beaucoup de faux positifs et
 faux négatifs sur des textes individuels. Ne pas utiliser pour accuser un auteur de fraude.
-
----
-
-## Limitations
 
 ---
 
