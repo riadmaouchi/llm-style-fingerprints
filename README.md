@@ -242,28 +242,27 @@ GPT-4 et Claude 3 ne sont pas distinguables dans ce protocole.
 
 ---
 
-## Précautions d'usage
+## Limitations
 
-> **Cette étude est une exploration méthodologique, pas un détecteur de LLM.**
+> **Ceci est une exploration méthodologique, pas un détecteur de LLM.**
 
-**Sur la taille du corpus :** n = 16 textes par classe est insuffisant pour des conclusions fermes.
-La plupart des différences entre modèles passent le seuil de significativité *uniquement* grâce à
-des IC larges. Il faudrait n ≥ 100 pour des conclusions robustes.
+**Corpus trop petit pour des conclusions fermes.**
+n = 16 textes par classe. La plupart des différences entre modèles sont statistiquement significatives uniquement grâce à des intervalles de confiance larges. GPT-4 et Claude 3 ne sont pas distinguables (p = 1.0 après correction Bonferroni). Il faudrait n ≥ 100 pour des résultats robustes.
 
-**Sur le prompt :** toutes les réécritures utilisent le même prompt
-(*"Réécris ce texte dans un style neutre et factuel"*). Ce prompt biaise le résultat :
-il pousse tous les modèles vers la même direction (neutralisation), ce qui compresse les différences.
-Un prompt créatif ou libre donnerait probablement des signatures plus marquées.
+**Un seul prompt, un seul registre.**
+Toutes les réécritures utilisent le même prompt (*"style neutre et factuel"*) appliqué à du français littéraire du 19e siècle. Ce prompt pousse tous les modèles dans la même direction. Avec un prompt créatif ou un corpus journalistique, les signatures seraient différentes — et probablement plus ou moins marquées.
 
-**Sur le domaine :** les mots-outils retenus sont calibrés sur le français littéraire du 19e siècle.
-Appliqués à un article journalistique, un email ou un code commenté, les résultats seraient différents.
+**Le vocabulaire est biaisé vers les LLMs.**
+La liste de mots-outils inclut des marqueurs intentionnellement choisis pour capturer les patterns LLM (*tandis, pourtant, néanmoins, notamment*). Ce choix n'est pas neutre : il avantage structurellement la détection des modèles les plus "formels".
 
-**Sur l'évolution des modèles :** GPT-4-0125-preview et Claude-3-Sonnet-20240229 sont des versions
-fixées. Les modèles sont mis à jour en continu — les signatures peuvent changer entre versions.
+**Pas de contrôle humain "en mode neutre".**
+L'étude compare des textes originaux de Zola avec des réécritures LLM. Elle ne teste pas ce que donnerait le même prompt appliqué à un humain. Un rédacteur humain demandé d'écrire "dans un style neutre et factuel" produirait peut-être un shift similaire à Mistral.
 
-**Sur l'usage forensique :** le signal mesuré ici ne constitue pas une preuve d'authorship.
-La variance intra-groupe (0.43–0.65) montre que la méthode produit beaucoup de faux positifs et
-faux négatifs sur des textes individuels. Ne pas utiliser pour accuser un auteur de fraude.
+**Modèles fixes, signatures évolutives.**
+GPT-4-0125-preview et Claude-3-Sonnet-20240229 sont des versions figées au moment de la collecte. Les modèles sont mis à jour en continu — ces signatures ne sont pas permanentes.
+
+**Ne pas utiliser pour accuser.**
+La variance intra-groupe (0.43–0.65) est trop élevée pour des conclusions sur des textes individuels. Ce signal n'est pas une preuve d'authorship.
 
 ---
 
