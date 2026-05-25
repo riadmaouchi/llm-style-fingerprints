@@ -4,22 +4,24 @@ Génère tous les graphiques dans results/ sans Jupyter.
 Usage
 -----
     python generate_results.py          # tous les graphiques
-    python generate_results.py --fast   # sans t-SNE (rapide)
+    python generate_results.py --fast   # sans t-SNE et UMAP (rapide)
 
-Graphiques produits (12 au total)
+Graphiques produits (14 au total)
 ----------------------------------
-  shift_distributions.png   — violin plot des shifts par LLM
-  pca_clusters.png          — PCA 2D (6 groupes)
-  tsne_clusters.png         — t-SNE 2D (meilleure séparation non-linéaire)
-  fingerprint_comparison.png — fréquences des mots-outils discriminants
-  confusion_matrix.png      — matrice de confusion classifieur centroïde
-  feature_importance.png    — mots-outils discriminants (SVM linéaire)
-  shift_by_source.png       — shifts par auteur source (Zola vs Maupassant)
-  dendrogram.png            — clustering hiérarchique des centroïdes
-  radar_profiles.png        — profil stylistique en radar chart
-  shift_vs_length.png       — shift cosinus vs longueur du texte
-  bootstrap_ci.png          — moyennes + IC 95 % Bootstrap
-  permutation_null.png      — distributions nulles vs statistiques observées
+  shift_distributions.png        — violin plot des shifts par LLM
+  pca_clusters.png               — PCA 2D (6 groupes)
+  tsne_clusters.png              — t-SNE 2D (meilleure séparation non-linéaire)
+  umap_clusters.png              — UMAP 2D (structure locale préservée)
+  fingerprint_comparison.png     — fréquences des mots-outils discriminants
+  confusion_matrix.png           — matrice de confusion classifieur centroïde
+  feature_importance.png         — mots-outils discriminants (SVM linéaire)
+  logistic_feature_importance.png — coefficients logistic regression par classe
+  shift_by_source.png            — shifts par auteur source (Zola vs Maupassant)
+  dendrogram.png                 — clustering hiérarchique des centroïdes
+  radar_profiles.png             — profil stylistique en radar chart
+  shift_vs_length.png            — shift cosinus vs longueur du texte
+  bootstrap_ci.png               — moyennes + IC 95 % Bootstrap
+  permutation_null.png           — distributions nulles vs statistiques observées
 """
 
 from __future__ import annotations
@@ -36,12 +38,13 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 import seaborn as sns
 from sklearn.decomposition import PCA
+from sklearn.linear_model import LogisticRegression
 from sklearn.manifold import TSNE
+from sklearn.metrics import confusion_matrix
 from sklearn.model_selection import LeaveOneOut
 from sklearn.neighbors import NearestCentroid
-from sklearn.svm import SVC
 from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import confusion_matrix
+from sklearn.svm import SVC
 from scipy.cluster.hierarchy import dendrogram, linkage
 from scipy.spatial.distance import pdist, squareform
 import warnings
@@ -197,6 +200,95 @@ def fig_feature_importance(
     ax.grid(axis="x", alpha=0.1, color="#AAAAAA")
     _save(fig, "feature_importance.png", results_dir)
     return top_idx
+
+
+def fig_umap(sa: StyleAnalyzer, corpus: dict, results_dir: Path) -> None:
+    try:
+        import umap as umap_lib
+    except ImportError:
+        print("  – umap_clusters.png (skipped — pip install umap-learn)")
+        return
+
+    labels_list = list(corpus.keys())
+    texts_flat  = [t for grp in corpus.values() for t in grp]
+    labels_flat = [lbl for grp, lbl in zip(corpus.values(), labels_list) for _ in grp]
+
+    X      = sa.fit_transform(texts_flat)
+    coords = umap_lib.UMAP(
+        n_components=2, n_neighbors=8, min_dist=0.3, random_state=42
+    ).fit_transform(X)
+
+    fig, ax = plt.subplots(figsize=(10, 7))
+    fig.patch.set_facecolor(BG)
+    _ax_style(ax)
+    handles = []
+    for label in labels_list:
+        mask  = np.array([g == label for g in labels_flat])
+        pts   = coords[mask]
+        color = PALETTE.get(label, "#AAAAAA")
+        ax.scatter(pts[:, 0], pts[:, 1], c=color, s=90, alpha=0.82,
+                   edgecolors="black", linewidths=0.5, zorder=3)
+        cx, cy = pts.mean(axis=0)
+        ax.scatter([cx], [cy], c=color, s=320, marker="X",
+                   edgecolors="white", linewidths=1.5, zorder=5)
+        ax.annotate(f"  {label}", (cx, cy), color=color, fontsize=9, fontweight="bold")
+        handles.append(mpatches.Patch(color=color, label=label))
+    ax.set_title(
+        "Espace stylistique — UMAP 2D\n(meilleure préservation de la structure locale vs PCA/t-SNE)",
+        color="white", pad=12,
+    )
+    ax.legend(handles=handles, facecolor="#1C2128", edgecolor="#444444",
+              labelcolor="white", fontsize=9)
+    ax.grid(alpha=0.08, color="#AAAAAA")
+    _save(fig, "umap_clusters.png", results_dir)
+
+
+def fig_logistic(
+    sa: StyleAnalyzer, X: np.ndarray, y: np.ndarray,
+    llm_corpora: dict, results_dir: Path,
+) -> None:
+    model_names = list(llm_corpora.keys())
+    n_classes   = len(model_names)
+    scaler      = StandardScaler()
+    X_sc        = scaler.fit_transform(X)
+
+    preds = []
+    for tr, te in LeaveOneOut().split(X_sc):
+        clf = LogisticRegression(C=1.0, max_iter=1000, solver="lbfgs")
+        clf.fit(X_sc[tr], y[tr])
+        preds.append(clf.predict(X_sc[te])[0])
+    acc = float(np.mean(np.array(preds) == np.array(y)))
+
+    clf_all = LogisticRegression(C=1.0, max_iter=1000, solver="lbfgs")
+    clf_all.fit(X_sc, y)
+
+    importance = np.abs(clf_all.coef_).mean(axis=0)
+    top_idx    = np.argsort(importance)[::-1][:15]
+    feat_names = [sa.function_words[i] for i in top_idx]
+    coef_mat   = clf_all.coef_[:, top_idx]
+
+    fig, ax = plt.subplots(figsize=(13, 4))
+    fig.patch.set_facecolor(BG)
+    ax.set_facecolor(BG)
+    vmax = float(np.abs(coef_mat).max())
+    sns.heatmap(
+        coef_mat, annot=True, fmt=".2f",
+        cmap="RdBu_r", center=0, vmin=-vmax, vmax=vmax,
+        xticklabels=feat_names, yticklabels=model_names,
+        ax=ax, linewidths=0.3, linecolor="#333333",
+        cbar_kws={"shrink": 0.8},
+    )
+    ax.set_title(
+        f"Logistic regression — coefficients par classe, top 15 mots-outils\n"
+        f"LOO accuracy : {acc:.1%}  |  Baseline : {1/n_classes:.0%}"
+        f"  |  ⚠ n=16/classe — coefficients indicatifs",
+        color="white", pad=12,
+    )
+    plt.setp(ax.get_xticklabels(), rotation=45, ha="right", color="#AAAAAA", fontsize=9)
+    plt.setp(ax.get_yticklabels(), rotation=0, color="#AAAAAA", fontsize=9)
+    ax.tick_params(colors="#AAAAAA")
+    _save(fig, "logistic_feature_importance.png", results_dir)
+    print(f"       logistic acc={acc:.1%}")
 
 
 def fig_shift_by_source(
@@ -399,11 +491,14 @@ def main(fast: bool = False) -> None:
     fig_pca(sa, corpus, results_dir)
     if not fast:
         fig_tsne(sa, corpus, results_dir)
+        fig_umap(sa, corpus, results_dir)
     else:
         print("  – tsne_clusters.png (skipped — --fast)")
+        print("  – umap_clusters.png (skipped — --fast)")
     fig_fingerprint(sa, corpus, results_dir)
     X, y = fig_confusion(sa, llm_corpora, results_dir)
     top_idx = fig_feature_importance(sa, X, y, results_dir)
+    fig_logistic(sa, X, y, llm_corpora, results_dir)
     fig_shift_by_source(shifts_all, results_dir)
     fig_dendrogram(sa, corpus, results_dir)
     fig_radar(sa, corpus, top_idx, results_dir)

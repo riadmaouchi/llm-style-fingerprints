@@ -46,6 +46,9 @@ dev = [
     "pytest-cov>=5.0",
     "ruff>=0.4",
 ]
+extras = [
+    "umap-learn>=0.5",
+]
 
 [project.scripts]
 generate-results = "generate_results:main"
