@@ -94,11 +94,84 @@ def fig_violin(sa: StyleAnalyzer, shifts_all: dict, results_dir: Path) -> None:
 
 
 def fig_pca(sa: StyleAnalyzer, corpus: dict, results_dir: Path) -> None:
-    fig = sa.plot_clusters(
-        texts_groups=list(corpus.values()),
-        labels=list(corpus.keys()),
-        title="Espace stylistique — projection PCA 2D\nLes LLMs forment des clusters distincts des humains",
+    from matplotlib.patches import Ellipse
+    from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+
+    # LDA on shift vectors — maximizes between-LLM separation so centroids
+    # are visually well-separated (PCA on raw vectors gives too much overlap).
+    originals   = load_originals()
+    llm_corpora = load_llm_corpora()
+    orig_vecs   = sa.fit_transform(originals)
+
+    shift_pts, shift_lbls = [], []
+    for lbl, rewrites in llm_corpora.items():
+        rew_vecs = sa.fit_transform(rewrites)
+        for ov, rv in zip(orig_vecs, rew_vecs):
+            shift_pts.append(rv - ov)
+            shift_lbls.append(lbl)
+
+    S   = np.array(shift_pts)
+    lbl_arr = np.array(shift_lbls)
+    lda = LinearDiscriminantAnalysis(n_components=2)
+    coords = lda.fit_transform(S, lbl_arr)
+
+    # Label offsets so names don't collide
+    label_offsets = {
+        "GPT-4":      (-22, -14),
+        "Claude 3":   ( 8,   8),
+        "Mistral 7B": (-22,  8),
+        "Gemini Pro": ( 8, -14),
+    }
+
+    fig, ax = plt.subplots(figsize=(11, 7.5))
+    fig.patch.set_facecolor(BG)
+    _ax_style(ax)
+
+    rng     = np.random.default_rng(42)
+    handles = []
+
+    for label in llm_corpora.keys():
+        mask  = lbl_arr == label
+        pts   = coords[mask]
+        color = PALETTE.get(label, "#AAAAAA")
+
+        # 1-sigma ellipse
+        if len(pts) >= 3:
+            cov  = np.cov(pts.T)
+            vals, vecs = np.linalg.eigh(cov)
+            order = vals.argsort()[::-1]
+            vals, vecs = vals[order], vecs[:, order]
+            angle = np.degrees(np.arctan2(*vecs[:, 0][::-1]))
+            w, h  = 2 * np.sqrt(np.maximum(vals, 0))
+            ell   = Ellipse(xy=pts.mean(axis=0), width=w, height=h, angle=angle,
+                            fc=color, alpha=0.13, ec=color, lw=2.0, ls="--", zorder=2)
+            ax.add_patch(ell)
+
+        # Jittered scatter — very small, semi-transparent
+        jitter = rng.uniform(-0.04, 0.04, pts.shape)
+        ax.scatter((pts + jitter)[:, 0], (pts + jitter)[:, 1],
+                   c=color, s=25, alpha=0.40, edgecolors="none", zorder=3)
+
+        # Bold centroid marker
+        cx, cy = pts.mean(axis=0)
+        ax.scatter([cx], [cy], c=color, s=260, marker="X",
+                   edgecolors="white", linewidths=1.5, zorder=6)
+        dx, dy = label_offsets.get(label, (8, 4))
+        ax.annotate(label, (cx, cy), color=color,
+                    fontsize=10, fontweight="bold",
+                    xytext=(dx, dy), textcoords="offset points")
+        handles.append(mpatches.Patch(color=color, label=label))
+
+    ax.set_xlabel("LD1 — axe de discrimination inter-LLM", color="#AAAAAA", labelpad=8)
+    ax.set_ylabel("LD2 — axe de discrimination inter-LLM", color="#AAAAAA", labelpad=8)
+    ax.set_title(
+        "Fingerprints stylistiques — LDA 2D (vecteurs de shift)\n"
+        "✕ = centroïde LLM  ·  ellipses = dispersion 1-σ par modèle",
+        color="white", pad=12,
     )
+    ax.legend(handles=handles, facecolor="#1C2128", edgecolor="#444444",
+              labelcolor="white", fontsize=9, loc="best")
+    ax.grid(alpha=0.07, color="#AAAAAA")
     _save(fig, "pca_clusters.png", results_dir)
 
 
@@ -113,23 +186,42 @@ def fig_tsne(sa: StyleAnalyzer, corpus: dict, results_dir: Path) -> None:
         max_iter=1500, learning_rate="auto", init="pca",
     ).fit_transform(X)
 
-    fig, ax = plt.subplots(figsize=(10, 7))
+    from matplotlib.patches import Ellipse
+
+    fig, ax = plt.subplots(figsize=(11, 7.5))
     fig.patch.set_facecolor(BG)
     _ax_style(ax)
     handles = []
+    rng = np.random.default_rng(42)
     for label in labels_list:
         mask = np.array([g == label for g in labels_flat])
         pts   = coords[mask]
         color = PALETTE.get(label, "#AAAAAA")
-        ax.scatter(pts[:, 0], pts[:, 1], c=color, s=90, alpha=0.82,
-                   edgecolors="black", linewidths=0.5, zorder=3)
+        jitter = rng.uniform(-0.04, 0.04, pts.shape)
+        ax.scatter((pts + jitter)[:, 0], (pts + jitter)[:, 1], c=color, s=45,
+                   alpha=0.55, edgecolors="none", zorder=3)
+        if len(pts) >= 3:
+            cov  = np.cov(pts.T)
+            vals, vecs = np.linalg.eigh(cov)
+            order = vals.argsort()[::-1]
+            vals, vecs = vals[order], vecs[:, order]
+            angle = np.degrees(np.arctan2(*vecs[:, 0][::-1]))
+            w, h  = 2 * np.sqrt(np.maximum(vals, 0))
+            ell   = Ellipse(xy=pts.mean(axis=0), width=w, height=h, angle=angle,
+                            fc=color, alpha=0.10, ec=color, lw=1.8, ls="--", zorder=2)
+            ax.add_patch(ell)
         cx, cy = pts.mean(axis=0)
-        ax.scatter([cx], [cy], c=color, s=320, marker="X",
-                   edgecolors="white", linewidths=1.5, zorder=5)
-        ax.annotate(f"  {label}", (cx, cy), color=color, fontsize=9, fontweight="bold")
+        ax.scatter([cx], [cy], c=color, s=220, marker="X",
+                   edgecolors="white", linewidths=1.2, zorder=5)
+        ax.annotate(f" {label}", (cx, cy), color=color,
+                    fontsize=8.5, fontweight="bold",
+                    xytext=(6, 4), textcoords="offset points")
         handles.append(mpatches.Patch(color=color, label=label))
-    ax.set_title("Espace stylistique — t-SNE 2D\n(non-linéaire — meilleure séparation des clusters)",
-                 color="white", pad=12)
+    ax.set_title(
+        "Espace stylistique — t-SNE 2D\n"
+        "Points = textes individuels  ·  ✕ = centroïde  ·  ellipses = zone 1-σ",
+        color="white", pad=12,
+    )
     ax.legend(handles=handles, facecolor="#1C2128", edgecolor="#444444",
               labelcolor="white", fontsize=9)
     ax.grid(alpha=0.08, color="#AAAAAA")
@@ -218,23 +310,40 @@ def fig_umap(sa: StyleAnalyzer, corpus: dict, results_dir: Path) -> None:
         n_components=2, n_neighbors=8, min_dist=0.3, random_state=42
     ).fit_transform(X)
 
-    fig, ax = plt.subplots(figsize=(10, 7))
+    from matplotlib.patches import Ellipse
+
+    fig, ax = plt.subplots(figsize=(11, 7.5))
     fig.patch.set_facecolor(BG)
     _ax_style(ax)
     handles = []
+    rng = np.random.default_rng(42)
     for label in labels_list:
         mask  = np.array([g == label for g in labels_flat])
         pts   = coords[mask]
         color = PALETTE.get(label, "#AAAAAA")
-        ax.scatter(pts[:, 0], pts[:, 1], c=color, s=90, alpha=0.82,
-                   edgecolors="black", linewidths=0.5, zorder=3)
+        jitter = rng.uniform(-0.04, 0.04, pts.shape)
+        ax.scatter((pts + jitter)[:, 0], (pts + jitter)[:, 1], c=color, s=45,
+                   alpha=0.55, edgecolors="none", zorder=3)
+        if len(pts) >= 3:
+            cov  = np.cov(pts.T)
+            vals, vecs = np.linalg.eigh(cov)
+            order = vals.argsort()[::-1]
+            vals, vecs = vals[order], vecs[:, order]
+            angle = np.degrees(np.arctan2(*vecs[:, 0][::-1]))
+            w, h  = 2 * np.sqrt(np.maximum(vals, 0))
+            ell   = Ellipse(xy=pts.mean(axis=0), width=w, height=h, angle=angle,
+                            fc=color, alpha=0.10, ec=color, lw=1.8, ls="--", zorder=2)
+            ax.add_patch(ell)
         cx, cy = pts.mean(axis=0)
-        ax.scatter([cx], [cy], c=color, s=320, marker="X",
-                   edgecolors="white", linewidths=1.5, zorder=5)
-        ax.annotate(f"  {label}", (cx, cy), color=color, fontsize=9, fontweight="bold")
+        ax.scatter([cx], [cy], c=color, s=220, marker="X",
+                   edgecolors="white", linewidths=1.2, zorder=5)
+        ax.annotate(f" {label}", (cx, cy), color=color,
+                    fontsize=8.5, fontweight="bold",
+                    xytext=(6, 4), textcoords="offset points")
         handles.append(mpatches.Patch(color=color, label=label))
     ax.set_title(
-        "Espace stylistique — UMAP 2D\n(meilleure préservation de la structure locale vs PCA/t-SNE)",
+        "Espace stylistique — UMAP 2D\n"
+        "Points = textes individuels  ·  ✕ = centroïde  ·  ellipses = zone 1-σ",
         color="white", pad=12,
     )
     ax.legend(handles=handles, facecolor="#1C2128", edgecolor="#444444",

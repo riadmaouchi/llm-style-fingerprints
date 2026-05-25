@@ -16,9 +16,9 @@ consistent across texts, temperatures, and prompts.
 
 > *"LLMs don't erase literary style. They replace it with their own."*
 
-| ![Human vs LLM stylistic clusters](results/pca_clusters.png) | ![Function-word fingerprints per model](results/radar_profiles.png) |
+| ![LLM stylistic fingerprints (LDA)](results/pca_clusters.png) | ![Function-word fingerprints per model](results/radar_profiles.png) |
 |:---:|:---:|
-| *Human vs LLM stylistic clusters (PCA)* | *Function-word fingerprints per model* |
+| *LLM stylistic fingerprints — LDA sur vecteurs de shift* | *Function-word fingerprints per model* |
 
 ---
 
@@ -141,14 +141,13 @@ Un shift de 0 = vecteur de style identique. Un shift de 1 = vecteurs de style ma
 
 ### 1. Les LLMs forment des clusters stylistiques distincts
 
-| | PCA (linéaire) | t-SNE (non-linéaire) |
-|-|:-:|:-:|
-| | ![PCA](results/pca_clusters.png) | ![t-SNE](results/tsne_clusters.png) |
+| LDA — fingerprints stylistiques (vecteurs de shift) | t-SNE |
+|:-:|:-:|
+| ![LDA](results/pca_clusters.png) | ![t-SNE](results/tsne_clusters.png) |
 
-- **Humains** → dispersés (styles individuels distincts — variance intra élevée)
-- **GPT-4 + Mistral 7B** → shifts similaires (~0.146), statistiquement indistinguables
-- **Claude 3** → shift intermédiaire (~0.192), zone de chevauchement
-- **Gemini Pro** → shift le plus fort (~0.205), seul significativement différent de GPT-4 et Mistral
+- **GPT-4 + Mistral 7B** → shifts similaires (~0.146), statistiquement indistinguables (ellipses très chevauchées)
+- **Claude 3** → shift intermédiaire (~0.192), zone de chevauchement partielle
+- **Gemini Pro** → shift le plus fort (~0.205), cluster isolé — seul significativement différent
 
 Le dendrogramme confirme la structure à **2–3 groupes effectifs**, pas 4 :
 
