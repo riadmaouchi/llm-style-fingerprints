@@ -1,89 +1,258 @@
 {
-  "model": "Gemini 1.5 Pro",
-  "model_version": "gemini-1.5-pro-001",
+  "model": "Gemini 2.5 Flash",
+  "model_version": "gemini-2.5-flash",
   "prompt": "Réécris ce texte dans un style neutre et factuel, en conservant le sens.",
   "temperature": 0.7,
-  "notes": "Gemini Pro tend à expliciter les liens causaux, utilise 'notamment', 'afin de', 'en raison de', et adopte un registre plus analytique. Tendance à décomposer l'implicite.",
   "rewrites": [
     {
       "id": 1,
       "original_id": 1,
-      "text": "Alors qu'Étienne Lantier entamait sa descente dans la fosse, l'obscurité de la nuit régnait encore. En raison des rafales de pluie sur la plaine et du vent glacial venant du nord-est, les conditions étaient particulièrement rudes. Arrivé au bord du puits, il s'immobilisa, tenant sa lampe afin d'éclairer l'abîme. Le grondement de la machine montait des profondeurs."
+      "text": "Voici le texte réécrit dans un style neutre et factuel :\n\nDans une plaine dégagée, sous une nuit sans étoiles caractérisée par une obscurité intense, un homme progressait seul sur la route reliant Marchiennes à Montsou. Il s'agissait d'un tronçon pavé de dix kilomètres, linéaire, traversant des champs de betteraves. La visibilité était si faible qu'il ne distinguait pas le sol devant lui. L'étendue de l'horizon plat n'était perceptible que par les souffles du vent de mars. Ces rafales étaient amples et froides, ayant balayé de vastes zones de marais et de terres nues."
     },
     {
       "id": 2,
       "original_id": 2,
-      "text": "Catherine s'engageait dans l'escalier de bois, sa lampe à la main, afin de rejoindre la galerie. Cette dernière s'étendait devant eux dans l'obscurité humide et profonde. Elle avançait d'un pas rapide, la tête et les épaules inclinées, tandis que ses pensées se portaient vers Étienne, notamment vers ses mains et sa voix."
+      "text": "Voici une réécriture dans un style neutre et factuel :\n\nCatherine était chargée du déplacement des berlines. Elle remplissait chaque berline au chantier voisin, la poussait jusqu'au plan incliné, la mettait en mouvement pour la descente, puis recommençait le processus.\n\nUn couloir bas et étroit était faiblement éclairé, permettant l'orientation. Catherine progressait en exerçant une poussée importante sur la berline.\n\nAu niveau supérieur, un garçon accrochait les berlines et les expédiait vers le fond du puits par un mouvement brusque. Le bruit de roulement des roues et les chocs métalliques se propageaient dans le passage sombre."
     },
     {
       "id": 3,
       "original_id": 3,
-      "text": "Le ciel présentait une teinte bleue sombre et semblait peser sur la terre. Étienne longeait le terril, les mains dans les poches, en raison du froid. La fosse continuait d'émettre de la fumée. Le vent redoublait d'intensité. Il avait conscience de n'avoir plus rien à perdre."
+      "text": "Depuis le terril, l'ensemble du site minier était observable. Le Voreux se présentait comme une exploitation souterraine. Il comprenait plusieurs bâtiments, des chevalements de bois, une salle de recette et une chambre de dégagement. Cet ensemble de constructions avait une apparence sombre et encrassée. Par intermittence, de la vapeur s'échappait en sifflant intensément. Le fonctionnement de la machine était audible, accompagné du grincement des poulies."
     },
     {
       "id": 4,
       "original_id": 4,
-      "text": "À son retour chez lui, Maheu était épuisé et couvert de saleté, sans mot dire. La Maheude l'attendait près du feu, entourée des enfants. En raison de la pénurie alimentaire, il n'y avait rien à manger. Il s'assit néanmoins à la table, les coudes appuyés, les yeux fixés sur le feu."
+      "text": "Voici le texte réécrit dans un style neutre et factuel :\n\nMaheu est rentré chez lui. Il présentait des signes de fatigue physique, ses yeux étant irrités par la poussière. Il a retiré sa veste et l'a déposée sur une chaise, puis s'est assis. La Maheude était présente avec les enfants, rassemblés autour de la table. Il n'y avait pas de nourriture disponible : les marmites étaient vides et le pain manquant. Un silence s'est installé ; personne n'a prononcé de mot. Maheu a posé sa tête entre ses mains, les coudes reposant sur la toile cirée. Il a fixé son regard sur la lampe qui émettait de la fumée."
     },
     {
       "id": 5,
       "original_id": 5,
-      "text": "La grève se prolongeait depuis quinze jours, en raison d'un désaccord persistant. Bien que les hommes résistent, les femmes souffraient de la famine. Étienne prenait la parole afin de maintenir la cohésion, et les mineurs l'écoutaient, debout sous la neige. Ses mots résonnaient dans le silence."
+      "text": "Sous un ciel nuageux, Étienne s'exprima longuement, avec une grande conviction et un langage marqué. La foule, dense et silencieuse, était rassemblée dans la neige. Il abordait les thèmes de leurs conditions difficiles, de leurs droits et de la persévérance des mineurs. Sa voix montait en intensité, résonnant contre les hauts murs du coron et portant jusqu'à l'assemblée. Des femmes pleuraient, tandis que les hommes acquiesçaient."
     },
     {
       "id": 6,
       "original_id": 6,
-      "text": "La Maheude berçait son dernier enfant dans une maison entièrement vidée. Les soldats étaient entendus dehors. En raison des privations, elle ne disposait plus de rien — ni pain, ni charbon, ni espoir. Elle continuait néanmoins de bercer l'enfant, dans un geste mécanique et silencieux."
+      "text": "Voici une réécriture du texte dans un style neutre et factuel :\n\nLa Maheude s'était assise et avait déboutonné son corsage. L'enfant, tourné de côté sur ses genoux, était en train de téter. Il était né quelques semaines auparavant.\nElle observait l'enfant boire. Son regard se dirigeait vers la fenêtre, d'où provenait le bruit de soldats qui passaient.\nElle ne manifestait ni pleurs ni paroles.\nElle berçait doucement l'enfant. Son visage présentait une expression calme et fermée."
     },
     {
       "id": 7,
       "original_id": 7,
-      "text": "La température était élevée dans la galerie basse. Afin de progresser, les hommes avançaient à quatre pattes, leurs lampes n'éclairant que faiblement le charbon noir. Aucune conversation n'avait lieu, en raison notamment de la concentration requise. Seuls les bruits des pioches et les respirations se mêlaient à la poussière."
+      "text": "Voici le texte réécrit dans un style neutre et factuel :\n\nChaval effectuait l'extraction du charbon, en position couchée sur le côté, dans une galerie dont la faible hauteur ne permettait pas de se tenir debout. Une lampe, placée à côté de lui, éclairait la roche de charbon à une distance de vingt centimètres de son visage.\n\nLes seuls sons perceptibles étaient les coups réguliers de la rivelaine percutant la roche, ainsi que la respiration audible des deux hommes dans un environnement à l'air raréfié.\n\nLa chaleur ambiante était intense. La transpiration était abondante, rendant les corps dénudés et noircis luisants."
     },
     {
       "id": 8,
       "original_id": 8,
-      "text": "Chaval cracha par terre avant de diriger son regard vers Étienne. Une haine ancienne, sourde et d'essence animale, existait entre eux. Catherine baissa la tête, consciente que la situation évoluerait inévitablement vers un affrontement. Elle garda le silence, comme à son habitude."
+      "text": "Voici le texte réécrit dans un style neutre et factuel :\n\nChaval recula d'un pas. Les deux hommes se regardèrent. Une animosité préexistante était observable entre eux. Catherine se tenait à l'écart, contre la paroi. Étienne demeurait immobile. La galerie était silencieuse. La flamme des lampes ne tremblait pas."
     },
     {
       "id": 9,
       "original_id": 9,
-      "text": "La pluie tombait en abondance et la nuit était particulièrement sombre. Sur la route déserte, un homme avançait en luttant contre les intempéries. Il marchait à vive allure, comme afin de fuir une situation indéfinie. Ses pensées le ramenaient à elle, malgré sa marche."
+      "text": "Voici une réécriture dans un style neutre et factuel :\n\nUn craquement fut suivi d'un bruit sourd et d'un éboulement de grande ampleur. Étienne fut projeté contre la paroi par l'onde de choc générée par le déplacement d'air. La galerie s'emplit de poussière, et les lampes s'éteignirent. Seuls des gémissements et le bruit lointain des boisages cédant étaient audibles. Il resta un moment immobile, en état de choc, tentant d'analyser la situation."
     },
     {
       "id": 10,
       "original_id": 10,
-      "text": "Elle était belle et se trouvait seule. Elle pleurait en silence, sans que personne en soit informé. Certaines souffrances sont gardées secrètes, notamment celles que l'on enfouit si profondément qu'elles finissent par disparaître de la conscience."
+      "text": "Voici une réécriture du texte dans un style neutre et factuel :\n\nLe groupe a avancé sur la route, franchissant les fossés et les haies. Étienne courait en tête, Catherine se trouvant à ses côtés. Les sabots produisaient un son sur le pavé gelé. Des voix s'élevaient dans le vent froid du Nord. Des feux de Bengale, allumés par une personne, éclairaient par intermittence les têtes des participants."
     },
     {
       "id": 11,
       "original_id": 11,
-      "text": "L'homme pénétra dans la pièce et prit place. Il procéda à un examen visuel de l'espace : rien n'avait changé, en raison notamment de l'absence de toute intervention depuis son départ. Il soupira, alluma une cigarette afin de patienter, et attendit sans objectif précis."
+      "text": "Voici une réécriture du texte dans un style neutre et factuel :\n\nL'activité débutait rue de la Goutte-d'Or le matin. Les commerces ouvraient successivement. Le boulanger exposait ses pains ; le marchand de vin nettoyait ses comptoirs. Des ouvrières passaient, munies de châles. Les odeurs de café chaud et de tabac se combinaient avec celle provenant du ruisseau. Gervaise observait cette scène depuis le seuil de la blanchisserie, les bras croisés sur son tablier blanc."
     },
     {
       "id": 12,
       "original_id": 12,
-      "text": "Les deux amis pratiquaient la pêche depuis l'aube. Ils échangeaient peu de paroles, préférant observer le cours de l'eau. Le soleil progressait dans le ciel. Cette tranquillité partagée, notamment l'amitié silencieuse entre ces deux hommes d'un certain âge, avait une valeur particulière."
+      "text": "Voici le texte réécrit dans un style neutre et factuel :\n\nCoupeau effectuait des travaux sur le toit d'un immeuble situé dans le faubourg Poissonnière, à une hauteur de six étages. Il posait des feuilles de zinc avec des gestes précis et stables. En contrebas, la rue paraissait étroite et les véhicules semblaient petits et nombreux. Son épouse, venue lui apporter son déjeuner, ne regardait pas son activité à cette hauteur. Il émettait des sifflements et échangeait des plaisanteries. De ce point de vue, l'étendue urbaine de Paris, jusqu'à sa banlieue, était visible, dominée par de nombreuses toitures grisâtres."
     },
     {
       "id": 13,
       "original_id": 13,
-      "text": "Le soldat avait rédigé une dernière lettre afin de communiquer ses dernières pensées. Il l'avait soigneusement pliée avant de la glisser dans sa poche. Puis il était reparti vers le front, dans la nuit. Sa mère ne prendrait connaissance de ce courrier que trois semaines plus tard."
+      "text": "Voici le texte réécrit dans un style neutre et factuel :\n\nLa situation de Gervaise a connu une détérioration progressive. Cette évolution a été influencée par la fatigue, suivie par la pauvreté, puis par la consommation d'alcool. Elle a perdu conscience de sa situation. Son quotidien est devenu caractérisé par une uniformité monotone, incluant des sensations physiques persistantes de froid et de faim.\n\nInitialement, elle avait pour objectif de travailler, d'économiser et d'atteindre une position sociale stable et respectable. Actuellement, ses activités incluaient la collecte de mégots de cigarette dans l'espace public et la sollicitation d'argent auprès des passants, sans établir de contact visuel."
     },
     {
       "id": 14,
       "original_id": 14,
-      "text": "L'homme était avancé en âge et considérait avoir manqué sa vie. En raison des départs de ses enfants et du décès de sa femme, il se retrouvait seul. Il demeurait dans une maison désormais trop grande, observant par la fenêtre des années révolues qui ne reviendraient plus."
+      "text": "Voici le texte réécrit dans un style neutre et factuel :\n\nNana apparut. Elle portait une longue robe blanche et ses cheveux étaient détachés, tombant sur les épaules. La salle réagit par un murmure ; l'aspect physique de la personne n'avait pas encore été évalué.\nEn s'avançant vers la rampe, elle fut pleinement exposée à la lumière. Elle était blonde, avec des yeux bleus. Sa taille était modeste, mais son corps présentait des formes généreuses qui captaient l'attention."
     },
     {
       "id": 15,
       "original_id": 15,
-      "text": "Elle gardait un secret depuis vingt ans. Durant cette période, afin de ne pas éveiller les soupçons, elle avait maintenu une expression souriante lorsqu'on évoquait cet été-là et cet homme. Ce mensonge, pratiqué depuis si longtemps, avait fini par acquérir les attributs de la vérité."
+      "text": "Voici le texte réécrit dans un style neutre et factuel :\n\nLe comte Muffat s'assit dans un salon contenant des fleurs. Nana n'était pas encore prête. Il attendit, vêtu de son habit et tenant ses gants. Il observa les meubles, les soieries roses et les bibelots. Une odeur féminine était perceptible.\n\nDes bruits provenaient de la chambre voisine : un froissement de robes, un claquement de porcelaines et des rires.\n\nZoé entra pour l'informer de l'arrivée imminente de madame."
     },
     {
       "id": 16,
       "original_id": 16,
-      "text": "Le vieux cheval s'était effondré au milieu du chemin, en raison de son épuisement extrême, et se trouvait dans l'incapacité de se relever. Son propriétaire le regardait, les bras sans force, ne sachant comment intervenir. Il ne disposait pas des ressources financières nécessaires pour faire appel à un vétérinaire."
+      "text": "Voici le texte réécrit dans un style neutre et factuel :\n\nLe Bonheur des Dames a ouvert ses portes un lundi matin de novembre. Des vendeuses, vêtues de noir, se tenaient près des comptoirs où étaient exposées des étoffes. La lumière électrique éclairait les soieries, les velours et les dentelles. À l'extérieur, une foule se pressait contre les vitrines. Des groupes de femmes pénétraient dans le magasin. Octave Mouret circulait parmi elles, les mains derrière le dos, observant l'ensemble."
+    },
+    {
+      "id": 17,
+      "original_id": 17,
+      "text": "Denise est restée seule un instant dans la salle des manteaux, après le départ de ses collègues. Elle a observé les rangées de manteaux sur leurs cintres et son reflet dans les miroirs. Elle présentait une apparence pâle et droite, vêtue de sa robe noire de vendeuse. Elle était arrivée de Valognes avec ses deux frères et vingt francs d'économies. Depuis une semaine, elle s'habituait à Paris, à ses bruits, à sa lumière, ainsi qu'à l'immense magasin."
+    },
+    {
+      "id": 18,
+      "original_id": 18,
+      "text": "Jean Macquart travaillait le sol depuis l'aube. Le soc fendait la terre de la Beauce, exposant des mottes. Une légère vapeur s'élevait de ces mottes dans l'air frais du matin. Des corbeaux suivaient l'outil, picorant les vers mis à nu. Jean dirigeait sa charrue, son regard fixé sur le sol. Le cheval expirait bruyamment. La plaine était étendue, calme et de couleur grise, jusqu'à la ligne d'horizon."
+    },
+    {
+      "id": 19,
+      "original_id": 19,
+      "text": "Voici le texte réécrit dans un style neutre et factuel :\n\nFouan a réuni ses trois enfants, Buteau, Hyacinthe et Fanny. Ils étaient assis autour de la table de la ferme, les bras croisés, regardant Fouan. Ce dernier souhaitait partager ses terres de son vivant afin d'organiser sa succession. Cependant, des signes de tension et de mécontentement étaient déjà perceptibles parmi les enfants. La terre, située à l'extérieur de la ferme, représentait un enjeu de longue date dans les conflits liés au patrimoine."
+    },
+    {
+      "id": 20,
+      "original_id": 20,
+      "text": "Voici le texte réécrit dans un style neutre et factuel :\n\nBonnemort, une personne âgée, toussait de manière persistante, assis sur sa chaise près du feu, la tête penchée en avant. Cinquante années passées à la mine avaient entraîné une détérioration physique notable, se manifestant par des poumons noircis et des jambes raidies. Son élocution était devenue très limitée. Il toussait et crachait. Ses yeux, d'une pâleur marquée, s'ouvraient parfois grand. Les enfants ne lui portaient plus d'attention. Sa présence était celle d'un individu ignoré, ne recevant aucune considération particulière de la part de son entourage."
+    },
+    {
+      "id": 21,
+      "original_id": 21,
+      "text": "Souvarine travaillait silencieusement et avec application. Il ne sollicitait personne, ne demandait rien et n'offrait rien. Le soir, dans sa chambre, il lisait. On l'entendait parfois murmurer des noms de camarades décédés. Son lapin blanc dormait sur ses genoux. De sa main gauche, il caressait le lapin, tandis que de sa main droite, il tournait les pages. Il adhérait à l'idée d'une destruction totale, d'une table rase."
+    },
+    {
+      "id": 22,
+      "original_id": 22,
+      "text": "Voici une réécriture du texte dans un style neutre et factuel :\n\nLe repas avait débuté deux heures auparavant et était destiné à se prolonger. Des plats chauds, tels que du lapin, de la gibelotte et du bœuf aux carottes, étaient disposés sur la table, au milieu de bouteilles entamées. Les femmes desserraient leurs corsages et les hommes relevaient leurs manches. Des éclats de rire étaient émis et la table était frappée. À l'extérieur, l'environnement sonore urbain de Paris persistait. À l'intérieur, une atmosphère de jovialité se développait."
+    },
+    {
+      "id": 23,
+      "original_id": 23,
+      "text": "Voici le texte réécrit dans un style neutre et factuel :\n\nLe comte avait cédé sa fortune, l'hôtel de famille, les terres du Poitou et l'argenterie ancienne. Il ne possédait plus de biens. Néanmoins, il continuait à se rendre sur les lieux. Nana ne lui accordait aucune attention. Il accédait à l'antichambre en même temps que les fournisseurs et attendait son tour, tenant son chapeau à la main."
+    },
+    {
+      "id": 24,
+      "original_id": 24,
+      "text": "Bourras constatait que sa clientèle se dirigeait vers le Bonheur des Dames, un établissement situé de l'autre côté de la rue. En l'espace de deux ans, l'activité de son commerce de parapluies et de cannes avait significativement diminué. Malgré cette situation, il maintenait son activité et refusait de céder son établissement. La concurrence exercée par les grands magasins affectait gravement son entreprise. Il continuait d'exprimer son opposition à cette situation, mais sa capacité à la soutenir s'affaiblissait."
+    },
+    {
+      "id": 25,
+      "original_id": 25,
+      "text": "Voici le texte réécrit dans un style neutre et factuel :\n\nL'eau s'est élevée dans les galeries pendant trois jours. Un bruit d'écoulement, régulier et sourd, était audible depuis un point non identifié dans l'obscurité, son intensité augmentant progressivement. Les sources lumineuses se sont éteintes successivement au contact de l'humidité ambiante. Le personnel avançait en se guidant par contact avec les parois, le niveau de l'eau atteignant les genoux. Aucune communication verbale n'a été enregistrée. La situation indiquait que l'exploitation de la fosse était compromise et qu'une évacuation rapide était nécessaire pour la sécurité des individus."
+    },
+    {
+      "id": 26,
+      "original_id": 26,
+      "text": "Voici le texte réécrit dans un style neutre et factuel :\n\nPendant plusieurs jours consécutifs, des éléments d'une armée en déroute ont traversé la ville. Il ne s'agissait pas de troupes organisées, mais de groupes dispersés. Les individus présentaient des barbes longues et sales, ainsi que des uniformes en lambeaux. Leur progression était lente et semblait dénuée de dynamisme, sans drapeau ni organisation régimentaire identifiable. Ils manifestaient des signes d'épuisement intense ; leur marche apparaissait mécanique, et ils s'effondraient de fatigue immédiatement dès qu'ils s'immobilisaient."
+    },
+    {
+      "id": 27,
+      "original_id": 27,
+      "text": "Voici le texte réécrit dans un style neutre et factuel :\n\nElle était une femme d'une apparence agréable, issue d'une famille d'employés. Dénuée de dot et manquant de perspectives d'ascension sociale, elle ne disposait pas des moyens de s'unir à un homme riche et de statut élevé. Elle contracta mariage avec un commis travaillant au ministère de l'Instruction publique.\n\nElle ressentait une insatisfaction constante, persuadée d'être destinée à un mode de vie luxueux et raffiné. Cette insatisfaction était notamment due à la modestie de son logement, à l'état des murs, à l'usure des sièges et à la qualité ordinaire des étoffes."
+    },
+    {
+      "id": 28,
+      "original_id": 28,
+      "text": "Voici une version neutre et factuelle du texte :\n\nParis était bloqué et connaissait une famine. Les moineaux étaient rares sur les toits, et les égouts étaient dépeuplés. La population consommait tout ce qui était disponible. Un clair matin de janvier, alors qu'il se promenait le long du boulevard extérieur, les mains dans les poches de sa culotte d'uniforme et le ventre vide, M. Morissot, horloger, s'arrêta devant un confrère qu'il reconnut comme un ami."
+    },
+    {
+      "id": 29,
+      "original_id": 29,
+      "text": "Voici le texte réécrit dans un style neutre et factuel :\n\nLes habitants des zones rurales environnantes de Goderville, hommes et femmes, se dirigeaient vers le bourg. Cette affluence s'expliquait par le jour de marché. La démarche des hommes était caractérisée par un léger penchant du corps vers l'avant. Leur posture et leur morphologie montraient des adaptations résultant des travaux agricoles intenses. Spécifiquement, la poussée de la charrue avait pour effet de relever l'épaule gauche et de dévier la taille. De même, la fauche des blés nécessitait d'écarter les genoux afin d'obtenir un aplomb stable."
+    },
+    {
+      "id": 30,
+      "original_id": 30,
+      "text": "Voici une réécriture dans un style neutre et factuel :\n\nL'individu réside dans une maison qui est son lieu de croissance. Depuis les fenêtres, la Seine est visible. Elle s'écoule le long du jardin, au-delà de la route, à proximité de la propriété. Cette portion du fleuve, qui relie Rouen au Havre, est fréquentée par des bateaux.\n\nCependant, depuis plusieurs semaines, une sensation de malaise est ressentie. La cause de cette sensation demeure inconnue. Elle se manifeste par une angoisse, une crainte d'un événement futur et une appréhension de malheur. Un élément non identifié génère cette préoccupation."
+    },
+    {
+      "id": 31,
+      "original_id": 31,
+      "text": "Voici le texte réécrit dans un style neutre et factuel :\n\nUn homme âgé, à barbe blanche, a sollicité une aumône auprès du narrateur et de son compagnon. Joseph Davranche, le compagnon du narrateur, lui a donné cent sous. Davranche a alors expliqué que l'homme lui avait rendu un service par le passé. Il a ensuite fourni d'autres informations. La famille du narrateur était dans une situation de pauvreté et avait connu des difficultés. Jules, l'oncle du narrateur (frère de son père), était considéré comme l'unique espoir de la famille."
+    },
+    {
+      "id": 32,
+      "original_id": 32,
+      "text": "Georges Duroy quitta le bureau de comptabilité à sept heures du soir. Il tourna à gauche, descendit vers la Seine, puis longea le quai. Le soir arrivait. Les becs de gaz s'allumaient. Des femmes passaient. Duroy les observait, éprouvant du désir à leur égard. Sa situation financière constituait un obstacle à l'établissement de relations avec elles. Il disposait de trois francs vingt centimes pour la fin du mois."
+    },
+    {
+      "id": 33,
+      "original_id": 33,
+      "text": "Voici une réécriture dans un style neutre et factuel :\n\nElle s'est rendue seule sur la falaise dominant la mer. Le vent soufflait fort et froid, provenant du large. La mer était agitée, avec des moutons visibles jusqu'à l'horizon, et affichait une couleur grise sous un ciel également gris. Elle est restée immobile pendant une période prolongée, observant les vagues se former, rouler, monter et se briser contre les roches. Ses pensées concernent sa vie et le constat que sa jeunesse s'écoulait, selon sa perception, sans joie ni amour. Elle avait, par le passé, adhéré à des convictions qu'elle estimait désormais dénuées de réalité."
+    },
+    {
+      "id": 34,
+      "original_id": 34,
+      "text": "Voici le texte réécrit dans un style neutre et factuel :\n\nLa maison de Madame Tellier était connue dans la région. Elle recevait occasionnellement des visiteurs en provenance de Fécamp. La bâtisse, d'un étage, était équipée de rideaux blancs aux fenêtres. La propriétaire était une femme rousse de grande taille. Son apparence était sérieuse, et elle accueillait ses clients avec une attitude digne."
+    },
+    {
+      "id": 35,
+      "original_id": 35,
+      "text": "Voici le texte réécrit dans un style neutre et factuel :\n\nLa diligence transportait douze passagers à travers la plaine normande. Il faisait nuit et les températures étaient basses. Les seuls sons perceptibles provenaient du roulement des roues sur la neige et du souffle des chevaux. Chaque passager s'était enveloppé dans des fourrures. Le silence régnait à l'intérieur du véhicule. Une passagère, assise en face, sortit un panier de provisions et l'ouvrit."
+    },
+    {
+      "id": 36,
+      "original_id": 36,
+      "text": "Voici le texte réécrit dans un style neutre et factuel :\n\nLesable était employé au ministère de la Marine. Il avait épousé la nièce d'un chef de bureau, avec pour motif l'obtention d'un héritage. L'oncle était toujours en vie. Le couple lui rendait visite régulièrement le dimanche, lui apportant des gâteaux. La nièce observait le passage du temps et faisait des calculs en prévision de l'héritage. L'oncle continuait de vivre et consommait les gâteaux."
+    },
+    {
+      "id": 37,
+      "original_id": 37,
+      "text": "Un officier prussien occupait un château normand depuis quinze jours. Il était blond, jeune, avait les yeux clairs et portait une fine moustache.\n\nIl a brisé des miroirs, découpé des tableaux au sabre et brûlé des livres de la bibliothèque. Ses subordonnés ne sont pas intervenus.\n\nUn soir, il a fait venir des femmes du bourg et a organisé un rassemblement au milieu du mobilier endommagé."
+    },
+    {
+      "id": 38,
+      "original_id": 38,
+      "text": "Voici le texte réécrit dans un style neutre et factuel :\n\nIsidore, âgé de 19 ans, était le fils de la marchande de légumes de la place du marché. Il était roux et présentait un comportement réservé, évitant le contact visuel avec les jeunes femmes. Sa mère lui avait inculqué le respect des femmes. Au sein de la commune, il était considéré comme un individu irréprochable, faisant figure de modèle de sagesse et d'assiduité. Ces qualités menèrent Madame Husson à le sélectionner pour le rôle de rosier de l'année."
+    },
+    {
+      "id": 39,
+      "original_id": 39,
+      "text": "Un dimanche, lors d'une promenade aux Champs-Élysées, Madame Loisel aperçut une femme promenant un enfant. Il s'agissait de Madame Forestier. Madame Loisel considéra la possibilité de lui adresser la parole. Ayant désormais remboursé sa dette, elle forma l'intention de lui révéler la totalité de la situation."
+    },
+    {
+      "id": 40,
+      "original_id": 40,
+      "text": "Voici une réécriture dans un style neutre et factuel :\n\nPierre observait son frère. Jean avait récemment hérité d'un ami de la famille qu'il connaissait peu. L'héritage comprenait cent mille francs et une maison. Pierre n'avait pas reçu d'héritage. Il ne formula aucun commentaire, mais une modification de son état interne vers une certaine rigidité s'opérait en lui. Il rentrait tard le soir et effectuait de longues marches sur le quai avant de se coucher."
+    },
+    {
+      "id": 41,
+      "original_id": 41,
+      "text": "Voici le texte réécrit dans un style neutre et factuel :\n\nSimon avait huit ans. Il était l'enfant d'une mère célibataire du village, situation connue de la communauté. À l'école, d'autres enfants l'ont interpellé à ce sujet en riant. Il est rentré chez lui en pleurant. Il a demandé à sa mère : \"Pourquoi n'ai-je pas de père ?\" Sa mère n'a pas répondu immédiatement. Ses mains tremblaient sur son ouvrage. À l'extérieur, la nuit tombait sur le village."
+    },
+    {
+      "id": 42,
+      "original_id": 42,
+      "text": "Voici le texte réécrit dans un style neutre et factuel :\n\nToine était l'homme le plus corpulent du canton de Tournevent. Il était caractérisé par une largeur physique importante et une taille modeste. Il était le propriétaire et gérant de l'unique auberge du village. Il avait l'habitude de consommer des boissons avec ses clients du matin au soir, de rire bruyamment et de raconter des histoires.\n\nSa femme, une femme de petite taille et mince, présentait des signes de fatigue intense due au travail. Ses relations avec Toine étaient tendues. Elle lui reprochait quotidiennement de gaspiller leurs ressources. Toine réagissait en accentuant son rire."
+    },
+    {
+      "id": 43,
+      "original_id": 43,
+      "text": "Voici une version neutre et factuelle du texte :\n\nLa rivière s'écoulait entre les saules. Le soleil de juin éclairait la surface de l'eau, générant des reflets. Deux pêcheurs étaient positionnés sur la berge, leurs lignes immergées et une pipe à la bouche. Ils étaient restés silencieux pendant une heure. L'un d'eux leva les yeux et observa un objet sombre dérivant sous la surface de l'eau. Il se leva, examina l'objet de plus près et déclara à son compagnon : « Il y a un noyé. »"
+    },
+    {
+      "id": 44,
+      "original_id": 44,
+      "text": "Voici le texte réécrit dans un style neutre et factuel :\n\nLa veuve de Paolo Saverini résidait seule avec son fils dans une petite maison modeste, située en bordure des remparts de Bonifacio. La ville est bâtie sur une avancée rocheuse, dont certaines sections surplombent la mer. Elle fait face au détroit, parsemé d'écueils, d'où l'on peut apercevoir la côte de Sardaigne, plus basse. En contrebas, de l'autre côté, une échancrure de la falaise, qui contourne la ville presque entièrement et forme un corridor naturel, est utilisée comme port."
+    },
+    {
+      "id": 45,
+      "original_id": 45,
+      "text": "Environ six ans auparavant, une tempête survint alors que nous nous trouvions sur les bords de l'Oust. Un château ancien et abandonné était situé à proximité ; ses portes, laissées ouvertes, étaient agitées par le vent. Nous pénétrâmes à l'intérieur pour nous abriter. L'obscurité était totale. Des craquements d'arbres étaient audibles, et des sons furent perçus, dont certains furent interprétés comme des voix. Par la suite, des bruits indiquant un déplacement lent et lourd dans l'escalier furent entendus, évoquant une progression marche par marche."
+    },
+    {
+      "id": 46,
+      "original_id": 46,
+      "text": "En six mois, Duroy s'était familiarisé avec son nouvel environnement. Il avait acquis une compréhension des dynamiques de ce milieu, incluant les salons, les rédactions et les résidences de personnalités influentes. Il avait constaté la primauté des relations et de l'audace sur le talent et le mérite pour l'avancement. Ses capacités d'observation s'étaient développées, lui permettant d'identifier rapidement les individus à courtiser, ceux dont l'influence était moindre, et ceux dont la situation était précaire."
+    },
+    {
+      "id": 47,
+      "original_id": 47,
+      "text": "L'observateur a constaté un phénomène et en est convaincu. Avant cette observation, l'individu ressentait un froid intense et une sensation de peur.\n\nDe l'eau avait été placée dans une carafe de cristal. Le niveau d'eau dans la carafe a diminué spontanément alors qu'il était observé. Cette diminution s'est produite de manière suggestive d'une aspiration par une entité non visible."
+    },
+    {
+      "id": 48,
+      "original_id": 48,
+      "text": "Voici une réécriture dans un style neutre et factuel :\n\nL'homme consommait de l'alcool de manière habituelle. Le soir, après son retour du port, il fréquentait les cabarets. Il en ressortait en titubant avant de rentrer à son domicile.\n\nSon épouse l'attendait en silence, déposait la soupe sur la table, puis se couchait avec les enfants. L'homme mangeait seul. Il lui arrivait de renverser des objets et de prononcer des jurons.\n\nIl la frappait parfois. Il lui arrivait également de pleurer. Son comportement était imprévisible, alternant entre des accès de violence physique envers son épouse et des épisodes de pleurs."
+    },
+    {
+      "id": 49,
+      "original_id": 49,
+      "text": "Voici le texte réécrit dans un style neutre et factuel :\n\nElle avait des sentiments pour cet homme depuis l'enfance. À quinze ans, alors qu'il en avait douze, elle lui a exprimé ses sentiments pour la première fois derrière l'école. Il a réagi par la moquerie. Plus tard, elle est revenue au village chaque année pour son activité de réparation de chaises. Elle l'observait, mais il ne lui prêtait pas attention. Il s'est marié. Elle a continué à travailler sur les routes, rempaillant les chaises, et a économisé son argent avec l'intention de le lui destiner en cas de besoin."
+    },
+    {
+      "id": 50,
+      "original_id": 50,
+      "text": "Voici le texte réécrit dans un style neutre et factuel :\n\nUne femme âgée est montée à bord à Argentan, munie d'un panier de grande taille et d'une poule contenue dans un sac. Elle s'est assise face à un autre passager, a ouvert la fenêtre malgré la pluie, et a entamé une conversation prolongée. Elle a indiqué se rendre à Caen pour y voir sa fille. Elle a également mentionné avoir un fils à Falaise. Elle a précisé que son mari était décédé l'hiver précédent. La poule a émis des gloussements depuis le sac. Le train progressait à travers la campagne normande, sous la pluie."
     }
   ]
 }

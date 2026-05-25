@@ -1,46 +1,131 @@
 {
-  "source": "Émile Zola — Germinal (1885), public domain",
+  "source": "Émile Zola — Germinal, L'Assommoir, Nana, Au Bonheur des Dames, La Terre (1877–1888), public domain",
   "language": "fr",
   "texts": [
     {
       "id": 1,
-      "title": "Descente dans la fosse",
-      "text": "Quand Étienne Lantier descendit dans la fosse, il faisait nuit encore. La pluie tombait par rafales sur la plaine rase, un vent du nord-est soufflait, glacial. L'homme s'arrêta au bord du puits, la lampe à la main, et regarda l'abîme. Au fond, dans les ténèbres, on entendait gronder la machine."
+      "title": "Germinal — Arrivée d'Étienne",
+      "text": "Dans la plaine rase, sous la nuit sans étoiles, d'une obscurité et d'une épaisseur d'encre, un homme suivait seul la grande route de Marchiennes à Montsou, dix kilomètres de pavé coupant tout droit, à travers les champs de betteraves. Il ne voyait même pas le sol noir devant lui, et il n'avait la sensation de l'immense horizon plat que par les souffles du vent de mars, des rafales larges comme sur une mer, glacées d'avoir balayé des lieues de marais et de terres nues."
     },
     {
       "id": 2,
-      "title": "Catherine dans la galerie",
-      "text": "Catherine descendait l'escalier de bois, sa lampe à la main. La galerie s'ouvrait devant eux, noire, humide, immense. Elle marchait vite, la tête baissée, les épaules courbées. Et elle pensait à Étienne, à ses mains, à sa voix."
+      "title": "Germinal — Catherine au fond",
+      "text": "Catherine, cependant, s'était mise à rouler. Elle emplissait sa berline au chantier voisin, puis elle la poussait jusqu'au plan incliné, la lançait, et recommençait. Dans le couloir bas et étroit, une lueur vague guidait ses pas. Elle avançait les épaules rentrées, les reins courbés, poussant de tout son poids. En haut, un garçon accrochait les berlines, les envoyait au fond du puits d'une secousse. Le roulement sourd des roues, le heurt du métal, emplissaient le boyau obscur."
     },
     {
       "id": 3,
-      "title": "Étienne au terril",
-      "text": "Le ciel était d'un bleu sombre, lourd, écrasant. Étienne marchait le long du terril, les mains dans les poches. La fosse crachait sa fumée. Le vent redoublait. Il pensait qu'il n'avait plus rien à perdre."
+      "title": "Germinal — La fosse vue du terril",
+      "text": "Du terril, on voyait la fosse entière. Le Voreux s'enfonçait dans la terre, avec ses bâtiments trapus, ses chevalements de bois, sa salle de recette, sa chambre de dégagement, tout un empilement de constructions noires et sales, qui prenait une mine de bête mauvaise, accroupie là pour dévorer. Par moments, la vapeur sifflait avec violence, et l'on entendait la machine souffler, au milieu du grincement des poulies."
     },
     {
       "id": 4,
-      "title": "Maheu rentre chez lui",
-      "text": "Maheu rentra chez lui, sale, épuisé, silencieux. La Maheude l'attendait près du feu, les enfants autour d'elle. Il n'y avait rien à manger. Il s'assit quand même, les coudes sur la table, et il regarda le feu."
+      "title": "Germinal — Maheu rentre épuisé",
+      "text": "Maheu rentra chez lui, las de la journée, les membres rompus, les yeux brûlants de poussière. Il jeta sa veste sur une chaise, s'assit. La Maheude était là, avec les enfants, autour de la table. Il n'y avait rien à manger, les marmites vides, le pain fini. Elle le regarda entrer sans rien dire, et lui aussi se tut. Il prit sa tête dans ses deux mains, les coudes sur la toile cirée, et il fixa les yeux sur la lampe qui fumait."
     },
     {
       "id": 5,
-      "title": "La grève",
-      "text": "La grève durait depuis quinze jours. Les hommes tenaient, mais les femmes criaient famine. Étienne parlait, et les mineurs l'écoutaient, debout sous la neige. Ses mots tombaient dans le silence comme des pierres dans l'eau."
+      "title": "Germinal — Étienne harangue les mineurs",
+      "text": "Sous les nuages qui couraient, Étienne parla longtemps, avec une fièvre qui le jetait aux plus grands mots. La foule se serrait, silencieuse dans la neige. Il leur disait leur misère, leur droit, la longue patience des hommes de mine. Sa voix montait, battait contre les hauts murs du coron, revenait sur eux, chauffée de sa propre chaleur. Les femmes pleuraient, les hommes hochaient la tête."
     },
     {
       "id": 6,
-      "title": "La Maheude seule",
-      "text": "La Maheude berçait son dernier-né, dans la maison vide. Dehors, on entendait les soldats. Elle n'avait plus rien. Ni pain, ni charbon, ni espoir. Mais elle berçait quand même, doucement, les yeux dans le vide."
+      "title": "Germinal — La Maheude et le dernier-né",
+      "text": "La Maheude s'était assise, elle avait déboutonné son corsage, et le petit, tourné de côté sur ses genoux, suçait. Il était né depuis quelques semaines à peine, poussé là dans cette misère, comme une bouche de plus à nourrir. Elle le regardait boire, et ses yeux allaient à la fenêtre, derrière laquelle on entendait les soldats passer. Elle ne pleurait pas. Elle ne disait rien. Elle berçait doucement le petit, et son visage s'était durci en quelque chose de calme et de fermé."
     },
     {
       "id": 7,
-      "title": "Les hommes au fond",
-      "text": "Il faisait chaud dans la galerie basse. Les hommes avançaient à quatre pattes, leurs lampes éclairant à peine le charbon noir. On ne parlait pas. On n'entendait que les pioches et la respiration dans la poussière."
+      "title": "Germinal — Travail au fond",
+      "text": "Chaval abattait d'une veine difficile, couché sur le côté dans une taille trop basse pour qu'on pût s'y tenir debout. La lampe posée à côté de lui éclairait le charbon noir, à vingt centimètres de sa face. On n'entendait que le coup régulier de la rivelaine, qui entamait la roche, et la respiration sifflante des deux hommes, dans l'air raréfié. La chaleur était étouffante, la sueur ruisselait, les corps nus et noirs luisaient comme du métal."
     },
     {
       "id": 8,
-      "title": "Chaval et Étienne",
-      "text": "Chaval cracha par terre et regarda Étienne. Il y avait entre eux une haine ancienne, sourde, animale. Catherine baissa la tête. Elle savait que ça finirait mal. Mais elle ne disait rien. Elle ne disait jamais rien."
+      "title": "Germinal — Chaval et Étienne face à face",
+      "text": "Chaval avait reculé d'un pas, et tous deux se regardèrent. Il y avait entre eux une haine de longue date, faite d'une jalousie d'homme à homme, d'une rivalité obscure et profonde que ni l'un ni l'autre n'eût pu expliquer. Catherine se tenait à l'écart, contre la paroi, blême. Elle sentait venir le malheur, elle ne pouvait rien faire. Étienne ne bougeait pas, attendant. La galerie était silencieuse. La flamme des lampes ne tremblait pas."
+    },
+    {
+      "id": 9,
+      "title": "Germinal — La catastrophe",
+      "text": "Tout d'un coup, il y eut un craquement, puis un bruit sourd, un éboulement terrible, comme si la terre s'écroulait. Étienne fut projeté contre la paroi, soufflé par le souffle violent de l'air chassé. La galerie s'emplit de poussière, les lampes s'éteignirent. On n'entendait plus que des gémissements, le fracas lointain des boisages qui cédaient. Il resta un moment sans bouger, assommé, cherchant à comprendre ce qui venait de se passer."
+    },
+    {
+      "id": 10,
+      "title": "Germinal — La sortie des grévistes",
+      "text": "La bande s'élança sur la route, débordant les fossés, culbutant les haies. Étienne courait en tête, Catherine à côté de lui. Ils n'étaient plus une foule, ils étaient une force de la nature, un torrent qui emportait tout. Les sabots sonnaient sur le pavé gelé, les voix criaient dans le grand vent froid du Nord. Des feux de bengale que quelqu'un avait allumés éclairaient par instants le flot sombre des têtes."
+    },
+    {
+      "id": 11,
+      "title": "L'Assommoir — La rue de la Goutte-d'Or",
+      "text": "La rue de la Goutte-d'Or s'éveillait dans le gris du matin. Les boutiques ouvraient une à une, le boulanger sortait ses pains, le marchand de vin essuyait ses comptoirs. Des ouvrières passaient, serrant leur châle contre elles, les yeux encore gonflés de sommeil. L'odeur du café chaud et du tabac se mêlait à celle du ruisseau. Gervaise regardait tout cela depuis le seuil de la blanchisserie, les bras croisés sur son tablier blanc."
+    },
+    {
+      "id": 12,
+      "title": "L'Assommoir — Coupeau sur les toits",
+      "text": "Coupeau travaillait sur le toit d'un immeuble du faubourg Poissonnière, à six étages de hauteur. Il posait des feuilles de zinc avec des gestes précis et tranquilles, comme s'il marchait sur le sol. En bas, la rue était étroite, les voitures passaient en fourmis. Sa femme, qui était venue lui porter son déjeuner, n'osait pas regarder. Il siffloait, il plaisantait. On voyait de là tout Paris jusqu'à la banlieue, une mer de toitures grisâtres."
+    },
+    {
+      "id": 13,
+      "title": "L'Assommoir — La chute de Gervaise",
+      "text": "Gervaise avait glissé peu à peu. D'abord la fatigue, puis la misère, puis l'alcool. Elle ne se rendait plus compte. Les journées se ressemblaient toutes, grises et vides, avec le même froid aux pieds, la même faim au ventre. Elle qui avait voulu travailler, économiser, se tailler une petite place honnête, elle ramassait maintenant des mégots de cigarette dans le caniveau et tendait la main aux passants sans les regarder."
+    },
+    {
+      "id": 14,
+      "title": "Nana — Entrée en scène",
+      "text": "Nana parut. Elle avait une longue robe blanche, toute simple, les cheveux dénoués, tombant sur les épaules. La salle l'accueillit dans un murmure. On ne savait pas encore si elle était belle. Elle s'avança vers la rampe, et alors la lumière la prit, la baigna, la fit éclater. Elle était blonde, d'un blond extraordinaire, avec des yeux bleus qui riaient. Elle n'était pas grande, mais d'une rondeur, d'un modelé de chair qui faisait tourner toutes les têtes."
+    },
+    {
+      "id": 15,
+      "title": "Nana — Chez le comte Muffat",
+      "text": "Le comte Muffat s'assit dans le salon encombré de fleurs. Nana n'était pas encore prête. Il attendit, raide dans son habit, les gants à la main, regardant ces meubles extravagants, ces soieries roses, ces bibelots entassés dont l'odeur de femme l'étourdissait. On entendait dans la chambre voisine un bruit de robes froissées, un claquement de porcelaines, des éclats de rire. Zoé entra lui dire que madame allait venir."
+    },
+    {
+      "id": 16,
+      "title": "Au Bonheur des Dames — Ouverture du magasin",
+      "text": "Le Bonheur des Dames ouvrit ses portes par un lundi matin de novembre. Les vendeuses en noir, fraîches et souriantes, se tenaient au milieu des comptoirs chargés d'étoffes. La lumière électrique éclatait de toutes parts sur les soieries, les velours, les dentelles. Dehors, la foule s'écrasait contre les vitrines. Des femmes entraient en groupes, le nez en l'air, intimidées et ravies. Octave Mouret se promenait parmi elles, les mains derrière le dos, l'œil partout."
+    },
+    {
+      "id": 17,
+      "title": "Au Bonheur des Dames — Denise seule",
+      "text": "Denise resta seule un instant dans la salle des manteaux, après le départ de ses collègues. Elle regarda autour d'elle, les rangées de manteaux sur leurs cintres, les glaces qui la renvoyaient son image, pâle et droite dans sa robe noire de vendeuse. Elle était venue de Valognes avec ses deux frères et ses vingt francs d'économies. Depuis une semaine, elle apprenait Paris, ses bruits, sa lumière, et cet immense magasin qui l'écrasait et la fascinait."
+    },
+    {
+      "id": 18,
+      "title": "La Terre — Les labours",
+      "text": "Jean Macquart labourait depuis l'aube. Le soc ouvrait la terre grasse de la Beauce, retournant des mottes luisantes qui fumaient un peu dans l'air froid du matin. Les corbeaux suivaient en silence, picorant les vers mis à nu. Jean guidait sa charrue d'une main ferme, les yeux au sol, pensant à rien et à tout, avec cette vide béatitude du travail lent et régulier qui abolit la pensée. Le cheval soufflait. La plaine était vaste, silencieuse, grise jusqu'à l'horizon."
+    },
+    {
+      "id": 19,
+      "title": "La Terre — La dispute pour l'héritage",
+      "text": "Fouan avait convoqué ses enfants. Ils étaient là tous les trois, Buteau, Hyacinthe et Fanny, assis autour de la table de la ferme, les bras croisés, les yeux sur le vieux. Il voulait partager la terre de son vivant, pour en finir. Mais on sentait déjà que personne n'était content, que la jalousie couvait sous les regards obliques. La terre était là, dehors, immobile et indifférente, qui avait vu naître tous les conflits des hommes depuis des siècles."
+    },
+    {
+      "id": 20,
+      "title": "Germinal — La mort de Bonnemort",
+      "text": "Le vieux Bonnemort toussait sans arrêt, assis sur sa chaise près du feu, la tête tombée en avant. Cinquante ans de mine l'avaient consumé, lui avaient noirci les poumons, raidi les jambes. Il ne parlait presque plus. Il toussait, crachait, et parfois ses yeux délavés s'ouvraient grand sur quelque chose que lui seul voyait. Les enfants ne lui prêtaient plus attention. Il était là comme un meuble, un vieux meuble usé que personne ne regardait."
+    },
+    {
+      "id": 21,
+      "title": "Germinal — Souvarine le niveleur",
+      "text": "Souvarine travaillait en silence, avec une application tranquille et froide. Il n'avait besoin de personne, ne demandait rien, ne donnait rien. Le soir, dans sa chambre, il lisait. On l'entendait parfois murmurer des noms de camarades morts. Sa lapin blanc dormait sur ses genoux. Il le caressait machinalement de la main gauche, tout en tournant les pages de sa main droite. Il croyait en la destruction totale, en la table rase, et ça lui suffisait."
+    },
+    {
+      "id": 22,
+      "title": "L'Assommoir — Le repas de noce",
+      "text": "On était à table depuis deux heures et on y resterait encore longtemps. Le lapin, la gibelotte, le bœuf aux carottes fumaient dans les plats, au milieu des bouteilles entamées. Les femmes défaisaient leurs corsages, les hommes roulaient leurs manches. On riait fort, on tapait sur la table. Dehors, Paris continuait son bruit de ville, indifférent. Dedans, la joie montait, une joie un peu lourde, un peu triste, comme toutes les joies du peuple."
+    },
+    {
+      "id": 23,
+      "title": "Nana — La ruine du comte",
+      "text": "Le comte avait tout donné. Sa fortune, l'hôtel de famille, les terres du Poitou, l'argenterie ancienne. Il ne restait plus rien. Et il revenait quand même, poussé par quelque chose qui n'était plus du désir mais de la servitude, une habitude de souffrance qu'il ne pouvait plus secouer. Nana ne le regardait même plus. Il entrait dans l'antichambre avec les fournisseurs, attendait son tour, le chapeau à la main."
+    },
+    {
+      "id": 24,
+      "title": "Au Bonheur des Dames — L'écrasement du petit commerce",
+      "text": "Le père Bourras voyait ses clients passer de l'autre côté de la rue, attirés par les vitrines du Bonheur des Dames. Sa boutique de parapluies et de cannes s'était vidée en deux ans. Il résistait, têtu, cloué à son comptoir, refusant de vendre. La grande machine commerciale l'écrasait sans le voir, comme une roue écrase un caillou. Il brandissait encore son poing vers la façade lumineuse d'en face, mais ses bras se fatiguaient."
+    },
+    {
+      "id": 25,
+      "title": "Germinal — Le puits noyé",
+      "text": "L'eau montait dans les galeries depuis trois jours. On entendait son bruit de cascade quelque part dans les ténèbres, un bruit régulier et sourd qui grandissait. Les lampes s'éteignaient l'une après l'autre au contact de l'humidité. Les hommes avançaient à tâtons, de l'eau jusqu'aux genoux, cherchant les parois pour se guider. Personne ne parlait. On avait tous compris que la fosse était perdue, et qu'il fallait remonter vite ou ne pas remonter du tout."
     }
   ]
 }

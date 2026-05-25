@@ -3,44 +3,129 @@
   "language": "fr",
   "texts": [
     {
-      "id": 9,
-      "title": "L'homme sur la route",
-      "text": "Il pleuvait à verse. La nuit était noire. Sur la route déserte, un homme marchait, courbé sous l'averse. Il allait vite, très vite, comme s'il fuyait quelque chose. Il pensait à elle. Il marchait."
+      "id": 26,
+      "title": "Boule de suif — départ de Rouen",
+      "text": "Pendant plusieurs jours de suite des lambeaux d'armée en déroute avaient traversé la ville. Ce n'était point de la troupe, mais des hordes débandées. Les hommes avaient la barbe longue et sale, les uniformes en guenilles, et ils avançaient d'une allure molle, sans drapeau, sans régiment. Tous semblaient accablés, éreintés, incapables d'une pensée ou d'une résolution, marchant seulement par habitude et tombant de fatigue sitôt qu'ils s'arrêtaient."
     },
     {
-      "id": 10,
-      "title": "Elle pleurait seule",
-      "text": "Elle était belle. Elle était seule. Et elle pleurait, dans le silence. Personne ne savait. Personne ne saurait jamais. Il y a des douleurs qu'on garde pour soi, qu'on enfouit si profond qu'elles disparaissent."
+      "id": 27,
+      "title": "La Parure — Mathilde Loisel",
+      "text": "Elle était une de ces jolies et charmantes filles, nées, comme par une erreur du destin, dans une famille d'employés. Elle n'avait pas de dot, pas d'espérances, aucun moyen d'être connue, comprise, aimée, épousée par un homme riche et distingué ; et elle se laissa marier avec un petit commis du ministère de l'Instruction publique. Elle souffrait sans cesse, se sentant née pour toutes les délicatesses et tous les luxes. Elle souffrait de la pauvreté de son logement, de la misère des murs, de l'usure des sièges, de la laideur des étoffes."
     },
     {
-      "id": 11,
-      "title": "L'homme dans la pièce",
-      "text": "L'homme entra dans la pièce. Il s'assit. Il regarda autour de lui. Rien n'avait changé. Les meubles étaient à leur place. Il soupira. Il alluma une cigarette et il attendit, sans savoir quoi."
+      "id": 28,
+      "title": "Deux amis — sur la Seine",
+      "text": "Paris était bloqué, affamé et râlant. Les moineaux se faisaient bien rares sur les toits, et les égouts se dépeuplaient. On mangeait n'importe quoi. Comme il se promenait tristement par un clair matin de janvier le long du boulevard extérieur, les mains dans les poches de sa culotte d'uniforme et le ventre vide, M. Morissot, horloger de son état et pantouflard par occasion, s'arrêta net devant un confrère qu'il reconnut pour un ami."
     },
     {
-      "id": 12,
-      "title": "Les deux pêcheurs",
-      "text": "Les deux amis pêchaient depuis l'aube. Ils ne parlaient guère. Ils regardaient l'eau couler. Le soleil montait doucement. Et c'était bien, cette paix-là, cette amitié silencieuse de deux vieux hommes."
+      "id": 29,
+      "title": "La Ficelle — maître Hauchecome",
+      "text": "Sur toutes les routes autour de Goderville, les paysans et leurs femmes s'en venaient vers le bourg ; car c'était jour de marché. Les mâles allaient, à pas tranquilles, tout le corps en avant à chaque mouvement de leurs longues jambes torses, difformées par les rudes travaux, par la pesée sur la charrue qui fait en même temps monter l'épaule gauche et dévier la taille, par le fauchage des blés qui fait écarter les genoux pour prendre un aplomb solide."
     },
     {
-      "id": 13,
-      "title": "La dernière lettre",
-      "text": "Le soldat avait écrit une dernière lettre. Il l'avait pliée soigneusement, glissée dans sa poche. Puis il était reparti dans la nuit. Sa mère ne lirait cette lettre que trois semaines plus tard."
+      "id": 30,
+      "title": "Le Horla — première nuit",
+      "text": "J'aime ma maison où j'ai grandi. De mes fenêtres, je vois la Seine qui coule, le long de mon jardin, derrière la route, presque chez moi, la grande et large Seine, qui va de Rouen au Havre, couverte de bateaux qui passent. Mais voilà que depuis quelques semaines je me sens mal à l'aise. Je ne sais pas pourquoi. C'est comme une angoisse, une crainte de quelque chose qui viendra, une appréhension du malheur. Quelque chose de mystérieux m'inquiète."
     },
     {
-      "id": 14,
-      "title": "Le vieil homme",
-      "text": "Il était vieux. Il avait tout raté. Ses enfants étaient partis. Sa femme était morte. Et lui, il restait là, dans cette maison trop grande, à regarder par la fenêtre les années qui ne revenaient pas."
+      "id": 31,
+      "title": "Mon oncle Jules — la famille Davranche",
+      "text": "Un vieux pauvre, à barbe blanche, nous demanda l'aumône. Mon compagnon, Joseph Davranche, lui donna cent sous. Je fus surpris. Il me dit : C'est un malheureux qui m'a rendu jadis un grand service. Il m'en donna d'autres, et cette histoire me resta dans l'esprit, à cause de la façon simple et grave dont il me la conta. Nous avions une famille pauvre, et qui avait souffert. Mon oncle Jules, le frère de mon père, était considéré comme l'unique espérance de la famille."
     },
     {
-      "id": 15,
-      "title": "Le secret de vingt ans",
-      "text": "Elle avait un secret. Elle l'avait gardé vingt ans. Vingt ans à sourire quand on lui parlait de cet été-là, de cet homme-là. Vingt ans de mensonge tranquille, presque devenu vérité."
+      "id": 32,
+      "title": "Bel-Ami — Georges Duroy",
+      "text": "Georges Duroy quitta le bureau de comptabilité à sept heures du soir. Il tourna à gauche, descendit vers la Seine, puis longea le quai. Le soir venait, calme et doux. Les becs de gaz s'allumaient. Des femmes passaient en regardant les hommes, et lui les regardait aussi, les désirant toutes, contrariés par leur pauvreté qui l'empêchait de les connaître. Il n'avait que trois francs vingt centimes pour finir le mois."
     },
     {
-      "id": 16,
-      "title": "Le vieux cheval",
-      "text": "Le vieux cheval était tombé au milieu du chemin. Il ne pouvait plus se lever. Son maître le regardait, debout, les bras ballants. Il ne savait pas quoi faire. On n'avait pas d'argent pour le vétérinaire."
+      "id": 33,
+      "title": "Une vie — Jeanne au château",
+      "text": "Elle était sortie seule pour aller, comme souvent, s'asseoir sur la falaise qui domine la mer. Le vent soufflait du large, fort et froid. La mer moutonnait jusqu'à l'horizon, grise sous le ciel gris. Elle resta longtemps immobile à regarder les vagues se former, rouler, monter, se briser contre les roches. Elle pensait à sa vie, à sa jeunesse qui passait sans joie ni amour. Elle avait cru en des choses qui n'existaient pas."
+    },
+    {
+      "id": 34,
+      "title": "La Maison Tellier — le départ",
+      "text": "On connaissait dans toute la contrée la maison de Madame Tellier. On y allait, de Fécamp, comme on va déjeuner à Rouen, par fantaisie, une fois de temps en temps. C'était une maison de bonne apparence, à un étage, avec des rideaux blancs aux fenêtres et un air de bourgeoisie tranquille. La patronne était une grande femme rousse, d'aspect grave, qui recevait ses clients avec la dignité d'une marchande de draps."
+    },
+    {
+      "id": 35,
+      "title": "Boule de suif — dans la diligence",
+      "text": "La diligence emportait ses douze passagers à travers la plaine normande, dans la nuit et le froid. On n'entendait que le bruit des roues sur la neige, le souffle des chevaux. Chacun s'était enroulé dans ses fourrures. Personne ne parlait. La graisse de Rouen, comme l'avait surnommée Cornudet en regardant la grosse femme bien en chair qui leur faisait face, avait sorti un panier de provisions qu'elle ouvrit tranquillement."
+    },
+    {
+      "id": 36,
+      "title": "L'Héritage — les cousins Lesable",
+      "text": "Lesable était un homme d'ordre, un petit employé du ministère de la Marine. Il avait épousé la nièce d'un vieux chef de bureau, dans l'espoir d'un héritage. L'oncle vivait, traînait, ne mourait pas. On le visitait régulièrement, le dimanche, avec des gâteaux et des sourires. La nièce comptait les jours, calculait, attendait. L'oncle vivait toujours, mangeur de gâteaux, souriant de son sourire de vieux qui sait très bien ce qu'on attend de lui."
+    },
+    {
+      "id": 37,
+      "title": "Mademoiselle Fifi — l'officier prussien",
+      "text": "L'officier prussien avait pris ses quartiers dans le château normand depuis quinze jours. Il était blond, jeune, avec des yeux clairs et une moustache fine. Il s'ennuyait. Pour s'occuper, il brisait les miroirs, découpait les tableaux au sabre, brûlait les livres de la bibliothèque. Ses hommes le laissaient faire. Un soir, il fit venir des femmes du bourg et organisa une fête au milieu des meubles éventrés."
+    },
+    {
+      "id": 38,
+      "title": "Le Rosier de Madame Husson — Isidore",
+      "text": "Isidore était le fils de la marchande de légumes de la place du marché. Il avait dix-neuf ans, était roux, timide, et ne regardait jamais les filles en face. Sa mère lui avait appris à respecter les femmes. On le considérait dans toute la commune comme un garçon sans reproche, un modèle de sagesse et de travail. C'est pourquoi Madame Husson l'avait choisi pour être le rosier de l'année."
+    },
+    {
+      "id": 39,
+      "title": "La Parure — la découverte",
+      "text": "Un dimanche, comme elle se promenait aux Champs-Élysées pour se délasser des besognes de la semaine, elle aperçut tout à coup une femme qui promenait un enfant. C'était Madame Forestier, toujours jeune, toujours belle, toujours séduisante. Madame Loisel se sentit émue. Allait-elle lui parler ? Oui, certes. Et maintenant qu'elle avait payé, elle lui dirait tout. Pourquoi pas ?"
+    },
+    {
+      "id": 40,
+      "title": "Pierre et Jean — la querelle des frères",
+      "text": "Pierre regardait son frère d'un œil sombre. Jean venait d'hériter d'un vieil ami de la famille qu'il avait à peine connu. Cent mille francs et une maison. Pierre n'avait rien. Il ne disait rien non plus, mais quelque chose en lui durcissait. Il rentrait tard le soir, marchait longtemps sur le quai avant de monter se coucher. Les hommes comme lui, qui pensaient trop, souffraient de choses que d'autres ne voyaient même pas."
+    },
+    {
+      "id": 41,
+      "title": "Le Papa de Simon — l'enfant sans père",
+      "text": "Le petit Simon avait huit ans. Il était l'enfant d'une fille-mère du village, ce que tout le monde savait. Les autres enfants le lui avaient dit à l'école, méchamment, avec des rires. Il revint chez lui en pleurant. Il demanda à sa mère : Pourquoi je n'ai pas de papa, moi ? Sa mère ne répondit pas tout de suite. Ses mains tremblaient sur son ouvrage. Dehors, la nuit tombait sur le village."
+    },
+    {
+      "id": 42,
+      "title": "Toine — le paysan normand",
+      "text": "Toine était le plus gros homme du canton de Tournevent. On disait de lui qu'il était large comme la route, et presque aussi court. Il tenait la seule auberge du village, buvait avec ses clients du matin au soir, riait fort, contait des histoires. Sa femme, une petite femme sèche et avinée de travail, le supportait mal. Elle lui disait chaque soir qu'il mangeait son bien. Il riait encore plus fort."
+    },
+    {
+      "id": 43,
+      "title": "Le Noyé — la rivière normande",
+      "text": "La rivière coulait doucement entre les saules. Le soleil de juin frappait l'eau et la faisait briller comme de l'argent. Deux pêcheurs étaient assis sur la berge, leurs lignes dans l'eau, leur pipe à la bouche. Depuis une heure ils n'avaient pas dit un mot. Puis l'un d'eux, levant les yeux, aperçut quelque chose de sombre qui dérivait entre deux eaux. Il se leva sans se presser, regarda mieux, et dit simplement à son compagnon : Y'a un noyé."
+    },
+    {
+      "id": 44,
+      "title": "Une vendetta — la mère corse",
+      "text": "La veuve de Paolo Saverini habitait seule avec son fils une petite maison misérable au bord des remparts d'Bonifacio. La ville, bâtie sur une avancée de la montagne, suspendus par places au-dessus de la mer, regardait par-dessus le détroit hérissé d'écueils la côte plus basse de la Sardaigne. À ses pieds, de l'autre côté, la contournant presque entièrement, une coupure de la falaise, qui ressemble à un gigantesque corridor, lui sert de port."
+    },
+    {
+      "id": 45,
+      "title": "La Peur — le récit du voyageur",
+      "text": "Un soir, il y a six ans environ, nous fûmes surpris, sur les bords de l'Oust, par une tempête terrible. Il y avait là un château ancien, abandonné depuis longtemps, dont les portes ouvertes battaient au vent. Nous entrâmes nous mettre à l'abri. La nuit était noire, les arbres craquaient, on entendait des bruits qui ressemblaient à des voix. Et puis, dans l'escalier, quelque chose de lourd qui descendait lentement, marche par marche."
+    },
+    {
+      "id": 46,
+      "title": "Bel-Ami — l'ascension de Duroy",
+      "text": "Six mois avaient suffi à Duroy pour trouver ses marques. Il savait maintenant comment fonctionnait ce monde-là : les salons, les rédactions, les appartements de femmes qui comptaient. Il avait compris que les relations valaient mieux que le talent, et l'audace mieux que le mérite. Son regard s'était affûté. Il reconnaissait d'un coup ceux qu'il fallait courtiser, ceux qu'on pouvait négliger, ceux dont la chute était proche."
+    },
+    {
+      "id": 47,
+      "title": "Le Horla — la présence invisible",
+      "text": "Je l'ai vu ! Je l'ai vu ! Je ne puis plus en douter... Je l'ai vu ! J'avais froid jusqu'aux os, j'avais peur jusqu'à la moelle des os ; et puis, soudain, j'ai vu... J'avais mis de l'eau dans une carafe de cristal. Et l'eau diminuait, toute seule, pendant que je la regardais. Je la regardais descendre dans ce verre comme si une bouche invisible eût aspiré."
+    },
+    {
+      "id": 48,
+      "title": "L'Ivrogne — la nuit de violence",
+      "text": "Cet homme-là buvait toujours. Le soir, en rentrant du port, il passait devant les cabarets, entrait dans tous, ressortait titubant, rentrait chez lui la tête en feu. Sa femme l'attendait sans mot dire, posait la soupe sur la table, se couchait avec les enfants. Il mangeait seul, renversait quelque chose, jurait. Parfois il la battait. Parfois il pleurait. On ne savait jamais lequel des deux viendrait ce soir-là."
+    },
+    {
+      "id": 49,
+      "title": "La Rempailleuse — amour de paysan",
+      "text": "Elle aimait cet homme depuis l'enfance. Elle en avait quinze ans, lui douze, quand elle lui avait dit pour la première fois qu'elle l'aimait, là-bas, derrière l'école. Il s'était moqué d'elle. Plus tard, elle était revenue au village chaque année pour réparer les chaises. Elle le voyait, il ne la regardait pas. Il s'était marié. Elle continuait à travailler sur les routes, rempaillant les chaises, gardant son argent pour lui, pour le jour où il en aurait besoin."
+    },
+    {
+      "id": 50,
+      "title": "Le Voyage — la vieille femme en chemin de fer",
+      "text": "La vieille femme était montée à Argentan avec un gros panier et une poule dans un sac. Elle s'était assise en face de lui, avait ouvert la fenêtre malgré la pluie, et avait commencé à parler sans s'arrêter. Elle allait voir sa fille à Caen. Elle avait aussi un fils à Falaise. Son mari était mort l'hiver dernier. La poule gloussait dans le sac. Le train filait dans la campagne normande sous la pluie."
     }
   ]
 }

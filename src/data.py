@@ -110,7 +110,7 @@ def load_corpus() -> dict[str, list[str]]:
 
 
 def load_originals() -> list[str]:
-    """Retourne les 16 textes originaux (Zola + Maupassant) dans l'ordre."""
+    """Retourne les textes originaux (Zola + Maupassant) dans l'ordre."""
     return load_human("zola") + load_human("maupassant")
 
 
