@@ -11,8 +11,8 @@
 \usepackage[utf8]{inputenc}
 
 \title{Stylistic Drift as a Model Fingerprint:\\
-Measuring Prompt-Invariant LLM Signatures\\
-in French Literary Rewrites}
+Measuring LLM Stylistic Signatures and Their\\
+Prompt Sensitivity in French Literary Rewrites}
 
 \author{
   Riad Maouchi \\
@@ -35,7 +35,7 @@ Three findings emerge.
 First, Gemini produces significantly larger stylistic drift than the other
 models ($\Delta = 0.23$, $p < 0.001$ after Bonferroni correction);
 GPT-4 and Mistral are statistically indistinguishable ($p = 1.0$).
-Second, a linear classifier trained on shift vectors reaches only 36.9\%
+Second, a linear classifier trained on shift vectors reaches only 40.6\%
 accuracy (baseline 25\%), confirming that the signal is weak at the
 individual-text level.
 Third, inter-prompt robustness is weak across all models:
@@ -88,11 +88,12 @@ Our main contributions are:
     a French literary corpus (40 Zola + 40 Maupassant excerpts, $\sim$120
     words each), with all API outputs archived.
   \item Evidence that model rankings are preserved across prompts but
-    per-text correlations are weak, with Claude showing \emph{no}
-    significant per-text correlation ($r = 0.03$) despite an identical
-    mean drift---a dissociation not previously reported.
+    per-text shift correlations are weak or null for all four models
+    (bootstrap CIs include zero for three out of four),
+    suggesting that stylistic fingerprints are distributional descriptors
+    of models rather than stable per-document properties.
   \item A negative result: a logistic classifier on shift vectors
-    reaches only 36.9\% accuracy on a 4-class problem (baseline 25\%),
+    reaches only 40.6\% accuracy on a 4-class problem (baseline 25\%),
     suggesting that individual-text stylometric fingerprinting of
     LLMs remains unreliable at current corpus sizes.
 \end{enumerate}
@@ -129,7 +130,7 @@ Both factors make their task easier, and their results should not
 be taken as an upper bound for our problem.
 \citet{sadasivan2023} prove that detection accuracy degrades
 fundamentally under paraphrasing, which is consistent with our
-modest 36.9\% accuracy: rewrites are by design closer to the original
+modest 40.6\% accuracy: rewrites are by design closer to the original
 than freely generated text.
 \citet{liang2024} demonstrate that surface-level stylometric detectors
 produce false positives for non-native speakers, a bias our
@@ -150,16 +151,6 @@ consistent across semantically distinct rewriting instructions.
 This is the gap our robustness analysis (\S\ref{sec:robustness})
 addresses, albeit at modest corpus scale.
 
-\paragraph{Missing baseline.}
-A limitation shared by most LLM stylometry work, including ours,
-is the absence of a human rewriter baseline.
-\citet{koppel2009} show that even human authors exhibit significant
-intra-author variance across genres and time.
-It is unknown whether a human asked to ``neutralise'' then
-``simplify'' the same text would produce per-text shift correlations
-comparable to our LLM measurements.
-Without this baseline, the null per-text correlations we observe
-cannot be definitively attributed to model-specific behaviour.
 
 % ─────────────────────────────────────────────
 \section{Method}
@@ -173,9 +164,7 @@ We use 80 French literary excerpts: 40 from Zola
 and 40 from Maupassant
 (\textit{Boule de suif}, \textit{La Parure}, \textit{Yvette},
 \textit{Miss Harriet}, and others).
-Each excerpt contains approximately 120 words,
-above the 80-word threshold below which we observe signal degradation
-(\S\ref{sec:results}).
+Each excerpt contains approximately 120 words.
 All texts are in the public domain.
 
 \subsection{Rewriting Prompts}
@@ -421,8 +410,12 @@ The function-word list includes markers selected partly for
 their known association with LLM formal register
 (\textit{tandis, néanmoins, notamment}),
 introducing a mild bias toward models that produce formal connectives.
-We have no human rewriter baseline: a human asked to neutralise
-Zola might produce similarly uncorrelated P1/P2 shift patterns.
+We have no human rewriter baseline: \citet{koppel2009} show that
+even human authors exhibit significant intra-author variance across
+genres; a human asked to neutralise then simplify the same text
+might produce similarly low per-text shift correlations, in which case
+our null results would reflect task difficulty rather than a
+model-specific property.
 Finally, all models were queried at a fixed snapshot in time;
 model updates may alter these signatures.
 
@@ -438,7 +431,7 @@ At the aggregate level, model rankings are stable across two prompts.
 At the individual-text level, however, per-text shift correlations are
 weak or null for all four models (bootstrap CIs all include or nearly
 include zero), and individual-text LLM identification reaches only
-36.9\% accuracy on a 4-class problem.
+40.6\% accuracy on a 4-class problem.
 We conclude that, at current corpus sizes, LLM stylistic fingerprints
 are reliable comparative descriptors of models but not reliable
 predictors for individual texts.
