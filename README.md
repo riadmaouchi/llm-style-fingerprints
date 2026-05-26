@@ -57,10 +57,13 @@ detectable across 80 French literary texts with two distinct rewriting prompts.
 
 **Résultat principal :** Gemini introduit le shift stylistique le plus fort et se distingue significativement des trois autres modèles (p < 0.01, Bonferroni). GPT-4 et Mistral restent statistiquement indistinguables (p = 1.0). Le classement entre modèles est stable sur deux prompts distincts, mais la corrélation texte-par-texte entre P1 et P2 est faible ou nulle pour tous les modèles — les IC bootstrap incluent zéro pour 3 modèles sur 4.
 
-| Classifieur | Accuracy | Baseline |
-|------------|:--------:|:--------:|
-| Centroïde LOO — 4 classes | **30.9 %** | 25 % |
-| Régression logistique LOO — 4 classes | **36.9 %** | 25 % |
+| Méthode | Accuracy | Baseline |
+|---------|:--------:|:--------:|
+| Shift + stats de surface (combiné) | **43.8 %** | 25 % |
+| Stats de surface seules | **41.9 %** | 25 % |
+| Shift vectors (mots-outils) | **40.6 %** | 25 % |
+| Char n-grams TF-IDF (3–6) | **33.1 %** | 25 % |
+| Centroïde LOO | **30.9 %** | 25 % |
 
 ---
 
@@ -221,23 +224,23 @@ Classifieur par centroïde, Leave-One-Out, 4 classes :
 
 ![Matrice de confusion](results/confusion_matrix.png)
 
-- Accuracy centroïde : **30.9 %** > baseline 25 % → signal détectable
-- Accuracy logistique (LOO, mots-outils seuls) : **36.9 %** → signal faible mais supérieur au hasard
-- Confusion principale : **GPT-4 ↔ Mistral** (shifts statistiquement identiques, p=1.0)
+Six méthodes comparées en Leave-One-Out sur 320 exemples (80 textes × 4 modèles) :
+
+| Méthode | Accuracy |
+|---------|:--------:|
+| Shift + stats de surface (combiné) | **43.8 %** |
+| Stats de surface seules | **41.9 %** |
+| Shift vectors (mots-outils) | **40.6 %** |
+| Fréquences brutes réécriture | 39.4 % |
+| Char n-grams TF-IDF (3–6) | 33.1 % |
+| Vecteur texte original (sanity) | 0.0 % |
+| Baseline aléatoire | 25.0 % |
+
+Trois observations : (1) toutes les méthodes plafonnent entre 33–44 % — le signal est présent mais faible ; (2) la soustraction shift n'apporte que +1.3 pp sur les fréquences brutes ; (3) les stats de surface (longueur de phrases, TTR, densité de ponctuation) sont aussi compétitives que les mots-outils, ce qui suggère que les LLMs laissent des traces à plusieurs niveaux simultanément. La confusion principale reste **GPT-4 ↔ Mistral** dans toutes les conditions.
 
 ![Mots-outils discriminants](results/feature_importance.png)
 
-#### Features stylistiques étendues
-
-Trois features supplémentaires ont été testées : densité de hedge words (*toutefois*, *néanmoins*…), burstiness (coefficient de variation de la longueur des phrases) et entropie de ponctuation.
-
 ![Logistic regression étendue](results/logistic_feature_importance.png)
-
-- Accuracy étendue (LOO) : **35.0 %** — quasi-identique aux mots-outils seuls (36.9 %)
-- Seule `punct_entropy` apparaît dans le top 15, avec un signal fort pour **Gemini Pro** : Gemini utilise une ponctuation plus variée que les autres modèles
-- **Burstiness et hedge words sont plats** entre tous les modèles
-
-> Ce résultat confirme le signal principal de l'étude : pour une tâche de réécriture littéraire, les LLMs égalisent leurs patterns de surface (rythme, précautions rhétoriques) et ne laissent comme trace robuste que les **fréquences de mots-outils**.
 
 ### 6. Cohérence par auteur source
 
@@ -280,7 +283,7 @@ GPT-4 et Mistral sont **indistinguables** dans ce protocole (p = 1.0).
 |-------------|--------|
 | "GPT-4 et Mistral ont des styles différents" | ✗ non supporté (p=1.0 après correction) |
 | "Ces résultats se généralisent à l'anglais" | ✗ non testé |
-| "On peut identifier un LLM en pratique" | ⚠️ accuracy 36.9% avec 4 classes → insuffisant |
+| "On peut identifier un LLM en pratique" | ⚠️ accuracy 40.6% avec 4 classes → insuffisant |
 | "Le signal est robuste sur des textes très courts" | ⚠️ dégradation observée sous 80 mots |
 | "La signature est stable texte-par-texte entre prompts" | ✗ corrélations faibles ou nulles pour tous les modèles (IC bootstrap incluent 0 pour 3/4) — seul le classement agrégé est stable |
 
