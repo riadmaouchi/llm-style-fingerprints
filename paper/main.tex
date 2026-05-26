@@ -103,29 +103,63 @@ Our main contributions are:
 \paragraph{Authorship attribution and function words.}
 The use of function-word frequencies for authorship attribution
 dates to \citet{mosteller1964} and was formalised by
-\citet{burrows1987}'s Delta method.
-\citet{juola2015} demonstrated that four such features sufficed to
-identify J.~K.~Rowling behind the pseudonym Robert Galbraith.
-\citet{stamatatos2009} provides a comprehensive survey.
+\citet{burrows1987}'s Delta method, which measures cosine distance
+between z-scored frequency vectors.
+Our shift measure is structurally related to Delta, with two differences:
+(i) we compare an original to its rewrite rather than two authors,
+making the baseline text-specific; and
+(ii) we use the raw shift vector $v(t') - v(t)$ as a feature for
+classification, rather than distance alone.
+Studies in authorship attribution routinely achieve 80--90\%+ accuracy
+\citep{stamatatos2009,koppel2009}, but on corpora of thousands of
+samples per author exhibiting stable, lifelong stylistic patterns.
+Our setting is structurally harder: LLMs are not authors but
+instruction-following systems, and our corpus contains only 80 texts.
+The comparison is informative but not direct.
 
 \paragraph{LLM-generated text detection.}
-\citet{uchendu2023} benchmark multiple detectors across generative models;
-\citet{sadasivan2023} prove fundamental detection limits under paraphrase
-attacks.
-\citet{liang2024} show that detectors exhibit false-positive bias
-against non-native speakers---a critical failure mode for applied systems.
-Our work differs: we do not build a detector but measure the \emph{degree}
-and \emph{structure} of stylistic change.
+\citet{uchendu2023} benchmark multiple detectors across generative
+models and report classification accuracy above 80\% in a controlled
+setting.
+However, their task differs from ours in two critical ways:
+they classify full-length generated articles (not short rewrites),
+and they distinguish generative models from each other or from humans
+(not from the same human text rewritten under different instructions).
+Both factors make their task easier, and their results should not
+be taken as an upper bound for our problem.
+\citet{sadasivan2023} prove that detection accuracy degrades
+fundamentally under paraphrasing, which is consistent with our
+modest 36.9\% accuracy: rewrites are by design closer to the original
+than freely generated text.
+\citet{liang2024} demonstrate that surface-level stylometric detectors
+produce false positives for non-native speakers, a bias our
+function-word approach may share when applied to contemporary text.
 
-\paragraph{LLM style and rewriting.}
-\citet{guo2023} compare ChatGPT outputs to human experts across domains;
-\citet{zhu2023} show that casual paraphrasing can defeat detectors.
-Closest to ours is work on style transfer evaluation
-\citep{mir2019,tikhonov2019}, which uses function-word features to
-assess style preservation.
-To our knowledge, no prior work specifically measures the
-\emph{per-text correlation} of LLM stylistic shift across prompts,
-nor reports the dissociation we observe in Claude.
+\paragraph{Prompt sensitivity and style robustness.}
+\citet{guo2023} compare ChatGPT outputs to human experts but hold
+the prompt fixed; prompt sensitivity is not studied.
+\citet{zhu2023} show that casual paraphrasing defeats detectors,
+implying sensitivity to instruction, but do not measure per-text
+correlation of shift across prompt variants.
+Style transfer evaluation \citep{mir2019,tikhonov2019} uses
+function-word features to assess how much style is preserved after
+transfer, a complementary perspective to our shift measurement.
+To our knowledge, no prior work directly measures whether the
+stylistic shift produced by a given LLM on a given text is
+consistent across semantically distinct rewriting instructions.
+This is the gap our robustness analysis (\S\ref{sec:robustness})
+addresses, albeit at modest corpus scale.
+
+\paragraph{Missing baseline.}
+A limitation shared by most LLM stylometry work, including ours,
+is the absence of a human rewriter baseline.
+\citet{koppel2009} show that even human authors exhibit significant
+intra-author variance across genres and time.
+It is unknown whether a human asked to ``neutralise'' then
+``simplify'' the same text would produce per-text shift correlations
+comparable to our LLM measurements.
+Without this baseline, the null per-text correlations we observe
+cannot be definitively attributed to model-specific behaviour.
 
 % ─────────────────────────────────────────────
 \section{Method}
