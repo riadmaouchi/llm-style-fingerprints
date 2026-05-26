@@ -12,13 +12,13 @@
 This project measures the stylistic drift introduced by LLM rewrites —
 using function-word fingerprints and cosine distance in a 57-dimension style space.
 GPT-4, Claude 3, Mistral 7B and Gemini Pro each leave a measurable stylistic imprint —
-detectable across 50 French literary texts with a single rewriting prompt.
+detectable across 80 French literary texts with two distinct rewriting prompts.
 
 > *"LLMs don't erase literary style. They replace it with their own."*
 
-| ![LLM stylistic fingerprints (LDA)](results/pca_clusters.png) | ![Function-word fingerprints per model](results/radar_profiles.png) |
+| ![Drift trajectories (PCA)](results/drift_trajectories.png) | ![LDA stylistic fingerprints](results/pca_clusters.png) |
 |:---:|:---:|
-| *LLM stylistic fingerprints — LDA sur vecteurs de shift* | *Function-word fingerprints per model* |
+| *Drift trajectoires — chaque LLM déplace le texte dans des directions distinctes* | *Fingerprints stylistiques — LDA sur vecteurs de shift* |
 
 ---
 
@@ -50,17 +50,17 @@ detectable across 50 French literary texts with a single rewriting prompt.
 
 | Modèle | Shift moyen | IC 95 % Bootstrap |
 |--------|:-----------:|:-----------------:|
-| Gemini Pro | **0.205** | [0.176, 0.238] |
-| Claude 3 | **0.192** | [0.160, 0.227] |
-| Mistral 7B | **0.146** | [0.124, 0.172] |
-| GPT-4 | **0.146** | [0.119, 0.176] |
+| Gemini Pro | **0.230** | [0.204, 0.256] |
+| Claude 3 | **0.170** | [0.147, 0.195] |
+| Mistral 7B | **0.139** | [0.124, 0.157] |
+| GPT-4 | **0.132** | [0.113, 0.152] |
 
-**Résultat principal :** Gemini introduit le shift stylistique le plus fort ; GPT-4 et Mistral sont statistiquement indistinguables (p = 1.0 après correction Bonferroni). Le signal est cohérent sur n = 50 textes (25 Zola + 25 Maupassant), avec des réécritures générées par les APIs réelles.
+**Résultat principal :** Gemini introduit le shift stylistique le plus fort et se distingue significativement des trois autres modèles (p < 0.01, Bonferroni). GPT-4 et Mistral restent statistiquement indistinguables (p = 1.0). Le signal est cohérent sur n = 80 textes (40 Zola + 40 Maupassant), validé sur deux prompts distincts.
 
 | Classifieur | Accuracy | Baseline |
 |------------|:--------:|:--------:|
-| Centroïde LOO — 4 classes | **24.5%** | 25% |
-| Régression logistique LOO — 4 classes | **36.5%** | 25% |
+| Centroïde LOO — 4 classes | **30.9 %** | 25 % |
+| Régression logistique LOO — 4 classes | **36.9 %** | 25 % |
 
 ---
 
@@ -114,14 +114,16 @@ Juola (2015) a utilisé 4 telles caractéristiques pour identifier JK Rowling de
 
 | Source | Textes | Mots/texte | Langue |
 |--------|:------:|:----------:|--------|
-| Zola (Germinal, L'Assommoir, Nana…) | 25 | ~120 | Français |
-| Maupassant (nouvelles diverses) | 25 | ~120 | Français |
-| Réécritures GPT-4o | 50 | ~120 | Français |
-| Réécritures Claude Sonnet 4.6 | 50 | ~120 | Français |
-| Réécritures Mistral Small | 50 | ~120 | Français |
-| Réécritures Gemini 2.5 Flash | 50 | ~120 | Français |
+| Zola (Germinal, L'Assommoir, Nana, La Débâcle…) | 40 | ~120 | Français |
+| Maupassant (Boule de suif, La Parure, Yvette…) | 40 | ~120 | Français |
+| Réécritures GPT-4o | 80 | ~120 | Français |
+| Réécritures Claude Sonnet 4.6 | 80 | ~120 | Français |
+| Réécritures Mistral Small | 80 | ~120 | Français |
+| Réécritures Gemini 2.5 Flash | 80 | ~120 | Français |
 
-**Prompt de réécriture :** *"Réécris ce texte dans un style neutre et factuel, en conservant le sens."*
+**Deux prompts de réécriture :**
+- **P1** — *"Réécris ce texte dans un style neutre et factuel, en conservant le sens."*
+- **P2** — *"Reformule ce texte en simplifiant le vocabulaire, pour le rendre accessible au grand public."*
 
 Toutes les sorties LLM sont **codées en dur** dans le dépôt — aucune clé API requise pour la reproduction.
 
@@ -139,74 +141,82 @@ Un shift de 0 = vecteur de style identique. Un shift de 1 = vecteurs de style ma
 
 ## Résultats
 
-### 1. Les LLMs forment des clusters stylistiques distincts
+### 1. Les LLMs dérivent dans des directions distinctes
+
+![Drift trajectories](results/drift_trajectories.png)
+
+Chaque flèche part du centroïde humain (★) vers le centroïde d'un modèle. La longueur = amplitude du shift moyen.
+Gemini s'éloigne le plus du baseline humain ; GPT-4 et Mistral restent proches et dans des directions similaires.
+
+### 2. Les LLMs forment des clusters stylistiques distincts
 
 | LDA — fingerprints stylistiques (vecteurs de shift) | t-SNE |
 |:-:|:-:|
 | ![LDA](results/pca_clusters.png) | ![t-SNE](results/tsne_clusters.png) |
 
-- **GPT-4 + Mistral 7B** → shifts similaires (~0.146), statistiquement indistinguables (ellipses très chevauchées)
-- **Claude 3** → shift intermédiaire (~0.192), zone de chevauchement partielle
-- **Gemini Pro** → shift le plus fort (~0.205), cluster isolé — seul significativement différent
+- **GPT-4 + Mistral 7B** → shifts similaires (~0.132–0.139), statistiquement indistinguables (ellipses très chevauchées)
+- **Claude 3** → shift intermédiaire (~0.170), zone de chevauchement partielle
+- **Gemini Pro** → shift le plus fort (~0.230), cluster isolé — seul significativement différent de tous les autres
 
 Le dendrogramme confirme la structure à **2–3 groupes effectifs**, pas 4 :
 
 ![Dendrogramme](results/dendrogram.png)
 
-### 2. Le shift est cohérent et mesurable — avec des nuances statistiques
+### 3. Le shift est cohérent et mesurable — avec des nuances statistiques
 
 ![Bootstrap CI](results/bootstrap_ci.png)
 
 | Modèle | Shift moyen | IC 95 % Bootstrap |
 |--------|:-----------:|:-----------------:|
-| Gemini Pro | **0.205** | [0.176, 0.238] |
-| Claude 3 | **0.192** | [0.160, 0.227] |
-| Mistral 7B | **0.146** | [0.124, 0.172] |
-| GPT-4 | **0.146** | [0.119, 0.176] |
+| Gemini Pro | **0.230** | [0.204, 0.256] |
+| Claude 3 | **0.170** | [0.147, 0.195] |
+| Mistral 7B | **0.139** | [0.124, 0.157] |
+| GPT-4 | **0.132** | [0.113, 0.152] |
 
 **Tests pairés (correction Bonferroni, 6 paires) :**
 
 | Paire | p corrigé | Significatif |
 |-------|:---------:|:------------:|
-| Mistral 7B vs Gemini Pro | 0.025 | ✓ |
-| GPT-4 vs Gemini Pro | 0.044 | ✓ |
-| Claude 3 vs Mistral 7B | 0.212 | ✗ |
-| GPT-4 vs Claude 3 | 0.282 | ✗ |
+| GPT-4 vs Gemini Pro | < 0.001 | ✓ |
+| Mistral 7B vs Gemini Pro | < 0.001 | ✓ |
+| Claude 3 vs Gemini Pro | 0.007 | ✓ |
+| GPT-4 vs Claude 3 | 0.103 | ✗ |
+| Claude 3 vs Mistral 7B | 0.262 | ✗ |
 | GPT-4 vs Mistral 7B | 1.000 | ✗ |
-| Claude 3 vs Gemini Pro | 1.000 | ✗ |
 
-**⚠️ Point critique :** Seul Gemini se distingue significativement de GPT-4 et Mistral.
-GPT-4 et Mistral sont **indistinguables** (p = 1.0) — même shift moyen (0.146).
+**⚠️ Point critique :** Seul Gemini se distingue significativement des trois autres modèles.
+GPT-4 et Mistral sont **indistinguables** (p = 1.0) — même shift moyen (~0.135).
 
 ![Distributions des shifts](results/shift_distributions.png)
 
-**Profil stylistique par modèle :**
+**Profil stylistique par modèle (écart vs baseline humain) :**
 
-![Radar](results/radar_profiles.png)
+![Heatmap profils](results/radar_profiles.png)
 
 | Modèle | Signature caractéristique |
 |--------|---------------------------|
 | GPT-4 | Forte utilisation de `et`, `de` — neutralisation factuelle |
 | Claude 3 | Surreprésentation de `tandis`, `pourtant`, `néanmoins` |
 | Mistral 7B | Distribution proche du profil humain — paraphrase de surface |
-| Gemini Pro | Usage élevé de `en`, `raison`, `afin`, `notamment` — style analytique |
+| Gemini Pro | Usage élevé de `en`, `afin`, `notamment` — style analytique |
 
 ![Empreinte stylistique](results/fingerprint_comparison.png)
 
-### 3. Cohérence intra-groupe : Gemini est le plus homogène
+### 4. Robustesse inter-prompt (P1 vs P2)
 
-Un résultat contre-intuitif : **Gemini Pro est le LLM stylistiquement le plus cohérent**
-(variance intra = 0.322), plus que GPT-4 ou Claude 3.
-Les auteurs humains sont les plus variables, ce qui est attendu.
+![Robustesse inter-prompt](results/prompt_robustness.png)
 
-### 4. Classification inter-LLM
+Le shift cosinus mesuré avec le prompt P1 (neutralisation) est fortement corrélé avec P2 (simplification)
+pour chaque modèle. La signature stylistique d'un LLM persiste indépendamment de l'instruction de réécriture.
+
+### 5. Classification inter-LLM
 
 Classifieur par centroïde, Leave-One-Out, 4 classes :
 
 ![Matrice de confusion](results/confusion_matrix.png)
 
-- Accuracy centroïde : **24.5 %** ≈ baseline 25 % → centroïde seul insuffisant
-- Accuracy logistique (LOO, mots-outils seuls) : **36.5 %** → signal faible mais supérieur au hasard
+- Accuracy centroïde : **30.9 %** > baseline 25 % → signal détectable
+- Accuracy logistique (LOO, mots-outils seuls) : **36.9 %** → signal faible mais supérieur au hasard
 - Confusion principale : **GPT-4 ↔ Mistral** (shifts statistiquement identiques, p=1.0)
 
 ![Mots-outils discriminants](results/feature_importance.png)
@@ -217,18 +227,23 @@ Trois features supplémentaires ont été testées : densité de hedge words (*t
 
 ![Logistic regression étendue](results/logistic_feature_importance.png)
 
-- Accuracy étendue (LOO) : **35.0 %** — quasi-identique aux mots-outils seuls (36.5 %)
-- Seule `punct_entropy` apparaît dans le top 15, avec un signal fort pour **Gemini Pro** (coefficient 1.02) : Gemini utilise une ponctuation plus variée que les autres modèles
-- **Burstiness et hedge words sont plats** entre tous les modèles (CV : 0.36–0.40, densité hedge : 0.06–0.27)
+- Accuracy étendue (LOO) : **35.0 %** — quasi-identique aux mots-outils seuls (36.9 %)
+- Seule `punct_entropy` apparaît dans le top 15, avec un signal fort pour **Gemini Pro** : Gemini utilise une ponctuation plus variée que les autres modèles
+- **Burstiness et hedge words sont plats** entre tous les modèles
 
-> Ce résultat confirme le signal principal de l'étude : pour une tâche de réécriture littéraire, les LLMs égalisent leurs patterns de surface (rythme, précautions rhétoriques) et ne laissent comme trace robuste que les **fréquences de mots-outils**. L'entropie de ponctuation de Gemini est la seule feature non-lexicale qui apporte un signal, mais insuffisant pour améliorer la classification globale.
+> Ce résultat confirme le signal principal de l'étude : pour une tâche de réécriture littéraire, les LLMs égalisent leurs patterns de surface (rythme, précautions rhétoriques) et ne laissent comme trace robuste que les **fréquences de mots-outils**.
 
-### 5. Shift vs longueur du texte
+### 6. Cohérence par auteur source
+
+![Shift par auteur](results/shift_by_source.png)
+
+Les shifts sont cohérents sur Zola et Maupassant, ce qui confirme que le signal n'est pas artefactuel.
+
+### 7. Shift vs longueur du texte
 
 ![Shift vs longueur](results/shift_vs_length.png)
 
-Corrélation faible entre longueur et shift — le signal est relativement stable
-au-dessus de 80 mots.
+Corrélation faible entre longueur et shift — le signal est relativement stable au-dessus de 80 mots.
 
 ---
 
@@ -237,19 +252,19 @@ au-dessus de 80 mots.
 ### Ce que l'étude établit de manière robuste
 
 > **Tous les LLMs testés déplacent le style du texte original.**
-> Ce déplacement est mesurable et cohérent sur n = 50 textes authentiques (Zola + Maupassant),
-> générés via les APIs réelles de chaque modèle.
+> Ce déplacement est mesurable et cohérent sur n = 80 textes authentiques (Zola + Maupassant),
+> générés via les APIs réelles de chaque modèle avec deux prompts distincts.
 
 Concrètement, il y a **2 groupes significativement distincts**, pas 4 :
 
 ```
 GPT-4 ≈ Mistral 7B   ←——————→   Gemini Pro
-(shift ~0.146)                   (shift ~0.205)
+(shift ~0.135)                   (shift ~0.230)
        ↑
-  Claude 3 (~0.192) — zone grise, pas significativement différent de l'un ni de l'autre
+  Claude 3 (~0.170) — zone grise, pas significativement différent de GPT-4 ni de Mistral
 ```
 
-Gemini impose le changement stylistique le plus fort — seul modèle significativement différent de GPT-4 et de Mistral.
+Gemini impose le changement stylistique le plus fort — seul modèle significativement différent des trois autres.
 GPT-4 et Mistral sont **indistinguables** dans ce protocole (p = 1.0).
 
 ### Ce que l'étude n'établit pas
@@ -258,9 +273,8 @@ GPT-4 et Mistral sont **indistinguables** dans ce protocole (p = 1.0).
 |-------------|--------|
 | "GPT-4 et Mistral ont des styles différents" | ✗ non supporté (p=1.0 après correction) |
 | "Ces résultats se généralisent à l'anglais" | ✗ non testé |
-| "On peut identifier un LLM en pratique" | ⚠️ accuracy 36.5% avec 4 classes → insuffisant |
+| "On peut identifier un LLM en pratique" | ⚠️ accuracy 36.9% avec 4 classes → insuffisant |
 | "Le signal est robuste sur des textes très courts" | ⚠️ dégradation observée sous 80 mots |
-| "Ces signatures tiennent avec d'autres prompts" | ✗ non testé — critique |
 
 ---
 
@@ -268,23 +282,20 @@ GPT-4 et Mistral sont **indistinguables** dans ce protocole (p = 1.0).
 
 > **Ceci est une exploration méthodologique, pas un détecteur de LLM.**
 
-**Corpus encore trop petit pour des conclusions fermes.**
-n = 50 textes par classe. Seul Gemini se distingue significativement de GPT-4 et Mistral. GPT-4, Claude 3 et Mistral ne sont pas distinguables entre eux au niveau Bonferroni. Il faudrait n ≥ 100 avec plusieurs prompts pour des résultats pleinement robustes.
-
-**Un seul prompt, un seul registre.**
-Toutes les réécritures utilisent le même prompt (*"style neutre et factuel"*) appliqué à du français littéraire du 19e siècle. Ce prompt pousse tous les modèles dans la même direction. Avec un prompt créatif ou un corpus journalistique, les signatures seraient différentes — et probablement plus ou moins marquées.
+**Un seul registre.**
+Toutes les réécritures sont appliquées à du français littéraire du 19e siècle. Avec un corpus journalistique ou contemporain, les signatures seraient probablement différentes.
 
 **Le vocabulaire est biaisé vers les LLMs.**
 La liste de mots-outils inclut des marqueurs intentionnellement choisis pour capturer les patterns LLM (*tandis, pourtant, néanmoins, notamment*). Ce choix n'est pas neutre : il avantage structurellement la détection des modèles les plus "formels".
 
 **Pas de contrôle humain "en mode neutre".**
-L'étude compare des textes originaux de Zola avec des réécritures LLM. Elle ne teste pas ce que donnerait le même prompt appliqué à un humain. Un rédacteur humain demandé d'écrire "dans un style neutre et factuel" produirait peut-être un shift similaire à Mistral.
+L'étude compare des textes originaux de Zola avec des réécritures LLM. Elle ne teste pas ce que donnerait le même prompt appliqué à un humain.
 
 **Modèles fixes, signatures évolutives.**
 gpt-4o, claude-sonnet-4-6, mistral-small-latest et gemini-2.5-flash sont des versions figées au moment de la collecte. Les modèles sont mis à jour en continu — ces signatures ne sont pas permanentes.
 
 **Ne pas utiliser pour accuser.**
-La variance intra-groupe (0.32–0.50) est trop élevée pour des conclusions sur des textes individuels. Ce signal n'est pas une preuve d'authorship.
+La variance intra-groupe est trop élevée pour des conclusions sur des textes individuels. Ce signal n'est pas une preuve d'authorship.
 
 ---
 
@@ -340,38 +351,33 @@ fig.savefig('clusters.png', dpi=150, bbox_inches='tight')
 llm-style-fingerprints/
 ├── src/
 │   ├── __init__.py
-│   ├── stylometry.py    # Wrapper de stylometry-python + plot_shift_violin()
-│   └── stats.py         # bootstrap_ci, permutation_test, pairwise_tests, intra_variance
+│   ├── stylometry.py    # Wrapper de stylometry-python + PALETTE + StyleAnalyzer
+│   ├── stats.py         # bootstrap_ci, permutation_test, pairwise_tests, intra_variance
+│   └── data.py          # load_corpus / load_aligned_rewrites — source unique
 ├── data/
 │   ├── human/
-│   │   ├── zola.json          # 25 extraits (Germinal, L'Assommoir, Nana…)
-│   │   └── maupassant.json    # 25 nouvelles (Boule de suif, La Parure…)
-│   ├── gpt4/rewrites.json     # 50 réécritures gpt-4o (API réelle)
-│   ├── claude3/rewrites.json  # 50 réécritures claude-sonnet-4-6 (API réelle)
-│   ├── mistral/rewrites.json  # 50 réécritures mistral-small-latest (API réelle)
-│   └── gemini/rewrites.json   # 50 réécritures gemini-2.5-flash (API réelle)
+│   │   ├── zola.json          # 40 extraits (Germinal, L'Assommoir, Nana, La Débâcle…)
+│   │   └── maupassant.json    # 40 nouvelles (Boule de suif, La Parure, Yvette…)
+│   ├── gpt4/
+│   │   ├── rewrites.json      # 80 réécritures gpt-4o — P1
+│   │   └── rewrites_p2.json   # 80 réécritures gpt-4o — P2
+│   ├── claude3/
+│   │   ├── rewrites.json      # 80 réécritures claude-sonnet-4-6 — P1
+│   │   └── rewrites_p2.json   # 80 réécritures claude-sonnet-4-6 — P2
+│   ├── mistral/
+│   │   ├── rewrites.json      # 80 réécritures mistral-small-latest — P1
+│   │   └── rewrites_p2.json   # 80 réécritures mistral-small-latest — P2
+│   └── gemini/
+│       ├── rewrites.json      # 80 réécritures gemini-2.5-flash — P1
+│       └── rewrites_p2.json   # 80 réécritures gemini-2.5-flash — P2
 ├── notebooks/
-│   ├── 01_shift_analysis.ipynb  # Shifts, violin, PCA, t-SNE, fingerprint
-│   ├── 02_classification.ipynb  # Confusion matrix, SVM, courbe d'apprentissage
-│   └── 03_robustesse.ipynb      # Bootstrap CI, permutation tests, intra-variance
-├── results/
-│   ├── pca_clusters.png
-│   ├── tsne_clusters.png
-│   ├── umap_clusters.png
-│   ├── shift_distributions.png
-│   ├── bootstrap_ci.png
-│   ├── permutation_null.png
-│   ├── fingerprint_comparison.png
-│   ├── radar_profiles.png
-│   ├── confusion_matrix.png
-│   ├── feature_importance.png
-│   ├── logistic_feature_importance.png
-│   ├── dendrogram.png
-│   ├── shift_by_source.png
-│   └── shift_vs_length.png
-├── generate_results.py   # Régénère les 14 PNG sans Jupyter
+│   ├── 01_shift_analysis.ipynb
+│   ├── 02_classification.ipynb
+│   └── 03_robustesse.ipynb
+├── results/              # PNGs générés — ne pas éditer à la main
+├── generate_results.py   # Régénère les figures (make fast)
 ├── scripts/
-│   └── generate_rewrites.py  # Appelle les APIs LLM pour régénérer les données
+│   └── generate_rewrites.py  # Appelle les APIs LLM (clés dans .env)
 ├── requirements.txt
 └── README.md
 ```
@@ -381,8 +387,8 @@ llm-style-fingerprints/
 ## Travaux connexes
 
 ### Stylométrie classique
-- Mosteller & Wallace (1964). *Inference and disputed authorship: The Federalist.* Addison-Wesley. *(fondateur du domaine)*
-- Burrows (1987). *Word patterns and story shapes.* Literary and Linguistic Computing 2(2). *(Delta method)*
+- Mosteller & Wallace (1964). *Inference and disputed authorship: The Federalist.* Addison-Wesley.
+- Burrows (1987). *Word patterns and story shapes.* Literary and Linguistic Computing 2(2).
 - Juola (2015). *The Rowling Case: A Proposed Standard Analytic Protocol for Authorship Questions.* DSH 30(S1).
 - Stamatatos (2009). *A survey of modern authorship attribution methods.* JASIST 60(3).
 - Koppel, Schler & Argamon (2009). *Computational methods in authorship attribution.* JASIST 60(1).
@@ -391,10 +397,9 @@ llm-style-fingerprints/
 ### LLMs et style
 - Uchendu et al. (2023). *TURINGBENCH: A benchmark environment for Turing test in the age of neural text generation.* EMNLP Findings.
 - Guo et al. (2023). *How Close is ChatGPT to Human Experts?* arXiv:2301.07597.
-- Liang et al. (2024). *GPT detectors are biased against non-native English writers.* Patterns 5(7). *(faux positifs critiques)*
-- Sadasivan et al. (2023). *Can AI-Generated Text be Reliably Detected?* arXiv:2303.11156. *(limites fondamentales)*
+- Liang et al. (2024). *GPT detectors are biased against non-native English writers.* Patterns 5(7).
+- Sadasivan et al. (2023). *Can AI-Generated Text be Reliably Detected?* arXiv:2303.11156.
 - Zhu et al. (2023). *Beat LLM-based text detection by casual paraphrasing.* arXiv:2305.10714.
-- Cafiero et al. (2023). *Demystifying QAnon: Identifying Coordinated Networks via Authorship Attribution.* arXiv:2303.02078.
 - Kapusta et al. (2025). *False positives in LLM detection for non-native speakers.* arXiv:2512.06922.
 
 ---
