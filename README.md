@@ -6,6 +6,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![PyPI - stylometry-python](https://img.shields.io/pypi/v/stylometry-python?label=stylometry-python)](https://pypi.org/project/stylometry-python/)
 [![GitHub stars](https://img.shields.io/github/stars/riadmaouchi/llm-style-fingerprints?style=social)](https://github.com/riadmaouchi/llm-style-fingerprints/stargazers)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20402754.svg)](https://doi.org/10.5281/zenodo.20402754)
 
 **Can ChatGPT erase Zola's writing style?**
 
