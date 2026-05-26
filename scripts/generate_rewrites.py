@@ -3,10 +3,11 @@ Génère les vraies réécritures LLM pour chaque texte du corpus.
 
 Usage
 -----
-    python scripts/generate_rewrites.py          # P1 + P2 pour tous les modèles
-    python scripts/generate_rewrites.py --prompt p1  # P1 uniquement
-    python scripts/generate_rewrites.py --prompt p2  # P2 uniquement
-    python scripts/generate_rewrites.py --model gpt4  # un seul modèle
+    python scripts/generate_rewrites.py                     # P1 + P2, tous modèles
+    python scripts/generate_rewrites.py --prompt p1         # P1 uniquement
+    python scripts/generate_rewrites.py --prompt p2         # P2 uniquement
+    python scripts/generate_rewrites.py --model gpt4        # un seul modèle
+    python scripts/generate_rewrites.py --fill-pending      # remplit seulement les [PENDING_API]
 
 Clés API requises (dans .env à la racine du projet) :
     OPEN_AI_KEY    — GPT-4
@@ -99,7 +100,7 @@ def rewrite_openai(texts: list[dict], prompt: str) -> list[dict]:
 # ---------------------------------------------------------------------------
 
 def rewrite_mistral(texts: list[dict], prompt: str) -> list[dict]:
-    from mistralai import Mistral
+    from mistralai.client.sdk import Mistral
     client = Mistral(api_key=os.environ["MISTRAL_KEY"])
     rewrites = []
     for t in texts:
@@ -133,17 +134,18 @@ def rewrite_mistral(texts: list[dict], prompt: str) -> list[dict]:
 # ---------------------------------------------------------------------------
 
 def rewrite_gemini(texts: list[dict], prompt: str) -> list[dict]:
-    import google.generativeai as genai
-    genai.configure(api_key=os.environ["GEMINI_KEY"])
-    model = genai.GenerativeModel("gemini-2.5-flash")
+    from google import genai
+    from google.genai import types
+    client = genai.Client(api_key=os.environ["GEMINI_KEY"])
     rewrites = []
     for t in texts:
         print(f"  Gemini  [{t['combined_id']:02d}] {t['title']}")
         for attempt in range(5):
             try:
-                resp = model.generate_content(
-                    f"{SYSTEM}\n\n{prompt}\n\n{t['text']}",
-                    generation_config={"temperature": 0.7, "max_output_tokens": 400},
+                resp = client.models.generate_content(
+                    model="gemini-2.5-flash",
+                    contents=f"{SYSTEM}\n\nRéponds uniquement avec le texte réécrit, sans préambule.\n\n{prompt}\n\n{t['text']}",
+                    config=types.GenerateContentConfig(temperature=0.7, max_output_tokens=1500),
                 )
                 rewrites.append({
                     "original_id": t["combined_id"],
@@ -191,12 +193,53 @@ MODELS = {
 }
 
 
+PENDING = "[PENDING_API]"
+
+
+def fill_pending(model_key: str, prompt_id: str, all_texts: list[dict],
+                 fn, label: str, version: str) -> None:
+    """Remplace uniquement les entrées [PENDING_API] dans le fichier existant."""
+    suffix = "" if prompt_id == "p1" else f"_{prompt_id}"
+    path = ROOT / "data" / model_key / f"rewrites{suffix}.json"
+    data = json.loads(path.read_text(encoding="utf-8"))
+
+    # Indexer les textes sources par combined_id pour un accès O(1)
+    src_by_id = {t["combined_id"]: t for t in all_texts}
+
+    pending_count = sum(1 for e in data["rewrites"] if e["text"] == PENDING)
+    if pending_count == 0:
+        print(f"  {label} {prompt_id.upper()}: aucun pending, rien à faire.")
+        return
+
+    print(f"  {label} {prompt_id.upper()}: {pending_count} entrées à remplir...")
+    prompt_text = PROMPTS[prompt_id]
+
+    for entry in data["rewrites"]:
+        if entry["text"] != PENDING:
+            continue
+        oid = entry["original_id"]
+        src = src_by_id.get(oid)
+        if src is None:
+            print(f"    ⚠ original_id={oid} introuvable dans le corpus")
+            continue
+        # Appel API via la fonction du modèle (attend une liste, retourne une liste)
+        result = fn([src], prompt_text)
+        if result:
+            entry["text"] = result[0]["text"]
+
+    path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+    filled = sum(1 for e in data["rewrites"] if e["text"] != PENDING)
+    print(f"  → {path} ({filled}/{len(data['rewrites'])} entrées remplies)")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--prompt", choices=["p1", "p2", "both"], default="both",
                         help="Prompt(s) à générer (défaut : both)")
     parser.add_argument("--model", choices=list(MODELS), default=None,
                         help="Modèle unique (défaut : tous)")
+    parser.add_argument("--fill-pending", action="store_true",
+                        help="Remplace uniquement les [PENDING_API] sans toucher aux entrées valides")
     args = parser.parse_args()
 
     texts = load_originals()
@@ -208,10 +251,13 @@ def main() -> None:
     for model_key in model_keys:
         label, version, fn = MODELS[model_key]
         for pid in prompt_ids:
-            prompt_text = PROMPTS[pid]
-            print(f"\n{label} — {pid.upper()} ({prompt_text[:50]}...)")
-            rewrites = fn(texts, prompt_text)
-            save(rewrites, label, version, prompt_text, pid, ROOT / "data" / model_key)
+            if args.fill_pending:
+                fill_pending(model_key, pid, texts, fn, label, version)
+            else:
+                prompt_text = PROMPTS[pid]
+                print(f"\n{label} — {pid.upper()} ({prompt_text[:50]}...)")
+                rewrites = fn(texts, prompt_text)
+                save(rewrites, label, version, prompt_text, pid, ROOT / "data" / model_key)
 
     print("\nTerminé. Lancez 'make fast' pour régénérer les figures.")
 
