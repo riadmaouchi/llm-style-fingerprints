@@ -38,14 +38,15 @@ GPT-4 and Mistral are statistically indistinguishable ($p = 1.0$).
 Second, a linear classifier trained on shift vectors reaches only 36.9\%
 accuracy (baseline 25\%), confirming that the signal is weak at the
 individual-text level.
-Third---and most unexpectedly---inter-prompt robustness is partial:
-model rankings are preserved across two semantically distinct prompts,
-but per-text Pearson correlations are weak ($r \approx 0.28$--$0.32$)
-and \emph{null} for Claude ($r = 0.03$, $p = 0.78$), despite Claude
-maintaining an identical mean drift under both prompts.
-This dissociation suggests that stylistic fingerprints capture
-aggregate distributional tendencies of a model rather than
-stable per-document properties.
+Third, inter-prompt robustness is weak across all models:
+per-text Pearson correlations between P1 and P2 shift series are
+non-significant for Gemini and Claude ($r < 0.07$, $p > 0.6$) and
+borderline significant for GPT-4 and Mistral ($r \approx 0.28$,
+bootstrap 95\% CI barely excluding zero).
+Model rankings are preserved at the aggregate level,
+but individual-text shift is not predictable across prompts,
+suggesting that stylistic fingerprints reflect distributional tendencies
+of models rather than stable per-document properties.
 Code and data: \url{https://github.com/riadmaouchi/llm-style-fingerprints}.
 \end{abstract}
 
@@ -280,69 +281,71 @@ together with the mean shift under each prompt.
 \begin{table}[h]
 \centering
 \small
-\begin{tabular}{lcccc}
+\begin{tabular}{lccccc}
 \toprule
-\textbf{Model} & \textbf{$r$} & \textbf{$p$} &
+\textbf{Model} & \textbf{$r$} & \textbf{95\% CI} & \textbf{$p$} &
   \textbf{$\bar\delta_{P1}$} & \textbf{$\bar\delta_{P2}$} \\
 \midrule
-Gemini  & 0.32 & 0.004 & 0.229 & 0.167 \\
-Mistral & 0.28 & 0.010 & 0.139 & 0.130 \\
-GPT-4   & 0.28 & 0.011 & 0.132 & 0.096 \\
-Claude  & 0.03 & 0.778 & 0.170 & 0.176 \\
+GPT-4   & 0.28 & [0.04,\ 0.51] & 0.011 & 0.132 & 0.096 \\
+Mistral & 0.28 & [$-$0.00,\ 0.51] & 0.011 & 0.139 & 0.130 \\
+Gemini  & 0.06 & [$-$0.17,\ 0.30] & 0.602 & 0.231 & 0.191 \\
+Claude  & 0.03 & [$-$0.21,\ 0.32] & 0.778 & 0.170 & 0.176 \\
 \bottomrule
 \end{tabular}
 \caption{Inter-prompt robustness: Pearson $r$ between per-text shifts
-  under P1 and P2 ($n = 80$).}
+  under P1 and P2 with bootstrap 95\% CI ($n = 80$, 5\,000 resamples).}
 \label{tab:robustness}
 \end{table}
 
-Three observations stand out.
-First, for GPT-4, Mistral, and Gemini, the correlations are
-statistically significant but weak ($r \approx 0.28$--$0.32$):
-knowing that a given text was strongly shifted under P1 gives only
-modest predictive power for its shift under P2.
-Second, P2 consistently produces lower mean shift than P1
-for these three models (simplification is less stylistically disruptive
-than neutralisation).
-Third---the key finding---Claude shows \emph{no} significant
-per-text correlation ($r = 0.03$, $p = 0.78$) despite an almost
-identical mean shift under both prompts (0.170 vs.\ 0.176).
-The texts that Claude displaces most under P1 are essentially
-uncorrelated with those it displaces most under P2.
+Per-text correlations are weak or null across all models.
+Only GPT-4 reaches nominal significance ($p = 0.011$), but its
+bootstrap CI is wide [0.04, 0.51], indicating substantial uncertainty.
+Mistral's lower CI bound is essentially zero ($-$0.00).
+Gemini and Claude show no significant correlation ($p > 0.6$).
+P2 consistently produces lower mean shift than P1 for GPT-4 and Mistral
+(simplification is less stylistically disruptive than neutralisation),
+while Claude's mean shift is virtually identical under both prompts
+(0.170 vs.\ 0.176) despite the null correlation.
 
 % ─────────────────────────────────────────────
 \section{Discussion}
 
-\paragraph{What the Claude dissociation implies.}
-The dissociation between mean drift and per-text correlation in Claude
-is the most theoretically interesting result.
-It rules out the simplest explanation---that the model has a fixed
-``aggressiveness'' applied uniformly across texts---and suggests instead
-that Claude's stylistic choices are more sensitive to the interaction
-between the prompt and the specific text.
-Under P1 (neutralise), some texts trigger strong formal register shifts;
-under P2 (simplify), a different set of texts is affected.
-This is consistent with Claude being more instruction-following
-at the sentence level, while Gemini imposes a more
-uniform stylistic template regardless of content.
-
 \paragraph{Aggregate ranking vs.\ individual prediction.}
 All four models preserve the same relative ranking under P1 and P2
 (Gemini $>$ Claude $>$ Mistral $\approx$ GPT-4).
-This ranking robustness is meaningful for comparative model evaluation:
-the choice of rewriting prompt does not change which model shifts style
-the most.
-However, it does not license individual-level inference:
-a single text rewritten by Claude under P1 is not predictably
-more or less shifted than the same text under P2.
+This aggregate robustness is the strongest claim this study can make:
+the choice of rewriting prompt does not change \emph{which} model
+shifts style the most.
+
+However, individual-level inference is not supported.
+With $n = 80$ and wide bootstrap CIs, only GPT-4 nominally crosses
+the significance threshold, and even that result ($r = 0.28$,
+CI [0.04, 0.51]) should be treated cautiously.
+Knowing that a given text was strongly shifted under P1 gives
+essentially no reliable prediction for its shift under P2
+for any of the four models.
+
+\paragraph{On the low classification accuracy.}
+36.9\% accuracy on a 4-class problem is above chance but far from
+practically useful.
+We treat this as a negative result: at $n = 80$, function-word
+stylometry does not provide enough signal to reliably identify the
+model that produced a given rewrite.
+Scaling the corpus and exploring complementary features
+(syntactic dependencies, sentence-length distributions) remain open
+directions.
 
 \paragraph{Limitations.}
 $n = 80$ excerpts from two 19th-century French authors limits
-generalisability.
+generalisability and statistical power.
+Bonferroni correction on 6 pairwise tests is conservative;
+some differences that are real may not reach significance here.
 The function-word list includes markers selected partly for
 their known association with LLM formal register
 (\textit{tandis, néanmoins, notamment}),
-introducing a mild bias toward models that use formal connectives.
+introducing a mild bias toward models that produce formal connectives.
+We have no human rewriter baseline: a human asked to neutralise
+Zola might produce similarly uncorrelated P1/P2 shift patterns.
 Finally, all models were queried at a fixed snapshot in time;
 model updates may alter these signatures.
 
@@ -351,16 +354,17 @@ model updates may alter these signatures.
 
 We measured stylistic drift in 640 LLM rewrites of French literary texts
 using cosine distance in function-word space.
-Gemini produces the largest drift and is the only model
-clearly distinguishable from all others.
-GPT-4 and Mistral are statistically indistinguishable.
-Inter-prompt robustness is partial: model rankings are stable,
-but per-text shift correlations are weak, and null for Claude---a
-dissociation that suggests stylistic fingerprints reflect
-distributional tendencies of models rather than
-stable per-document properties.
-Individual-text LLM identification via stylometry remains unreliable
-at current corpus sizes (36.9\% accuracy, 4 classes).
+Gemini produces the largest drift and is the only model clearly
+distinguishable from all others; GPT-4 and Mistral are statistically
+indistinguishable ($p = 1.0$).
+At the aggregate level, model rankings are stable across two prompts.
+At the individual-text level, however, per-text shift correlations are
+weak or null for all four models (bootstrap CIs all include or nearly
+include zero), and individual-text LLM identification reaches only
+36.9\% accuracy on a 4-class problem.
+We conclude that, at current corpus sizes, LLM stylistic fingerprints
+are reliable comparative descriptors of models but not reliable
+predictors for individual texts.
 
 % ─────────────────────────────────────────────
 \section*{Acknowledgements}

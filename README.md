@@ -55,7 +55,7 @@ detectable across 80 French literary texts with two distinct rewriting prompts.
 | Mistral 7B | **0.139** | [0.124, 0.157] |
 | GPT-4 | **0.132** | [0.113, 0.152] |
 
-**Résultat principal :** Gemini introduit le shift stylistique le plus fort et se distingue significativement des trois autres modèles (p < 0.01, Bonferroni). GPT-4 et Mistral restent statistiquement indistinguables (p = 1.0). Le classement entre modèles est stable sur deux prompts distincts, mais la corrélation texte-par-texte entre P1 et P2 est faible (r ≈ 0.28–0.32) voire nulle pour Claude 3 (r = 0.03, p = 0.78).
+**Résultat principal :** Gemini introduit le shift stylistique le plus fort et se distingue significativement des trois autres modèles (p < 0.01, Bonferroni). GPT-4 et Mistral restent statistiquement indistinguables (p = 1.0). Le classement entre modèles est stable sur deux prompts distincts, mais la corrélation texte-par-texte entre P1 et P2 est faible ou nulle pour tous les modèles — les IC bootstrap incluent zéro pour 3 modèles sur 4.
 
 | Classifieur | Accuracy | Baseline |
 |------------|:--------:|:--------:|
@@ -206,14 +206,14 @@ GPT-4 et Mistral sont **indistinguables** (p = 1.0) — même shift moyen (~0.13
 
 ![Robustesse inter-prompt](results/prompt_robustness.png)
 
-| Modèle | r (P1 vs P2) | p | Shift P1 | Shift P2 |
-|--------|:---:|:---:|:---:|:---:|
-| Gemini Pro | 0.32 | 0.004 | 0.229 | 0.167 |
-| Mistral 7B | 0.28 | 0.010 | 0.139 | 0.130 |
-| GPT-4 | 0.28 | 0.011 | 0.132 | 0.096 |
-| Claude 3 | 0.03 | 0.778 | 0.170 | 0.176 |
+| Modèle | r (P1 vs P2) | IC 95 % bootstrap | p | Shift P1 | Shift P2 |
+|--------|:---:|:---:|:---:|:---:|:---:|
+| GPT-4 | 0.28 | [0.04, 0.51] | 0.011 | 0.132 | 0.096 |
+| Mistral 7B | 0.28 | [−0.00, 0.51] | 0.011 | 0.139 | 0.130 |
+| Gemini Pro | 0.06 | [−0.17, 0.30] | 0.602 | 0.231 | 0.191 |
+| Claude 3 | 0.03 | [−0.21, 0.32] | 0.778 | 0.170 | 0.176 |
 
-Résultats nuancés : le **classement entre modèles** est stable (Gemini le plus fort sous les deux prompts), mais la **corrélation texte-par-texte** est faible (r ≈ 0.28–0.32) pour GPT-4/Mistral/Gemini, et **nulle** pour Claude 3 (r = 0.03, non significatif). La simplification (P2) produit en général un shift plus faible que la neutralisation (P1) — sauf pour Claude 3 dont le comportement est identique entre les deux prompts. Ces résultats suggèrent que la robustesse stylistique d'un LLM est partielle : le rang est préservé, mais la magnitude varie selon l'instruction.
+Le **classement entre modèles** est stable (Gemini toujours le plus fort sous les deux prompts). En revanche, la **corrélation texte-par-texte** est faible ou nulle pour tous les modèles : Gemini et Claude ne sont pas significatifs (p > 0.6), et même GPT-4 et Mistral qui atteignent la significativité nominale ont des IC très larges. Savoir qu'un texte a été fortement déplacé sous P1 ne prédit pas fiablement son shift sous P2 — pour aucun modèle.
 
 ### 5. Classification inter-LLM
 
@@ -282,7 +282,7 @@ GPT-4 et Mistral sont **indistinguables** dans ce protocole (p = 1.0).
 | "Ces résultats se généralisent à l'anglais" | ✗ non testé |
 | "On peut identifier un LLM en pratique" | ⚠️ accuracy 36.9% avec 4 classes → insuffisant |
 | "Le signal est robuste sur des textes très courts" | ⚠️ dégradation observée sous 80 mots |
-| "La signature est stable texte-par-texte entre prompts" | ⚠️ corrélation faible (r≈0.28) ; nulle pour Claude 3 — seul le classement inter-modèle est stable |
+| "La signature est stable texte-par-texte entre prompts" | ✗ corrélations faibles ou nulles pour tous les modèles (IC bootstrap incluent 0 pour 3/4) — seul le classement agrégé est stable |
 
 ---
 
