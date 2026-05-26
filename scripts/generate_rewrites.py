@@ -82,7 +82,6 @@ def rewrite_openai(texts: list[dict], prompt: str) -> list[dict]:
                     max_tokens=400,
                 )
                 rewrites.append({
-                    "id": t["combined_id"],
                     "original_id": t["combined_id"],
                     "text": resp.choices[0].message.content.strip(),
                 })
@@ -117,7 +116,6 @@ def rewrite_mistral(texts: list[dict], prompt: str) -> list[dict]:
                     max_tokens=400,
                 )
                 rewrites.append({
-                    "id": t["combined_id"],
                     "original_id": t["combined_id"],
                     "text": resp.choices[0].message.content.strip(),
                 })
@@ -148,7 +146,6 @@ def rewrite_gemini(texts: list[dict], prompt: str) -> list[dict]:
                     generation_config={"temperature": 0.7, "max_output_tokens": 400},
                 )
                 rewrites.append({
-                    "id": t["combined_id"],
                     "original_id": t["combined_id"],
                     "text": resp.text.strip(),
                 })
