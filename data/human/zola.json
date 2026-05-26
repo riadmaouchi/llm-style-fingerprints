@@ -1,5 +1,5 @@
 {
-  "source": "Émile Zola — Germinal, L'Assommoir, Nana, Au Bonheur des Dames, La Terre (1877–1888), public domain",
+  "source": "Émile Zola — Germinal, L'Assommoir, Nana, Au Bonheur des Dames, La Terre, La Débâcle, La Bête humaine, Le Ventre de Paris, La Curée, Pot-Bouille (1873–1892), public domain",
   "language": "fr",
   "texts": [
     {
@@ -126,6 +126,81 @@
       "id": 25,
       "title": "Germinal — Le puits noyé",
       "text": "L'eau montait dans les galeries depuis trois jours. On entendait son bruit de cascade quelque part dans les ténèbres, un bruit régulier et sourd qui grandissait. Les lampes s'éteignaient l'une après l'autre au contact de l'humidité. Les hommes avançaient à tâtons, de l'eau jusqu'aux genoux, cherchant les parois pour se guider. Personne ne parlait. On avait tous compris que la fosse était perdue, et qu'il fallait remonter vite ou ne pas remonter du tout."
+    },
+    {
+      "id": 26,
+      "title": "La Débâcle — La retraite",
+      "text": "Les soldats revenaient depuis deux jours, en colonnes désordonnées, les pieds ensanglantés dans les souliers percés. Jean regardait passer cette débâcle d'une armée qui n'était plus une armée. Des hommes jetaient leurs fusils dans les fossés, d'autres dormaient dans les champs, la face contre la terre, trop épuisés pour aller plus loin. Des charrettes de blessés cahotaient sur les pavés défoncés. On entendait le canon, là-bas, sourd et continu, qui se rapprochait. Le régiment de Jean n'avait plus de colonel, plus d'ordre du jour, plus rien. Ils marchaient parce qu'il fallait marcher, reculant devant quelque chose d'invisible qui les poussait."
+    },
+    {
+      "id": 27,
+      "title": "La Débâcle — Bazeilles en flammes",
+      "text": "Bazeilles brûlait depuis le matin. Weiss avait refusé de fuir. Sa femme, Henriette, suppliait, lui tirait le bras ; il secouait la tête, chargeait son fusil de chasse. C'était sa maison, son jardin, ses meubles, tout ce qu'il avait mis vingt ans à gagner. Les Bavarois entraient par la rue principale, tirant dans les fenêtres. Il tira lui aussi, calmement, avec méthode, depuis la fenêtre du premier étage. Puis une balle l'atteignit à l'épaule, une autre au ventre. Il s'effondra. Henriette le retrouva derrière le buffet de la salle à manger, les mains sur la blessure, mort."
+    },
+    {
+      "id": 28,
+      "title": "La Débâcle — Le prisonnier de Sedan",
+      "text": "Maurice avait été fait prisonnier à Sedan, avec dix mille autres. On les avait parqués dans la presqu'île d'Iges, entre la Meuse et les Ardennes, sans abri, sans nourriture. Trois jours de pluie, de froid, de faim. Des chevaux morts pourrissaient sur le sol. Des hommes fouillaient la boue pour trouver des betteraves. Jean le chercha longtemps parmi les groupes prostrés, appelant son nom. Quand il le trouva, Maurice était méconnaissable, les traits tirés, les yeux creux, enveloppé dans une couverture trouée qu'il avait arrachée d'un mort."
+    },
+    {
+      "id": 29,
+      "title": "La Bête humaine — Jacques et la Lison",
+      "text": "Jacques Lantier aimait sa locomotive comme on aime une femme. Il l'avait appelée la Lison, et il savait à ses moindres frémissements ce qu'elle voulait dire. Quand elle ronronnait bien, régulièrement, sans à-coups, il se sentait en paix. Quand elle toussait, quand sa vapeur sifflait de travers, il était inquiet. Sur le trajet du Havre à Paris, par les nuits noires, il lui parlait à voix basse, une main sur le régulateur, les yeux fixés sur les rails qui surgissaient du néant. Elle lui obéissait comme une bête docile. Il n'avait besoin de rien d'autre."
+    },
+    {
+      "id": 30,
+      "title": "La Bête humaine — Après le meurtre",
+      "text": "Ils avaient laissé le corps au fond du talus, dans les broussailles qui bordaient la voie. Séverine ne tremblait plus maintenant. Cela l'avait traversée d'un frisson au moment du geste, et puis rien, un vide, presque un calme. Jacques Lantier non plus ne parlait pas. Ils rentrèrent à Rouen par le train de nuit, assis l'un en face de l'autre dans un compartiment vide. Le paysage défilait dans l'obscurité. À la gare, ils se séparèrent sans un mot. Chacun rentra chez soi. La nuit continua d'être silencieuse et froide, comme si rien ne s'était passé."
+    },
+    {
+      "id": 31,
+      "title": "La Bête humaine — La locomotive folle",
+      "text": "La Lison roulait à cent kilomètres à l'heure, sans conducteur, dans la nuit. Les deux hommes étaient tombés sur la voie. Elle filait à travers les plaines, seule, avec son chargement de soldats qui chantaient dans les wagons sans savoir. La vapeur sifflait, les pistons battaient, les roues dévoraient le rail. Aucune main sur le régulateur. Les tunnels se succédaient, noirs et stridents. À chaque gare, on faisait signe depuis le quai, mais il était trop tard pour arrêter quelque chose que rien n'arrêtait plus."
+    },
+    {
+      "id": 32,
+      "title": "Le Ventre de Paris — Les Halles avant l'aube",
+      "text": "Les Halles s'éveillaient avant le jour. Les camions arrivaient de nuit, chargés de légumes, de viandes, de poissons qui sentaient encore la campagne et la mer. Les marchands s'installaient, les grandes lanternes éclairaient les allées. Florent regardait tout cela avec des yeux de naufragé. Il revenait du bagne de Cayenne après huit ans, maigre comme un fil, les joues creuses. Autour de lui, cette abondance insolente, ces montagnes de nourriture, ces femmes grasses qui criaient les prix, lui donnaient la nausée. Il ne savait plus comment on mangeait, comment on vivait dans cette ville débordante."
+    },
+    {
+      "id": 33,
+      "title": "Le Ventre de Paris — La belle Lisa",
+      "text": "La belle Lisa présidait derrière le comptoir comme une reine. La charcuterie Quenu-Gradelle était la plus belle du quartier, peut-être de tout Paris. Les glaces réfléchissaient à l'infini les jambons dorés, les boudins noirs, les galantines ornées de feuilles de laurier. L'odeur de graisse chaude et d'épices flottait jusqu'à la rue, attirait les passants. Lisa avait des joues roses, des bras blancs, une allure tranquille et solide de femme bien nourrie, satisfaite, qui n'avait jamais manqué de rien et ne comprenait pas qu'on manquât de quoi que ce soit."
+    },
+    {
+      "id": 34,
+      "title": "Le Ventre de Paris — La guerre des voisins",
+      "text": "La querelle entre Florent et les poissonnières dura tout l'automne. Ils ne s'adressaient plus la parole. Ils se regardaient en biais, se faisaient des misères de voisinage. Florent avait refusé de fermer les yeux sur une petite fraude. La belle Normande ne lui pardonnait pas. Elle avait mobilisé les autres marchandes, les légumières, les tripières, toute une coalition de femmes grasses et colorées qui le regardaient de travers. Dans les allées des Halles, il était devenu l'homme maigre qu'on n'aimait pas, l'homme du bagne, l'homme qui ne comprenait pas les règles du ventre."
+    },
+    {
+      "id": 35,
+      "title": "La Curée — Les plans d'Haussmann",
+      "text": "Aristide Saccard étalait sur la table la grande carte de Paris que le préfet venait de lui montrer en confidence. Les tracés rouges des futurs boulevards coupaient les quartiers anciens comme des saignées. Il voyait les maisons s'écrouler, les terrains se vider, et au milieu de ce vide futur, ses propres terrains que personne ne connaissait encore. Il calculait vite, sur un coin de papier. La différence entre le prix d'achat et l'indemnité d'expropriation était fabuleuse. En deux ans, il serait riche. En cinq ans, immensément riche."
+    },
+    {
+      "id": 36,
+      "title": "La Curée — La serre",
+      "text": "Renée et Maxime restaient souvent le soir dans la serre de l'hôtel Saccard. C'était un monde à part, chaud et humide, où les plantes tropicales montaient jusqu'au vitrage, où l'air avait une odeur lourde de feuilles chaudes et de terre mouillée. Ils s'asseyaient dans les fauteuils d'osier, parmi les cactus et les fougères géantes. Il lui lisait des vers ou lui racontait les commérages du boulevard. Elle l'écoutait, à moitié endormie. La chaleur de la serre, les parfums, sa jeunesse à lui et son oisiveté à elle avaient créé entre eux une intimité inquiétante."
+    },
+    {
+      "id": 37,
+      "title": "La Curée — La ruine de Renée",
+      "text": "Renée avait fini par comprendre. Elle était sortie de son rêve d'un seul coup, comme on sort d'un mauvais sommeil. Saccard lui avait pris ses biens, ses bijoux, ses dots, sa part de fortune, tout ce qu'il pouvait légalement prendre et même ce qu'il ne pouvait pas. Elle n'avait plus rien. Et Maxime l'avait quittée sans se retourner, pour épouser une Américaine aux cent mille dollars. Elle se retrouvait seule dans l'hôtel vide, avec les dettes et les meubles qui allaient partir. Paris continuait de briller derrière les vitres."
+    },
+    {
+      "id": 38,
+      "title": "Pot-Bouille — L'escalier bourgeois",
+      "text": "La maison de la rue de Choiseul était une belle maison bourgeoise, à façade propre, avec une loge de concierge bien tenue et un escalier en marbre blanc. Octave Mouret découvrit d'emblée, dès le premier soir, que derrière cette façade régulière vivait une douzaine de ménages qui se haïssaient poliment. Les portes s'ouvraient et se fermaient avec précaution. On s'épiait par les judas. On se saluait dans l'escalier avec des sourires qui ne voulaient rien dire. La vie réelle se passait dans les cuisines, entre bonnes, où les secrets des maîtres circulaient librement."
+    },
+    {
+      "id": 39,
+      "title": "Pot-Bouille — Les cuisines",
+      "text": "Dans les cuisines, les bonnes se retrouvaient chaque jour pour parler. Elles savaient tout. Elles savaient que Monsieur Josserand était au bord de la faillite, que Madame Juzeur recevait un homme les mardis soir, que la petite Berthe pleurait la nuit dans sa chambre. Elles préparaient les repas en commentant ces nouvelles avec une précision et une cruauté tranquilles. L'ordure du vide-ordures montait dans la cour pendant qu'elles épluchaient les légumes. L'odeur était la même. La maison bourgeoise, de haut en bas, n'était qu'une façade."
+    },
+    {
+      "id": 40,
+      "title": "Pot-Bouille — Les Josserand",
+      "text": "Madame Josserand rêvait de marier ses filles dans la haute bourgeoisie. Elle avait deux filles, Hortense et Berthe, qui n'avaient ni dot ni charme particulier, mais qu'elle parait de robes de bal et forçait à sourire aux jeunes hommes des soirées. Chaque fois qu'un candidat s'approchait, elle tenait conseil avec ses filles dans le corridor, à voix basse, pendant que le père, dans son coin, regardait ses chaussures. On avait déjà raté quatre mariages. Elle ne désespérait pas. La nuit, dans leur lit commun, elle expliquait à son mari que c'était sa faute."
     }
   ]
 }

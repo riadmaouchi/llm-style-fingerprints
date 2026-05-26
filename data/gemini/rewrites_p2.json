@@ -1,0 +1,410 @@
+{
+  "model": "Gemini 2.5 Flash",
+  "model_version": "gemini-2.5-flash",
+  "prompt": "Reformule ce texte en simplifiant le vocabulaire, pour le rendre accessible au grand public.",
+  "prompt_id": "p2",
+  "temperature": 0.7,
+  "collection_date": "2026-05",
+  "rewrites": [
+    {
+      "id": 1,
+      "original_id": 1,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 2,
+      "original_id": 2,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 3,
+      "original_id": 3,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 4,
+      "original_id": 4,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 5,
+      "original_id": 5,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 6,
+      "original_id": 6,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 7,
+      "original_id": 7,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 8,
+      "original_id": 8,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 9,
+      "original_id": 9,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 10,
+      "original_id": 10,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 11,
+      "original_id": 11,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 12,
+      "original_id": 12,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 13,
+      "original_id": 13,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 14,
+      "original_id": 14,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 15,
+      "original_id": 15,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 16,
+      "original_id": 16,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 17,
+      "original_id": 17,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 18,
+      "original_id": 18,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 19,
+      "original_id": 19,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 20,
+      "original_id": 20,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 21,
+      "original_id": 21,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 22,
+      "original_id": 22,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 23,
+      "original_id": 23,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 24,
+      "original_id": 24,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 25,
+      "original_id": 25,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 26,
+      "original_id": 26,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 27,
+      "original_id": 27,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 28,
+      "original_id": 28,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 29,
+      "original_id": 29,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 30,
+      "original_id": 30,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 31,
+      "original_id": 31,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 32,
+      "original_id": 32,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 33,
+      "original_id": 33,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 34,
+      "original_id": 34,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 35,
+      "original_id": 35,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 36,
+      "original_id": 36,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 37,
+      "original_id": 37,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 38,
+      "original_id": 38,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 39,
+      "original_id": 39,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 40,
+      "original_id": 40,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 41,
+      "original_id": 41,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 42,
+      "original_id": 42,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 43,
+      "original_id": 43,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 44,
+      "original_id": 44,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 45,
+      "original_id": 45,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 46,
+      "original_id": 46,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 47,
+      "original_id": 47,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 48,
+      "original_id": 48,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 49,
+      "original_id": 49,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 50,
+      "original_id": 50,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 51,
+      "original_id": 51,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 52,
+      "original_id": 52,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 53,
+      "original_id": 53,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 54,
+      "original_id": 54,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 55,
+      "original_id": 55,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 56,
+      "original_id": 56,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 57,
+      "original_id": 57,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 58,
+      "original_id": 58,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 59,
+      "original_id": 59,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 60,
+      "original_id": 60,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 61,
+      "original_id": 61,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 62,
+      "original_id": 62,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 63,
+      "original_id": 63,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 64,
+      "original_id": 64,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 65,
+      "original_id": 65,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 66,
+      "original_id": 66,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 67,
+      "original_id": 67,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 68,
+      "original_id": 68,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 69,
+      "original_id": 69,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 70,
+      "original_id": 70,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 71,
+      "original_id": 71,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 72,
+      "original_id": 72,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 73,
+      "original_id": 73,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 74,
+      "original_id": 74,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 75,
+      "original_id": 75,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 76,
+      "original_id": 76,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 77,
+      "original_id": 77,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 78,
+      "original_id": 78,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 79,
+      "original_id": 79,
+      "text": "[PENDING_API]"
+    },
+    {
+      "id": 80,
+      "original_id": 80,
+      "text": "[PENDING_API]"
+    }
+  ]
+}

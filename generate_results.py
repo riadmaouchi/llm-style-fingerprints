@@ -59,7 +59,7 @@ sys.path.insert(0, str(ROOT))
 
 from src.stylometry import StyleAnalyzer, PALETTE
 from src.stats import bootstrap_ci, permutation_test, pairwise_tests, intra_variance
-from src.data import load_corpus, load_originals, load_llm_corpora
+from src.data import load_corpus, load_originals, load_llm_corpora, load_single_model_aligned
 from src.features import extra_features, extra_feature_names
 
 # ---------------------------------------------------------------------------
@@ -740,6 +740,70 @@ def fig_permutation(shifts_all: dict, results_dir: Path) -> None:
 
 
 # ---------------------------------------------------------------------------
+# Robustesse inter-prompt
+# ---------------------------------------------------------------------------
+
+def fig_prompt_robustness(sa: StyleAnalyzer, results_dir: Path) -> None:
+    """Scatter shift_p1 vs shift_p2 par modèle — teste la stabilité du fingerprint."""
+    MODEL_SLUGS = {
+        "GPT-4":      "gpt4",
+        "Claude 3":   "claude3",
+        "Mistral 7B": "mistral",
+        "Gemini Pro": "gemini",
+    }
+
+    # Collect data per model
+    model_data: dict[str, tuple[list[float], list[float]]] = {}
+    for label, slug in MODEL_SLUGS.items():
+        orig_p1, rew_p1 = load_single_model_aligned(slug, "p1")
+        orig_p2, rew_p2 = load_single_model_aligned(slug, "p2")
+        if not orig_p1 or not orig_p2:
+            continue
+        # Use texts available in both prompts (same combined-corpus positions)
+        n = min(len(orig_p1), len(orig_p2))
+        if n == 0:
+            continue
+        s1 = [sa.shift(o, r) for o, r in zip(orig_p1[:n], rew_p1[:n])]
+        s2 = [sa.shift(o, r) for o, r in zip(orig_p2[:n], rew_p2[:n])]
+        model_data[label] = (s1, s2)
+
+    if not model_data:
+        print("  prompt_robustness.png (skipped — aucune donnée P2 disponible)")
+        return
+
+    n_models = len(model_data)
+    fig, axes = plt.subplots(1, n_models, figsize=(5 * n_models, 5), squeeze=False)
+    fig.patch.set_facecolor(THEME["bg"])
+    fig.suptitle(
+        "Robustesse inter-prompt du fingerprint stylistique\n"
+        "(chaque point = un texte ; proximité de la diagonale = stabilité)",
+        color=THEME["text_primary"], fontsize=THEME["title_size"], y=1.01,
+    )
+
+    for ax, (label, (s1, s2)) in zip(axes[0], model_data.items()):
+        _ax_style(ax)
+        color = PALETTE.get(label, "#AAAAAA")
+
+        lim_max = max(max(s1), max(s2)) * 1.08
+        ax.plot([0, lim_max], [0, lim_max], "--", color="#484F58", lw=1.2, alpha=0.7, zorder=1)
+
+        ax.scatter(s1, s2, c=color, s=28, alpha=0.65, zorder=3)
+
+        corr = float(np.corrcoef(s1, s2)[0, 1])
+        ax.set_title(label, color=color, fontsize=THEME["title_size"], pad=8)
+        ax.set_xlabel("Shift P1 (neutre)", color=THEME["text_muted"])
+        ax.set_ylabel("Shift P2 (simplifié)", color=THEME["text_muted"])
+        ax.set_xlim(0, lim_max)
+        ax.set_ylim(0, lim_max)
+        ax.text(0.97, 0.05, f"r = {corr:.2f}  n = {len(s1)}",
+                ha="right", va="bottom", transform=ax.transAxes,
+                color=THEME["text_muted"], fontsize=THEME["annot_size"])
+
+    fig.tight_layout()
+    _save(fig, "prompt_robustness.png", results_dir)
+
+
+# ---------------------------------------------------------------------------
 # Résumé statistique
 # ---------------------------------------------------------------------------
 
@@ -826,6 +890,7 @@ def main(fast: bool = False) -> None:
     fig_shift_vs_length(shifts_all, llm_corpora, results_dir)
     fig_bootstrap(shifts_all, results_dir)
     fig_permutation(shifts_all, results_dir)
+    fig_prompt_robustness(sa, results_dir)
 
     print_stats(shifts_all)
     print(f"\nTous les graphiques générés dans {results_dir}/")
