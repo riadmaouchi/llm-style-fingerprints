@@ -616,15 +616,15 @@ def fig_drift_trajectories(
     # Arrows from origin → each LLM centroid + Δ labels
     rads    = {"GPT-4": 0.30, "Claude 3": -0.20, "Mistral 7B": 0.55, "Gemini Pro": -0.45}
     lbl_off = {
-        "GPT-4":      (14,  -20),
-        "Claude 3":   (-14,  16),
-        "Mistral 7B": ( 14,  14),
-        "Gemini Pro": (-14, -20),
+        "GPT-4":      ( -8,  -42),
+        "Claude 3":   (-22,   30),
+        "Mistral 7B": ( 22,   30),
+        "Gemini Pro": (-22,  -36),
     }
     delta_off = {
-        "GPT-4":      np.array([ 0.28, -0.22]),
+        "GPT-4":      np.array([ 0.10, -0.38]),
         "Claude 3":   np.array([-0.30,  0.20]),
-        "Mistral 7B": np.array([ 0.30,  0.18]),
+        "Mistral 7B": np.array([ 0.55,  0.28]),
         "Gemini Pro": np.array([-0.26, -0.26]),
     }
 
@@ -656,7 +656,9 @@ def fig_drift_trajectories(
                    edgecolors="white", linewidths=1.5, zorder=10)
         dx, dy = lbl_off.get(label, (10, 5))
         ax.annotate(label, (cx, cy), color=color, fontsize=10.5, fontweight="bold",
-                    xytext=(dx, dy), textcoords="offset points")
+                    xytext=(dx, dy), textcoords="offset points",
+                    bbox=dict(boxstyle="round,pad=0.3", fc=THEME["bg"], ec="none", alpha=0.88),
+                    zorder=11)
 
     # Zoom on the centroid zone, clip outlier points
     ax.set_xlim(-2.6, 2.6)
