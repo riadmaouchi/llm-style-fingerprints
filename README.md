@@ -11,8 +11,8 @@
 
 This project measures the stylistic drift introduced by LLM rewrites —
 using function-word fingerprints and cosine distance in a 57-dimension style space.
-GPT-4, Claude 3, Mistral 7B and Gemini Pro produce measurably distinct stylistic signatures,
-consistent across texts, temperatures, and prompts.
+GPT-4, Claude 3, Mistral 7B and Gemini Pro each leave a measurable stylistic imprint —
+detectable across 50 French literary texts with a single rewriting prompt.
 
 > *"LLMs don't erase literary style. They replace it with their own."*
 
@@ -196,7 +196,7 @@ GPT-4 et Mistral sont **indistinguables** (p = 1.0) — même shift moyen (0.146
 ### 3. Cohérence intra-groupe : Gemini est le plus homogène
 
 Un résultat contre-intuitif : **Gemini Pro est le LLM stylistiquement le plus cohérent**
-(variance intra = 0.428), plus que GPT-4 ou Claude 3.
+(variance intra = 0.322), plus que GPT-4 ou Claude 3.
 Les auteurs humains sont les plus variables, ce qui est attendu.
 
 ### 4. Classification inter-LLM
@@ -206,10 +206,22 @@ Classifieur par centroïde, Leave-One-Out, 4 classes :
 ![Matrice de confusion](results/confusion_matrix.png)
 
 - Accuracy centroïde : **24.5 %** ≈ baseline 25 % → centroïde seul insuffisant
-- Accuracy logistique (LOO) : **36.5 %** → signal faible mais supérieur au hasard
-- Confusion principale : **GPT-4 ↔ Mistral** (shifts identiques)
+- Accuracy logistique (LOO, mots-outils seuls) : **36.5 %** → signal faible mais supérieur au hasard
+- Confusion principale : **GPT-4 ↔ Mistral** (shifts statistiquement identiques, p=1.0)
 
 ![Mots-outils discriminants](results/feature_importance.png)
+
+#### Features stylistiques étendues
+
+Trois features supplémentaires ont été testées : densité de hedge words (*toutefois*, *néanmoins*…), burstiness (coefficient de variation de la longueur des phrases) et entropie de ponctuation.
+
+![Logistic regression étendue](results/logistic_feature_importance.png)
+
+- Accuracy étendue (LOO) : **35.0 %** — quasi-identique aux mots-outils seuls (36.5 %)
+- Seule `punct_entropy` apparaît dans le top 15, avec un signal fort pour **Gemini Pro** (coefficient 1.02) : Gemini utilise une ponctuation plus variée que les autres modèles
+- **Burstiness et hedge words sont plats** entre tous les modèles (CV : 0.36–0.40, densité hedge : 0.06–0.27)
+
+> Ce résultat confirme le signal principal de l'étude : pour une tâche de réécriture littéraire, les LLMs égalisent leurs patterns de surface (rythme, précautions rhétoriques) et ne laissent comme trace robuste que les **fréquences de mots-outils**. L'entropie de ponctuation de Gemini est la seule feature non-lexicale qui apporte un signal, mais insuffisant pour améliorer la classification globale.
 
 ### 5. Shift vs longueur du texte
 
@@ -272,7 +284,7 @@ L'étude compare des textes originaux de Zola avec des réécritures LLM. Elle n
 gpt-4o, claude-sonnet-4-6, mistral-small-latest et gemini-2.5-flash sont des versions figées au moment de la collecte. Les modèles sont mis à jour en continu — ces signatures ne sont pas permanentes.
 
 **Ne pas utiliser pour accuser.**
-La variance intra-groupe (0.43–0.65) est trop élevée pour des conclusions sur des textes individuels. Ce signal n'est pas une preuve d'authorship.
+La variance intra-groupe (0.32–0.50) est trop élevée pour des conclusions sur des textes individuels. Ce signal n'est pas une preuve d'authorship.
 
 ---
 

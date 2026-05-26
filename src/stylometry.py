@@ -24,12 +24,12 @@ from stylometry import StyleAnalyzer as _Base
 # ─── Palette cohérente pour tous les notebooks ───────────────────────────────
 
 PALETTE = {
-    "Humain (Zola)":        "#4FC3F7",
-    "Humain (Maupassant)":  "#81C784",
-    "GPT-4":                "#FF7043",
-    "Claude 3":             "#CE93D8",
-    "Mistral 7B":           "#FFD54F",
-    "Gemini Pro":           "#80DEEA",
+    "Humain (Zola)":        "#58A6FF",  # bleu GitHub
+    "Humain (Maupassant)":  "#3FB950",  # vert GitHub
+    "GPT-4":                "#FF7B72",  # rouge-orangé
+    "Claude 3":             "#D2A8FF",  # violet clair
+    "Mistral 7B":           "#E3B341",  # ambre
+    "Gemini Pro":           "#39D353",  # vert distinct
 }
 
 
