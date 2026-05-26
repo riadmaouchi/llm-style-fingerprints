@@ -1,5 +1,5 @@
 {
-  "model": "Gemini 2.5 Flash",
+  "model": "Gemini Pro",
   "model_version": "gemini-2.5-flash",
   "prompt": "Reformule ce texte en simplifiant le vocabulaire, pour le rendre accessible au grand public.",
   "prompt_id": "p2",
@@ -8,323 +8,323 @@
   "rewrites": [
     {
       "original_id": 1,
-      "text": "[PENDING_API]"
+      "text": "Dans la plaine toute plate, sous une nuit sans étoiles, si sombre qu'elle était noire comme de l'encre, un homme avançait seul sur la grande route. Cette route, qui allait de Marchiennes à Montsou, était droite et pavée sur dix kilomètres, traversant des champs de betteraves. Il ne voyait même pas le sol sombre sous ses pieds. L'immense horizon plat, il ne le percevait qu'à travers le vent de mars, des rafales fortes comme en pleine mer, et glacées d'avoir soufflé sur des kilomètres de marais et de terres vides."
     },
     {
       "original_id": 2,
-      "text": "[PENDING_API]"
+      "text": "Catherine, de son côté, s'était mise au travail. Elle remplissait son petit chariot à l'endroit de chargement d'à côté, puis elle le poussait jusqu'à la pente, le faisait descendre, et recommençait. Dans le couloir bas"
     },
     {
       "original_id": 3,
-      "text": "[PENDING_API]"
+      "text": "Depuis la colline de déchets, on voyait toute la mine. Le Voreux, c'était son nom, s'enfonçait dans le sol. Il y avait des bâtiments bas et solides, de grandes charpentes en bois au-dessus du puits, la"
     },
     {
       "original_id": 4,
-      "text": "[PENDING_API]"
+      "text": "Maheu est rentré à la maison, très fatigué de sa journée. Ses yeux lui brûlaient à cause de la poussière et il avait mal partout. Il a jeté sa veste sur une chaise et s'est assis. Sa femme, la Maheude"
     },
     {
       "original_id": 5,
-      "text": "[PENDING_API]"
+      "text": "Sous un ciel nuageux, Étienne a parlé longtemps, avec beaucoup de passion et des mots importants. La foule était serrée, silencieuse sous la neige. Il leur parlait de leur pauvreté, de leurs droits et de la longue patience des mineurs. Sa voix s'élevait, résonnait contre les grands murs des habitations, puis revenait vers eux, chargée de son émotion. Les femmes pleuraient, les hommes hochaient la tête."
     },
     {
       "original_id": 6,
-      "text": "[PENDING_API]"
+      "text": "La Maheude s'était assise. Elle avait ouvert son chemisier, et le bébé, posé sur ses genoux, tétait. Il n'avait que quelques semaines, né dans cette pauvreté, une bouche de plus à nourrir. Elle le regardait boire, et"
     },
     {
       "original_id": 7,
-      "text": "[PENDING_API]"
+      "text": "Chaval cassait le charbon dans un endroit difficile, couché sur le côté car le passage était trop bas pour se tenir debout. La lampe posée près de lui éclairait le charbon noir, à vingt centimètres de son visage. On n'entendait que les coups réguliers de la pioche qui attaquait la roche, et la respiration difficile des deux hommes dans l'air épais. La chaleur était insupportable, la sueur coulait à flots, et leurs corps nus et noirs brillaient comme du métal."
     },
     {
       "original_id": 8,
-      "text": "[PENDING_API]"
+      "text": "Chaval recula d'un pas, et les deux hommes se regardèrent. Ils se détestaient depuis longtemps. C'était une jalousie entre hommes, une compétition forte et compliquée que ni l'un ni l'autre n'aurait su expliquer. Catherine était à l'écart, contre le mur, très pâle. Elle sentait que le pire allait arriver, mais elle ne pouvait rien faire. Étienne ne bougeait pas, il attendait. Le tunnel était silencieux. La flamme des lampes ne tremblait pas."
     },
     {
       "original_id": 9,
-      "text": "[PENDING_API]"
+      "text": "Soudain, il y eut un grand craquement, puis un bruit lourd, un énorme effondrement, comme si la terre entière s'écroulait. Étienne fut violemment poussé contre le mur, balayé par l'air qui s'échappait avec force. Le couloir se remplit de poussière, et les lampes s'éteignirent. On n'entendait plus que des plaintes, et au loin, le bruit des supports en bois qui cassaient. Il resta un moment sans bouger, sous le choc, essayant de comprendre ce qui venait d'arriver."
     },
     {
       "original_id": 10,
-      "text": "[PENDING_API]"
+      "text": "Le groupe s'est jeté sur la route, passant par-dessus les fossés et renversant les haies. Étienne courait devant, Catherine à ses côtés. Ils n'étaient plus une simple foule, mais une force irrésistible, comme un torrent qui emportait"
     },
     {
       "original_id": 11,
-      "text": "[PENDING_API]"
+      "text": "La rue de la Goutte-d'Or commençait à s'animer dans le gris du matin. Les magasins ouvraient un par un, le boulanger sortait ses pains, le marchand de vin nettoyait ses comptoirs. Des ouvrières passaient, serrant leur châle contre elles, les yeux encore lourds de sommeil. L'odeur du café chaud et du tabac se mélangeait à celle du ruisseau. Gervaise regardait tout cela depuis l'entrée de la blanchisserie, les bras croisés sur son tablier blanc."
     },
     {
       "original_id": 12,
-      "text": "[PENDING_API]"
+      "text": "Coupeau travaillait sur le toit d'un immeuble de six étages, dans le quartier du faubourg Poissonnière. Il posait des plaques de zinc avec des gestes précis et calmes, comme s'il était au sol. En bas, la rue était étroite,"
     },
     {
       "original_id": 13,
-      "text": "[PENDING_API]"
+      "text": "Gervaise s'était laissée aller progressivement. D'abord la fatigue, puis la pauvreté, et enfin l'alcool. Elle ne comprenait plus ce qui lui arrivait. Toutes ses journées étaient pareilles, tristes et vides, avec toujours ce froid aux pieds et cette faim au ventre. Elle qui avait voulu travailler, économiser et avoir une vie respectable, elle ramassait maintenant des mégots dans le caniveau et demandait l'aumône aux passants sans même les regarder."
     },
     {
       "original_id": 14,
-      "text": "[PENDING_API]"
+      "text": "Nana apparut. Elle portait une longue robe blanche, toute simple, et ses cheveux lâchés tombaient sur ses épaules. La salle l'accueillit par un léger murmure. On ne savait pas encore si elle était belle. Elle s'avança vers le bord de la"
     },
     {
       "original_id": 15,
-      "text": "[PENDING_API]"
+      "text": "Le comte Muffat s'assit dans le salon rempli de fleurs. Nana n'était pas encore prête. Il attendit, droit dans son costume, les gants à la main, regardant ces meubles très originaux, ces tissus de soie roses, ces tas de petits objets dont l'odeur de femme le troublait. De la pièce d'à côté, on entendait des bruits de robes, des chocs de porcelaine et des rires. Zoé entra pour lui dire que madame allait arriver."
     },
     {
       "original_id": 16,
-      "text": "[PENDING_API]"
+      "text": "Le Bonheur des Dames a ouvert ses portes un lundi matin de novembre. Les vendeuses, habillées en noir, étaient là, souriantes et pleines d'énergie, au milieu des comptoirs remplis de tissus. La lumière électrique brillait de partout sur les soieries, les velours et les dentelles. Dehors, la foule se pressait contre les vitrines. Des groupes de femmes entraient, regardant partout avec curiosité, un peu impressionnées mais très contentes. Octave Mouret, les mains derrière le dos, se promenait parmi elles, observant tout."
     },
     {
       "original_id": 17,
-      "text": "[PENDING_API]"
+      "text": "Denise se retrouva seule un instant dans le vestiaire, une fois ses collègues partis. Elle regarda autour d'elle les rangées de manteaux accrochés, et les miroirs qui lui renvoyaient son reflet : pâle et droite dans sa robe noire de vendeuse. Elle était arrivée de Valognes avec ses deux frères et tout l'argent qu'elle avait économisé, vingt francs. Depuis une semaine, elle découvrait Paris, ses bruits, sa lumière, et cet immense magasin qui la faisait se sentir toute petite mais qui l'attirait énormément."
     },
     {
       "original_id": 18,
-      "text": "[PENDING_API]"
+      "text": "Jean Macquart labourait depuis le lever du soleil. La charrue ouvrait la terre riche et lourde de la Beauce, retournant des morceaux de terre brillants qui laissaient échapper un peu de vapeur dans l'air frais du matin. Des corbeaux suivaient"
     },
     {
       "original_id": 19,
-      "text": "[PENDING_API]"
+      "text": "Fouan avait appelé ses enfants. Ils étaient là tous les trois, Buteau, Hyacinthe et Fanny, assis autour de la table de la ferme, les bras croisés, les yeux fixés sur leur vieux père. Il voulait partager sa terre de son vivant,"
     },
     {
       "original_id": 20,
-      "text": "[PENDING_API]"
+      "text": "Le vieux Bonnemort toussait sans arrêt, assis sur sa chaise près du feu, la tête penchée en avant. Cinquante ans passés à la mine l'avaient complètement usé. Ses poumons étaient noirs et ses jambes raides. Il ne parlait"
     },
     {
       "original_id": 21,
-      "text": "[PENDING_API]"
+      "text": "Souvarine travaillait en silence, très concentré, sans montrer d'émotion. Il n'avait besoin de personne, ne demandait rien et ne donnait rien. Le soir, dans sa chambre, il lisait. On l'entendait parfois chuchoter les noms d'amis morts. Son lapin blanc dormait sur ses genoux. Il le caressait sans y penser avec sa main gauche, tout en tournant les pages de sa main droite. Il croyait qu'il fallait tout détruire pour tout recommencer à zéro, et cela lui suffisait."
     },
     {
       "original_id": 22,
-      "text": "[PENDING_API]"
+      "text": "On était à table depuis deux heures et on allait y rester encore longtemps. Les plats de lapin, de ragoût et de bœuf aux carottes étaient fumants, au milieu des bouteilles déjà ouvertes. Les femmes se déboutonnaient un peu, les hommes retroussaient leurs manches"
     },
     {
       "original_id": 23,
-      "text": "[PENDING_API]"
+      "text": "Le comte avait tout donné. Son argent, la maison de famille, ses terres en Poitou, ses vieux objets en argent. Il ne lui restait plus rien.\n\nPourtant, il revenait quand même, poussé par une force qui n'était plus de l'"
     },
     {
       "original_id": 24,
-      "text": "[PENDING_API]"
+      "text": "Le père Bourras voyait ses clients aller de l'autre côté de la rue, attirés par les belles vitrines du grand magasin \"Le Bonheur des Dames\". Son magasin de parapluies et de cannes était devenu vide en deux ans. Il tenait bon,"
     },
     {
       "original_id": 25,
-      "text": "[PENDING_API]"
+      "text": "L'eau montait dans les tunnels depuis trois jours. On entendait le bruit de l'eau qui tombait, comme une cascade, quelque part dans le noir total. Ce bruit régulier et grave devenait de plus en plus fort. Les lampes s'éteignaient les unes après les autres à cause de l'humidité. Les hommes avançaient en tâtonnant, les mains devant eux, avec de l'eau jusqu'aux genoux. Ils cherchaient les murs pour trouver leur chemin. Personne ne disait un mot. Tout le monde avait compris que la mine était perdue, et qu'il fallait remonter très vite, sinon ils ne remonteraient jamais."
     },
     {
       "original_id": 26,
-      "text": "[PENDING_API]"
+      "text": "Depuis deux jours, les soldats rentraient, marchant en désordre, les pieds en sang dans leurs chaussures trouées. Jean regardait passer cet effondrement d'une armée qui n'en était plus une. Des hommes jetaient leurs fusils dans les fossés,"
     },
     {
       "original_id": 27,
-      "text": "[PENDING_API]"
+      "text": "Bazeilles brûlait depuis le matin. Weiss ne voulait pas fuir. Sa femme, Henriette, le suppliait, lui tirait le bras. Mais il secouait la tête et préparait son fusil de chasse. C'était sa maison, son jardin,"
     },
     {
       "original_id": 28,
-      "text": "[PENDING_API]"
+      "text": "Maurice avait été capturé à Sedan, avec dix mille autres. On les avait placés dans la presqu'île d'Iges, entre la Meuse et les Ardennes, sans abri et sans rien à manger. Trois jours de pluie, de froid et de faim. Des chevaux morts pourrissaient par terre. Des hommes fouillaient la boue pour trouver des betteraves. Jean le chercha longtemps parmi les groupes d'hommes épuisés, appelant son nom. Quand il le trouva, Maurice était impossible à reconnaître, le visage marqué par la fatigue, les yeux enfoncés, enveloppé dans une couverture trouée qu'il avait prise sur un mort."
     },
     {
       "original_id": 29,
-      "text": "[PENDING_API]"
+      "text": "Jacques Lantier aimait sa locomotive, la Lison, comme on aime une femme. Il la connaissait par cœur et comprenait le moindre de ses bruits. Quand elle marchait bien, sans à-coups ni bruits suspects, il se sentait en paix. Mais quand elle toussait ou que"
     },
     {
       "original_id": 30,
-      "text": "[PENDING_API]"
+      "text": "Ils avaient laissé le corps au fond du fossé, dans les buissons près des rails. Séverine ne tremblait plus maintenant. Elle avait eu un frisson au moment de l'acte, mais après, plus rien, un grand vide, presque un calme. Jacques Lantier ne"
     },
     {
       "original_id": 31,
-      "text": "[PENDING_API]"
+      "text": "La Lison roulait à cent kilomètres à l'heure, sans personne aux commandes, en pleine nuit. Les deux hommes étaient tombés sur les rails. Le train fonçait à travers les plaines, tout seul, avec des soldats qui chantaient dans les wagons sans se"
     },
     {
       "original_id": 32,
-      "text": "[PENDING_API]"
+      "text": "L'activité commençait aux Halles bien avant le lever du soleil. Des camions arrivaient la nuit, remplis de légumes, de viandes et de poissons qui sentaient bon la campagne et la mer. Les vendeurs mettaient en place leurs étals, et"
     },
     {
       "original_id": 33,
-      "text": "[PENDING_API]"
+      "text": "La belle Lisa était derrière le comptoir, comme une reine. La charcuterie Quenu-Gradelle était la plus belle du quartier, peut-être de tout Paris. Les vitrines reflétaient sans fin les jambons bien dorés, les boudins noirs et les galantines décorées de feuilles de laurier. Le parfum de la graisse chaude et des épices arrivait jusqu'à la rue et attirait les gens. Lisa avait des joues roses, des bras blancs, et l'air calme et fort d'une femme à l'aise, contente. Elle n'avait jamais manqué de rien et ne comprenait pas que quelqu'un puisse manquer de quoi que ce soit."
     },
     {
       "original_id": 34,
-      "text": "[PENDING_API]"
+      "text": "La dispute entre Florent et les vendeuses de poisson a duré tout l'automne. Ils ne se parlaient plus. Ils se regardaient de travers et se faisaient des petits coups bas entre voisins. Florent avait refusé d'ignorer une petite tricherie. La belle"
     },
     {
       "original_id": 35,
-      "text": "[PENDING_API]"
+      "text": "Aristide Saccard étalait sur la table la grande carte de Paris que le préfet venait de lui montrer en secret. Les lignes rouges des futurs boulevards traversaient les vieux quartiers comme des coupures franches. Il voyait les maisons s'écrouler, les terrains se vider, et au milieu de ce vide futur, ses propres terrains que personne ne connaissait encore. Il calculait vite, sur un coin de papier. La différence entre le prix d'achat et l'argent qu'il recevrait pour ses terrains était énorme. En deux ans, il serait riche. En cinq ans, immensément riche."
     },
     {
       "original_id": 36,
-      "text": "[PENDING_API]"
+      "text": "Renée et Maxime passaient souvent leurs soirées dans la serre de l'hôtel Saccard. C'était un endroit spécial, chaud et humide. Les plantes exotiques poussaient partout, jusqu'aux vitres du plafond, et l'air avait une forte odeur de feuilles chaudes et de terre mouillée.\n\nIls s'installaient dans les fauteuils en osier, au milieu des cactus et des grandes fougères. Lui, il lui lisait des poèmes ou lui racontait les derniers potins de la ville. Elle l'écoutait, à moitié endormie.\n\nLa chaleur de la serre, les odeurs, sa jeunesse et le fait qu'elle n'avait rien à faire avaient créé entre eux un lien très fort, mais un peu étrange."
     },
     {
       "original_id": 37,
-      "text": "[PENDING_API]"
+      "text": "Renée avait enfin compris. Son rêve s'était brisé d'un coup, comme on se réveille d'un mauvais cauchemar. Saccard lui avait pris tout son argent et tous ses biens, tout ce qu'il avait le droit de prendre et même ce qu'il n'avait pas le droit de prendre. Elle n'avait plus rien. Et Maxime l'avait quittée sans un regard, pour épouser une Américaine très riche. Elle se retrouvait seule dans l'hôtel vide, avec des dettes et des meubles sur le point d'être saisis. Derrière les fenêtres, Paris continuait de briller."
     },
     {
       "original_id": 38,
-      "text": "[PENDING_API]"
+      "text": "La maison de la rue de Choiseul était une grande et belle maison de ville, avec une devanture impeccable, un logement de gardien très propre et un bel escalier en marbre blanc. Octave Mouret comprit tout de suite, dès le premier soir, que derrière cette"
     },
     {
       "original_id": 39,
-      "text": "[PENDING_API]"
+      "text": "Dans les cuisines, les employées de maison se réunissaient tous les jours pour parler. Elles savaient tout. Elles savaient que Monsieur Josserand était presque ruiné, que Madame Juzeur recevait un homme les mardis soir, et que la petite Berthe"
     },
     {
       "original_id": 40,
-      "text": "[PENDING_API]"
+      "text": "Madame Josserand rêvait de marier ses filles à des hommes riches et importants. Elle avait deux filles, Hortense et Berthe, qui n'étaient ni très jolies, ni très riches. Pourtant, elle les habillait de belles robes de soirée et les"
     },
     {
       "original_id": 41,
-      "text": "[PENDING_API]"
+      "text": "Pendant plusieurs jours, des restes d'une armée en fuite ont traversé la ville. Ce n'était pas une armée organisée, mais des groupes de soldats dispersés. Les hommes avaient la barbe longue et sale, leurs uniformes étaient en lambeaux. Ils avançaient lentement, sans force, sans drapeau ni unité. Tous semblaient accablés de fatigue, épuisés, incapables de penser ou de décider quoi que ce soit. Ils marchaient juste par habitude, et tombaient d'épuisement dès qu'ils s'arrêtaient."
     },
     {
       "original_id": 42,
-      "text": "[PENDING_API]"
+      "text": "C'était une de ces jolies filles charmantes, nées par erreur, semblait-il, dans une famille d'employés modestes. Elle n'avait pas d'argent pour son mariage, pas d'espoir pour l'avenir, aucune chance d'être remarquée et d'épouser un homme riche et important. Elle finit par épouser un petit employé du ministère de l'Éducation. Elle souffrait sans arrêt, car elle"
     },
     {
       "original_id": 43,
-      "text": "[PENDING_API]"
+      "text": "Paris était encerclé, les gens mouraient de faim et la ville était à bout de forces. Il n'y avait presque plus de moineaux sur les toits, et même les rats des égouts avaient disparu. On mangeait tout et n'importe quoi."
     },
     {
       "original_id": 44,
-      "text": "[PENDING_API]"
+      "text": "Sur toutes les routes autour de Goderville, les paysans et leurs femmes se dirigeaient vers le village, car c'était jour de marché. Les hommes marchaient tranquillement, le corps penché en avant à chaque pas de leurs longues jambes. Celles-ci étaient tordues et déformées à cause de leurs durs travaux : pousser la charrue leur avait fait monter l'épaule gauche et tordre la taille, et faucher le blé les obligeait à écarter les genoux pour garder l'équilibre."
     },
     {
       "original_id": 45,
-      "text": "[PENDING_API]"
+      "text": "J'aime la maison où j'ai grandi. Depuis mes fenêtres, je vois la Seine. Elle coule le long de mon jardin, derrière la route, juste à côté de chez moi. C'est un grand fleuve large qui relie Rouen au Havre, et"
     },
     {
       "original_id": 46,
-      "text": "[PENDING_API]"
+      "text": "Un vieil homme pauvre, avec une barbe blanche, nous a demandé de l'argent. Mon ami, Joseph Davranche, lui a donné un peu d'argent. J'ai été surpris. Il m'a expliqué : « C'est quelqu'un qui m'"
     },
     {
       "original_id": 47,
-      "text": "[PENDING_API]"
+      "text": "Georges Duroy sortit de son travail à sept heures du soir. Il tourna à gauche, descendit vers la Seine, puis marcha le long du quai. La soirée arrivait, calme et douce. Les lampadaires s'allumaient. Des femmes passaient en regardant les hommes, et lui aussi les regardait. Il les trouvait toutes à son goût, mais il était frustré par sa pauvreté, car elle l'empêchait de les aborder. Il n'avait que trois francs vingt centimes pour finir le mois."
     },
     {
       "original_id": 48,
-      "text": "[PENDING_API]"
+      "text": "Elle était sortie seule pour aller, comme d'habitude, s'asseoir sur le grand rocher qui donne sur la mer. Le vent était fort et froid, il venait de la mer. La mer était grise comme le ciel, avec des petites vagues blanches. Elle est restée longtemps sans bouger, à regarder les vagues qui se formaient, avançaient, montaient et se cassaient sur les rochers. Elle pensait à sa vie, à sa jeunesse qui passait sans joie ni amour. Elle avait cru à des choses qui n'étaient pas vraies."
     },
     {
       "original_id": 49,
-      "text": "[PENDING_API]"
+      "text": "Tout le monde connaissait la maison de Madame Tellier dans les environs. De Fécamp, on s'y rendait de temps en temps, juste pour le plaisir, un peu comme on ferait une petite sortie pour manger. C'était une maison d'un étage"
     },
     {
       "original_id": 50,
-      "text": "[PENDING_API]"
+      "text": "La grande voiture transportait ses douze voyageurs à travers la plaine de Normandie, pendant la nuit et dans le froid. On n'entendait que le bruit des roues sur la neige et le souffle des chevaux. Tout le monde s'était bien emmitouflé dans ses fourru"
     },
     {
       "original_id": 51,
-      "text": "[PENDING_API]"
+      "text": "Lesable était quelqu'un de très ordonné, un simple employé au ministère de la Marine. Il avait épousé la nièce d'un ancien chef de bureau, dans l'espoir de toucher un héritage. Mais l'oncle vivait longtemps, il s'accrochait à la vie et ne mourait pas. On allait le voir régulièrement, le dimanche, avec des gâteaux et des sourires. La nièce comptait les jours, faisait ses calculs et attendait. L'oncle, lui, était toujours là, mangeait les gâteaux et souriait avec l'air malicieux d'un vieil homme qui savait très bien ce qu'on attendait de lui."
     },
     {
       "original_id": 52,
-      "text": "[PENDING_API]"
+      "text": "L'officier prussien s'était installé dans le château de Normandie depuis deux semaines. Il était blond, jeune, avec des yeux clairs et une fine moustache. Il s'ennuyait. Pour s'occuper, il cassait les miroirs, coupait les tableaux avec son sabre et brûlait les livres de la bibliothèque. Ses hommes le laissaient faire. Un soir, il fit venir des femmes du village et organisa une fête au milieu des meubles abîmés."
     },
     {
       "original_id": 53,
-      "text": "[PENDING_API]"
+      "text": "Isidore était le fils de la marchande de légumes de la place du marché. Il avait dix-neuf ans, était roux, très timide, et ne regardait jamais les filles dans les yeux. Sa mère lui avait appris à toujours respecter les femmes. Partout dans le village, on le voyait comme un garçon parfait, à qui on n'avait rien à reprocher. C'était un exemple de bonne conduite et de travail. C'est pourquoi Madame Husson l'avait choisi pour être le rosier de l'année."
     },
     {
       "original_id": 54,
-      "text": "[PENDING_API]"
+      "text": "Un dimanche, en se promenant aux Champs-Élysées pour se reposer du travail de la semaine, elle vit soudain une femme qui promenait un enfant. C'était Madame Forestier, toujours jeune, toujours belle, toujours charmante. Madame Loisel fut touchée. Allait-elle lui parler ? Oui, bien sûr. Et maintenant qu'elle avait remboursé sa dette, elle lui dirait tout. Pourquoi pas ?"
     },
     {
       "original_id": 55,
-      "text": "[PENDING_API]"
+      "text": "Pierre regardait son frère avec un regard noir. Jean venait d'hériter d'un vieil ami de la famille qu'il connaissait à peine. Cent mille francs et une maison. Pierre n'avait rien. Il ne disait rien non plus, mais une"
     },
     {
       "original_id": 56,
-      "text": "[PENDING_API]"
+      "text": "Le petit Simon avait huit ans. Sa mère l'élevait toute seule, sans mari, et tout le monde au village le savait. Les autres enfants le lui avaient dit à l'école, en se moquant et en riant. Il revint chez lui en pleurant. Il demanda à sa mère : Pourquoi je n'ai pas de papa, moi ? Sa mère ne répondit pas tout de suite. Ses mains tremblaient sur son travail. Dehors, la nuit tombait sur le village."
     },
     {
       "original_id": 57,
-      "text": "[PENDING_API]"
+      "text": "Toine était l'homme le plus gros de la région de Tournevent. On disait qu'il était large comme une route et presque aussi court. Il gérait la seule auberge du village, buvait avec ses clients du matin au soir, riait fort et racontait des histoires. Sa femme, une petite femme maigre et usée par le travail, ne le supportait pas bien. Chaque soir, elle lui disait qu'il gaspillait leur argent. Il riait encore plus fort."
     },
     {
       "original_id": 58,
-      "text": "[PENDING_API]"
+      "text": "La rivière avançait tranquillement entre les saules. Le soleil de juin tapait sur l'eau et la faisait briller comme de l'argent. Deux pêcheurs étaient assis au bord de la rivière, leurs cannes dans l'eau, une pipe à la bouche. Depuis une heure, ils n'avaient pas dit"
     },
     {
       "original_id": 59,
-      "text": "[PENDING_API]"
+      "text": "La veuve de Paolo Saverini vivait seule avec son fils dans une petite maison pauvre, près des vieux murs de Bonifacio. La ville, construite sur une pointe de terre rocheuse, semble par endroits suspendue au-dessus de la mer. De là, elle regardait,"
     },
     {
       "original_id": 60,
-      "text": "[PENDING_API]"
+      "text": "Un soir, il y a environ six ans, nous avons été surpris par une grosse tempête au bord de l'Oust. Il y avait là un vieux château, vide depuis longtemps, dont les portes ouvertes claquaient dans le vent. Nous sommes entrés pour nous mettre"
     },
     {
       "original_id": 61,
-      "text": "[PENDING_API]"
+      "text": "En six mois, Duroy avait vite pris ses marques. Il savait désormais comment fonctionnait ce milieu : les soirées mondaines, les bureaux des journaux, les maisons des femmes importantes. Il avait compris que les contacts étaient plus utiles que le talent, et l'audace plus payante que le mérite. Son regard était devenu très perçant. Il voyait immédiatement qui il fallait approcher, qui on pouvait laisser de côté, et qui allait bientôt perdre son influence."
     },
     {
       "original_id": 62,
-      "text": "[PENDING_API]"
+      "text": "Je l'ai vu ! Je l'ai vu ! Maintenant, j'en suis sûr... Je l'ai vu ! J'avais très froid, j'avais très peur ; et tout à coup, j'ai vu... J'avais mis de l'eau dans une carafe en verre. Et l'eau baissait, toute seule, pendant que je la regardais. Je la voyais descendre dans la carafe, comme si une bouche invisible la buvait."
     },
     {
       "original_id": 63,
-      "text": "[PENDING_API]"
+      "text": "Cet homme buvait tout le temps. Le soir, en rentrant du port, il passait devant les bars, entrait dans chacun, ressortait en titubant et rentrait chez lui avec un mal de tête terrible. Sa femme l'attendait sans rien dire, posait la soupe sur la table, puis allait se coucher avec les enfants. Il mangeait seul, renversait des choses, et jurait. Parfois, il la frappait. Parfois, il pleurait. On ne savait jamais s'il serait violent ou triste ce soir-là."
     },
     {
       "original_id": 64,
-      "text": "[PENDING_API]"
+      "text": "Elle aimait cet homme depuis qu'elle était enfant. Elle avait quinze ans, et lui douze, quand elle lui a dit pour la première fois qu'elle l'aimait, derrière l'école. Il s'était moqué d'elle. Plus tard, elle revenait au village chaque année pour réparer les chaises. Elle le voyait, mais il ne la regardait pas. Il s'était marié. Elle continuait de travailler sur les routes, réparant les chaises, et elle gardait son argent pour lui, au cas où il en aurait besoin un jour."
     },
     {
       "original_id": 65,
-      "text": "[PENDING_API]"
+      "text": "La vieille femme avait pris le train à Argentan avec un gros panier et une poule dans un sac. Elle s'était assise en face de lui, avait ouvert la fenêtre malgré la pluie, et avait commencé à parler sans arrêt. Elle allait voir sa fille à Caen. Elle avait aussi un fils à Falaise. Son mari était mort l'hiver dernier. La poule gloussait dans le sac. Le train avançait vite dans la campagne de Normandie sous la pluie."
     },
     {
       "original_id": 66,
-      "text": "[PENDING_API]"
+      "text": "Le père servait à ses invités l'oiseau qu'il avait chassé ce matin-là, dans les buissons. Il le gardait pour une occasion spéciale, car il n'aimait pas le manger tout seul. Autour de la table, les amis habituels att"
     },
     {
       "original_id": 67,
-      "text": "[PENDING_API]"
+      "text": "Le vieux Milon fumait sa pipe devant la porte quand les officiers prussiens arrivèrent. Il se leva lentement, leur fit signe d'entrer et alla chercher du cidre. Ils burent, puis repartirent. Il les regardait partir par la fenêtre, sa pipe à"
     },
     {
       "original_id": 68,
-      "text": "[PENDING_API]"
+      "text": "La maison de Madame Tellier était connue dans toute la région, et même à Fécamp où des gens venaient parfois, juste pour le plaisir, passer la soirée. C'était une jolie maison à un étage, avec des rideaux blancs aux fenêtres. Elle donnait une impression de calme et de respectabilité. La propriétaire, une grande femme rousse à l'air sérieux, recevait ses clients avec beaucoup de respect, comme une commerçante. Les filles qui y travaillaient étaient propres et de bonne humeur, et tout le monde se comportait bien. Les règles de la maison étaient strictes, et Madame Tellier y veillait attentivement."
     },
     {
       "original_id": 69,
-      "text": "[PENDING_API]"
+      "text": "Elles sont rentrées de Virville par le train le soir, toutes les cinq. Elles étaient calmes et semblaient un peu différentes. La messe de communion de la petite nièce avait duré longtemps. L'église sentait la cire et les fleurs. Quelque chose"
     },
     {
       "original_id": 70,
-      "text": "[PENDING_API]"
+      "text": "Il arrivait dans les villages de Normandie avec sa boîte à dessins sous le bras, pour trouver des choses à peindre. Il aimait les vieux murs, les arbres aux formes bizarres, et la lumière pâle sur la mer. C'était un homme d'une quarantaine d'années. Il aimait être seul, parlait peu, mais observait tout avec attention. Il logeait dans les fermes quand les auberges étaient pleines. La fermière lui donnait une chambre, il pe"
     },
     {
       "original_id": 71,
-      "text": "[PENDING_API]"
+      "text": "Miss Harriet se promenait tous les matins sur la falaise, qu'il fasse beau ou mauvais. C'était une Anglaise d'environ cinquante ans, mince, qui rougissait facilement. Elle passait beaucoup de temps à prier et regardait la mer d'un"
     },
     {
       "original_id": 72,
-      "text": "[PENDING_API]"
+      "text": "Elle s'était attachée à lui, mais il ne s'en rendait pas compte. Il la voyait aux repas, parfois sur la falaise, et lui répondait sans vraiment faire attention. Pendant ce temps, elle notait ses mots dans un carnet, gardait un dessin qu'il avait mis à la poubelle, et passait devant la porte de sa chambre trop souvent. Il ne la voulait"
     },
     {
       "original_id": 73,
-      "text": "[PENDING_API]"
+      "text": "Le lendemain matin, on l'a découverte au fond du puits. Le serviteur a vu ses jupes flotter dans l'eau sombre. Les gendarmes ont été appelés et le corps a été remonté. Ses yeux étaient ouverts et ses bras étaient étendus le"
     },
     {
       "original_id": 74,
-      "text": "[PENDING_API]"
+      "text": "Yvette Obardi était la fille d'une femme élégante au passé un peu mystérieux. Elle semblait n'avoir hérité d'elle que sa beauté et son insouciance. À dix-huit ans, elle avait des yeux sincères et un rire clair."
     },
     {
       "original_id": 75,
-      "text": "[PENDING_API]"
+      "text": "La villa des Obardi, à Bougival, était un endroit vraiment bizarre. On y recevait beaucoup de gens, n'importe qui, à n'importe quel moment. Il y avait des gens riches, des artistes, des militaires en vacances, et des femmes dont on ne demandait pas le nom. On jouait aux cartes jusqu'au lever du soleil, on dansait sur la terrasse près de l'eau, et on riait de tout. Yvette courait au milieu de tout ce monde comme une enfant dans un jardin, sans comprendre qui étaient vraiment ces gens. Sa mère la laissait faire, trop occupée par ses propres affaires."
     },
     {
       "original_id": 76,
-      "text": "[PENDING_API]"
+      "text": "Ce soir-là, elle a tout compris d'un coup. Quelqu'un avait dit un mot, une phrase, et tout est devenu clair dans sa tête. Le monde où elle vivait depuis toujours, avec ses hommes, ses femmes, ces soirées où tout était permis"
     },
     {
       "original_id": 77,
-      "text": "[PENDING_API]"
+      "text": "Sa mère lui avait expliqué la situation calmement et sans gêne. C'était comme ça. Ce n'était pas si grave. On s'arrangeait. C'était la vie. Yvette l'avait écoutée sans répondre. Puis elle était remontée dans sa chambre"
     },
     {
       "original_id": 78,
-      "text": "[PENDING_API]"
+      "text": "André Mariolle avait tout pour être heureux : de l'argent, du temps libre, un bel appartement sur la rive gauche de Paris et des amis influents dans le monde de l'art. Pourtant, il sentait qu'il lui manquait quelque chose, sans savoir exactement quoi. Dans les soirées mondaines, il cherchait une femme qui le rendrait vraiment heureux. Il en avait rencontré plusieurs, s'était lié à deux ou trois d'entre elles, mais à chaque fois, il avait l'impression que ce n'était pas la bonne. Quand il a rencontré Michèle de Burne, il a pensé que cette fois, ce serait différent."
     },
     {
       "original_id": 79,
-      "text": "[PENDING_API]"
+      "text": "Michèle de Burne recevait chaque vendredi dans sa belle maison près du Parc Monceau. Elle avait un don spécial pour mettre les gens à l'aise, tout en les gardant à une distance respectueuse, afin que rien ne vienne gâcher ses soirées. Elle aimait les conversations intelligentes, les échanges d'idées et les résumés de livres. Par contre, elle n'aimait pas les émotions, qui, selon elle, compliquent tout et finissent souvent mal. Lorsque Mariolle commença à montrer un intérêt trop appuyé, elle le reçut avec le même sourire qu'elle offrait à tous ses invités habituels."
     },
     {
       "original_id": 80,
-      "text": "[PENDING_API]"
+      "text": "Mariolle avait quitté Paris pour quelques semaines, pour essayer d'oublier. Il était allé dans une auberge en forêt de Fontainebleau. Chaque jour, il avait marché au milieu des rochers et des pins, mangé seul, dormi beaucoup. Mais rien n'avait changé"
     }
   ]
 }
