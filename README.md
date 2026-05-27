@@ -255,6 +255,12 @@ Les shifts sont cohérents sur Zola et Maupassant, ce qui confirme que le signal
 
 Corrélation faible entre longueur et shift — le signal est relativement stable au-dessus de 80 mots.
 
+### 8. Stylométrie de code — illustration conceptuelle
+
+![Code stylometry (illustratif)](results/code_stylometry.png)
+
+La même méthodologie s'applique au code source : les développeurs laissent des empreintes stylistiques via des choix semi-automatiques (densité des annotations de type, retours anticipés, préfixes de nommage, etc.). Cette figure est **synthétique / illustrative** — elle montre à quoi ressemblerait l'expérience dans un espace 2D de dimensions mesurables (densité d'annotations × taux de retour anticipé). Les flèches indiquent la direction de dérive probable sous l'influence de suggestions AI (Copilot, etc.). Ce projet n'inclut pas de données de code réelles.
+
 ---
 
 ## Synthèse interprétative
