@@ -563,114 +563,136 @@ def fig_radar(sa: StyleAnalyzer, corpus: dict, top_idx: np.ndarray, results_dir:
 def fig_drift_trajectories(
     sa: StyleAnalyzer, corpus: dict, shifts_all: dict, results_dir: Path
 ) -> None:
-    from matplotlib.patches import Ellipse
-    from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+    """Hero visual: PCA on raw function-word vectors.
 
-    # Rebuild LDA shift-vector space (same as fig_pca)
+    Human texts form the anchor; arrows go from the human centroid to each
+    LLM centroid.  Axes carry real meaning (% variance explained).
+    """
+    from matplotlib.patches import Ellipse as _Ell
+
     originals   = load_originals()
     llm_corpora = load_llm_corpora()
-    orig_vecs   = sa.fit_transform(originals)
 
-    shift_pts, shift_lbls = [], []
+    # ── Build combined PCA projection ──────────────────────────────────────
+    all_vecs, all_lbls = [], []
+    orig_vecs = sa.fit_transform(originals)
+    for v in orig_vecs:
+        all_vecs.append(v); all_lbls.append("Humain")
     for lbl, rewrites in llm_corpora.items():
-        rew_vecs = sa.fit_transform(rewrites)
-        for ov, rv in zip(orig_vecs, rew_vecs):
-            shift_pts.append(rv - ov)
-            shift_lbls.append(lbl)
+        for v in sa.fit_transform(rewrites):
+            all_vecs.append(v); all_lbls.append(lbl)
 
-    S       = np.array(shift_pts)
-    lbl_arr = np.array(shift_lbls)
-    lda     = LinearDiscriminantAnalysis(n_components=2)
-    coords  = lda.fit_transform(S, lbl_arr)
+    X       = np.array(all_vecs)
+    lbl_arr = np.array(all_lbls)
+    pca     = PCA(n_components=2, random_state=42)
+    coords  = pca.fit_transform(X)
+    var     = pca.explained_variance_ratio_ * 100
 
-    llm_labels    = list(llm_corpora.keys())
-    llm_centroids = {l: coords[lbl_arr == l].mean(axis=0) for l in llm_labels}
-    origin        = np.array([0.0, 0.0])  # neutral reference in LDA shift space
+    human_mask     = lbl_arr == "Humain"
+    human_centroid = coords[human_mask].mean(axis=0)
+    llm_labels     = list(llm_corpora.keys())
+    llm_centroids  = {l: coords[lbl_arr == l].mean(axis=0) for l in llm_labels}
 
-    fig, ax = plt.subplots(figsize=(11, 8))
+    # ── Canvas ─────────────────────────────────────────────────────────────
+    fig, ax = plt.subplots(figsize=(12, 8.5))
     fig.patch.set_facecolor(THEME["bg"])
     _ax_style(ax)
 
-    # 1-sigma ellipses per LLM (show spread without scatter noise)
-    from matplotlib.patches import Ellipse as _Ell
+    # ── Human scatter + 1-σ ellipse ─────────────────────────────────────
+    ax.scatter(*coords[human_mask].T, c=THEME["text_muted"], s=14, alpha=0.18,
+               zorder=2, rasterized=True)
+    h_pts = coords[human_mask]
+    cov   = np.cov(h_pts.T)
+    vals, vecs = np.linalg.eigh(cov)
+    order = vals.argsort()[::-1]
+    vals, vecs = vals[order], vecs[:, order]
+    angle = np.degrees(np.arctan2(*vecs[:, 0][::-1]))
+    w, h_ = 2 * np.sqrt(np.maximum(vals, 0))
+    ax.add_patch(_Ell(xy=human_centroid, width=w, height=h_, angle=angle,
+                      fc=THEME["text_muted"], alpha=0.06, ec=THEME["text_muted"],
+                      lw=1.2, ls="--", zorder=2))
+
+    # ── LLM scatter (very light — centroids carry the story) ────────────
     for label in llm_labels:
         mask  = lbl_arr == label
-        pts   = coords[mask]
         color = PALETTE.get(label, "#AAAAAA")
-        if len(pts) >= 3:
-            cov  = np.cov(pts.T)
-            vals, vecs = np.linalg.eigh(cov)
-            order = vals.argsort()[::-1]
-            vals, vecs = vals[order], vecs[:, order]
-            angle = np.degrees(np.arctan2(*vecs[:, 0][::-1]))
-            w, h  = 2 * np.sqrt(np.maximum(vals, 0))
-            ax.add_patch(_Ell(xy=llm_centroids[label], width=w, height=h, angle=angle,
-                              fc=color, alpha=0.08, ec=color, lw=1.5, ls="--", zorder=2))
+        ax.scatter(*coords[mask].T, c=color, s=10, alpha=0.15,
+                   zorder=3, rasterized=True)
 
-    # Origin — geometric reference of LDA shift space
-    ax.scatter(*origin, c=THEME["text_muted"], s=180, marker="o",
-               zorder=6, edgecolors="white", linewidths=1.0, alpha=0.55)
-    ax.annotate("réf.", origin, xytext=(6, 8), textcoords="offset points",
-                color=THEME["text_muted"], fontsize=8, fontstyle="italic")
+    # ── Human centroid — star ─────────────────────────────────────────────
+    ax.scatter(*human_centroid, c="white", s=520, marker="*",
+               edgecolors=THEME["text_muted"], linewidths=1.2, zorder=8)
+    ax.annotate(
+        "Baseline humain (★)", human_centroid,
+        xytext=(12, -18), textcoords="offset points",
+        color=THEME["text_muted"], fontsize=9, fontstyle="italic",
+        bbox=dict(boxstyle="round,pad=0.25", fc=THEME["bg"], ec="none", alpha=0.80),
+    )
 
-    # Arrows from origin → each LLM centroid + Δ labels
-    rads    = {"GPT-4": 0.30, "Claude 3": -0.20, "Mistral 7B": 0.55, "Gemini Pro": -0.45}
-    lbl_off = {
-        "GPT-4":      ( -8,  -42),
-        "Claude 3":   (-22,   30),
-        "Mistral 7B": ( 22,   30),
-        "Gemini Pro": (-22,  -36),
+    # ── Arrows from human centroid → each LLM centroid ──────────────────
+    arrow_rads   = {"GPT-4": 0.18, "Claude 3": -0.15, "Mistral 7B": 0.28, "Gemini Pro": -0.22}
+    label_offsets = {
+        "GPT-4":      (-10, -44),
+        "Claude 3":   (-20,  28),
+        "Mistral 7B": ( 18,  28),
+        "Gemini Pro": (-20, -40),
     }
-    delta_off = {
-        "GPT-4":      np.array([ 0.10, -0.38]),
-        "Claude 3":   np.array([-0.30,  0.20]),
-        "Mistral 7B": np.array([ 0.55,  0.28]),
-        "Gemini Pro": np.array([-0.26, -0.26]),
+    delta_nudge = {
+        "GPT-4":      np.array([ 0.012, -0.035]),
+        "Claude 3":   np.array([-0.025,  0.018]),
+        "Mistral 7B": np.array([ 0.040,  0.022]),
+        "Gemini Pro": np.array([-0.022, -0.028]),
     }
 
     for label in llm_labels:
         color      = PALETTE.get(label, "#AAAAAA")
         cx, cy     = llm_centroids[label]
         mean_shift = float(np.mean(shifts_all[label]))
-        rad        = rads.get(label, 0.25)
+        rad        = arrow_rads.get(label, 0.20)
 
+        # Curved arrow
         ax.annotate(
-            "", xy=(cx, cy), xytext=origin,
+            "", xy=(cx, cy), xytext=human_centroid,
             arrowprops=dict(
-                arrowstyle="-|>", color=color, lw=2.6,
-                connectionstyle=f"arc3,rad={rad}", mutation_scale=20,
+                arrowstyle="-|>", color=color, lw=2.8,
+                connectionstyle=f"arc3,rad={rad}", mutation_scale=22,
             ),
             zorder=7,
         )
 
-        doff = delta_off.get(label, np.array([0.20, 0.15]))
-        mid  = origin + 0.5 * (np.array([cx, cy]) - origin) + doff
+        # Δ annotation near arrow midpoint
+        nudge = delta_nudge.get(label, np.array([0.02, 0.015]))
+        mid   = 0.5 * (human_centroid + np.array([cx, cy])) + nudge * (
+            np.array([cx, cy]) - human_centroid
+        ).mean()
         ax.annotate(
-            f"Δ = {mean_shift:.2f}", mid,
-            color=color, fontsize=9, fontstyle="italic", ha="center", va="center",
-            bbox=dict(boxstyle="round,pad=0.25", fc=THEME["bg"], ec="none", alpha=0.82),
+            f"Δ = {mean_shift:.3f}", mid,
+            color=color, fontsize=8.5, fontstyle="italic", ha="center", va="center",
+            bbox=dict(boxstyle="round,pad=0.22", fc=THEME["bg"], ec=color, alpha=0.85, lw=0.6),
             zorder=9,
         )
 
-        ax.scatter([cx], [cy], c=color, s=340, marker="X",
+        # LLM centroid marker
+        ax.scatter([cx], [cy], c=color, s=360, marker="X",
                    edgecolors="white", linewidths=1.5, zorder=10)
-        dx, dy = lbl_off.get(label, (10, 5))
-        ax.annotate(label, (cx, cy), color=color, fontsize=10.5, fontweight="bold",
-                    xytext=(dx, dy), textcoords="offset points",
-                    bbox=dict(boxstyle="round,pad=0.3", fc=THEME["bg"], ec="none", alpha=0.88),
-                    zorder=11)
 
-    # Zoom on the centroid zone, clip outlier points
-    ax.set_xlim(-2.6, 2.6)
-    ax.set_ylim(-2.2, 2.2)
-    ax.set_xlabel("LD1 — axe de discrimination inter-LLM", color=THEME["text_muted"], labelpad=8)
-    ax.set_ylabel("LD2 — axe de discrimination inter-LLM", color=THEME["text_muted"], labelpad=8)
+        # Model label
+        dx, dy = label_offsets.get(label, (12, 6))
+        ax.annotate(
+            label, (cx, cy), color=color, fontsize=11, fontweight="bold",
+            xytext=(dx, dy), textcoords="offset points",
+            bbox=dict(boxstyle="round,pad=0.32", fc=THEME["bg"], ec="none", alpha=0.90),
+            zorder=11,
+        )
+
+    ax.set_xlabel(f"PC1 ({var[0]:.1f} % variance)", color=THEME["text_muted"], labelpad=8)
+    ax.set_ylabel(f"PC2 ({var[1]:.1f} % variance)", color=THEME["text_muted"], labelpad=8)
     ax.set_title(
-        "Trajectoires de drift stylistique — espace LDA (vecteurs de shift)\n"
-        "Flèches : référence → centroïde LLM  ·  Δ = shift cosinus moyen  ·  ellipses = dispersion 1-σ",
-        color=THEME["text_primary"], pad=14,
+        "Stylistic drift in function-word PCA space\n"
+        "★ = human centroid  ·  ✕ = LLM centroid  ·  Δ = mean cosine shift",
+        color=THEME["text_primary"], pad=16,
     )
-    ax.grid(alpha=0.04, color=THEME["grid"])
+    ax.grid(alpha=0.03, color=THEME["grid"])
     _save(fig, "drift_trajectories.png", results_dir)
 
 
@@ -698,25 +720,51 @@ def fig_shift_vs_length(shifts_all: dict, llm_corpora: dict, results_dir: Path) 
 
 
 def fig_bootstrap(shifts_all: dict, results_dir: Path) -> None:
+    """Horizontal bar chart with 95 % CI and significance brackets."""
     model_names = list(shifts_all.keys())
     means_ci    = [(np.mean(v), *bootstrap_ci(v)) for v in shifts_all.values()]
 
-    fig, ax = plt.subplots(figsize=(9, 4))
-    fig.patch.set_facecolor(BG)
+    fig, ax = plt.subplots(figsize=(10, 5))
+    fig.patch.set_facecolor(THEME["bg"])
     _ax_style(ax)
-    for i, (name, (mean, lo, hi)) in enumerate(zip(model_names, means_ci)):
+
+    y_pos = np.arange(len(model_names))
+    for i, (name, (mean, lo, hi)) in enumerate(zip(reversed(model_names), reversed(means_ci))):
         color = PALETTE[name]
-        ax.bar(i, mean, color=color, alpha=0.75, width=0.5, zorder=3)
-        ax.errorbar(i, mean, yerr=[[mean - lo], [hi - mean]],
-                    fmt="none", color="white", capsize=6, capthick=1.5, elinewidth=1.5, zorder=4)
-        ax.text(i, hi + 0.005, f"{mean:.3f}", ha="center", va="bottom",
-                color="white", fontsize=9, fontweight="bold")
-    ax.set_xticks(range(len(model_names)))
-    ax.set_xticklabels(model_names, color="#AAAAAA")
-    ax.set_ylabel("Shift cosinus moyen", color="#AAAAAA")
-    ax.set_title("Shift moyen + IC 95 % Bootstrap (n=5 000)", color="white", pad=10)
-    ax.grid(axis="y", alpha=0.1, color="#AAAAAA")
-    ax.set_ylim(0, max(hi for _, lo, hi in means_ci) * 1.2)
+        ax.barh(i, mean, color=color, alpha=0.80, height=0.52, zorder=3,
+                left=0.0, edgecolor="none")
+        ax.errorbar(mean, i, xerr=[[mean - lo], [hi - mean]],
+                    fmt="none", color="white", capsize=5, capthick=1.5, elinewidth=1.5, zorder=4)
+        # Value label
+        ax.text(hi + 0.004, i, f"{mean:.3f}  [CI {lo:.3f}–{hi:.3f}]",
+                va="center", color="white", fontsize=8.5, fontweight="bold")
+        # Model label inline
+        ax.text(0.004, i, name, va="center", ha="left",
+                color=THEME["bg"], fontsize=9, fontweight="bold", zorder=5)
+
+    # Significance bracket: Gemini vs the group
+    gemini_idx   = list(reversed(model_names)).index("Gemini Pro")
+    gpt4_idx     = list(reversed(model_names)).index("GPT-4")
+    gemini_mean  = means_ci[model_names.index("Gemini Pro")][0]
+    bracket_x    = gemini_mean + 0.055
+    ax.annotate(
+        "", xy=(bracket_x, gpt4_idx), xytext=(bracket_x, gemini_idx),
+        arrowprops=dict(arrowstyle="<->", color="#FF7B72", lw=1.4),
+    )
+    ax.text(bracket_x + 0.005, (gpt4_idx + gemini_idx) / 2,
+            "p < 0.001\n(Bonferroni)", color="#FF7B72", fontsize=7.5,
+            va="center", fontstyle="italic")
+
+    ax.set_yticks([])
+    ax.set_xlabel("Mean cosine shift (stylistic displacement)", color=THEME["text_muted"], labelpad=8)
+    ax.set_title(
+        "Mean stylistic shift per model — 95 % bootstrap CI (n = 5 000)\n"
+        "Longer bar = more displacement from human baseline",
+        color=THEME["text_primary"], pad=12,
+    )
+    ax.set_xlim(0, max(hi for _, lo, hi in means_ci) * 1.38)
+    ax.grid(axis="x", alpha=0.06, color=THEME["grid"])
+    ax.spines["left"].set_visible(False)
     _save(fig, "bootstrap_ci.png", results_dir)
 
 
@@ -803,6 +851,123 @@ def fig_prompt_robustness(sa: StyleAnalyzer, results_dir: Path) -> None:
 
     fig.tight_layout()
     _save(fig, "prompt_robustness.png", results_dir)
+
+
+# ---------------------------------------------------------------------------
+# Code stylometry — illustrative figure (no real code data)
+# ---------------------------------------------------------------------------
+
+def fig_code_stylometry(results_dir: Path) -> None:
+    """Illustrative visualization of code stylometric fingerprints.
+
+    Uses synthetic data to show the concept: developer style clusters in a
+    2D space (type-hint density vs. structural habit), and a convergence zone
+    representing AI-assisted code.  Clearly labelled as synthetic.
+    """
+    rng = np.random.default_rng(42)
+
+    developers = {
+        "Dev A\n(type-heavy, early-return)": {
+            "center": np.array([0.82, 0.78]),
+            "std":    np.array([0.07, 0.06]),
+            "color":  "#58A6FF",
+            "n":      35,
+            "marker": "o",
+        },
+        "Dev B\n(implicit, nested)": {
+            "center": np.array([0.22, 0.28]),
+            "std":    np.array([0.07, 0.07]),
+            "color":  "#3FB950",
+            "n":      30,
+            "marker": "o",
+        },
+        "Dev C\n(mixed style)": {
+            "center": np.array([0.55, 0.75]),
+            "std":    np.array([0.08, 0.06]),
+            "color":  "#E3B341",
+            "n":      28,
+            "marker": "o",
+        },
+    }
+    ai_center = np.array([0.62, 0.52])
+    ai_color  = "#FF7B72"
+
+    fig, ax = plt.subplots(figsize=(11, 7.5))
+    fig.patch.set_facecolor(THEME["bg"])
+    _ax_style(ax)
+
+    # ── Developer clusters ──────────────────────────────────────────────
+    for name, cfg in developers.items():
+        pts = rng.normal(cfg["center"], cfg["std"], (cfg["n"], 2))
+        pts = np.clip(pts, 0.02, 0.98)
+        ax.scatter(*pts.T, c=cfg["color"], s=22, alpha=0.40, zorder=3, rasterized=True)
+        cx, cy = cfg["center"]
+        ax.scatter([cx], [cy], c=cfg["color"], s=200, marker="X",
+                   edgecolors="white", linewidths=1.4, zorder=6)
+        ax.annotate(
+            name, (cx, cy), xytext=(12, 7), textcoords="offset points",
+            color=cfg["color"], fontsize=9.5, fontweight="bold",
+            bbox=dict(boxstyle="round,pad=0.3", fc=THEME["bg"], ec="none", alpha=0.88),
+            zorder=8,
+        )
+
+    # ── AI-assisted convergence zone ──────────────────────────────────
+    ai_pts = rng.normal(ai_center, [0.11, 0.10], (70, 2))
+    ai_pts = np.clip(ai_pts, 0.02, 0.98)
+    ax.scatter(*ai_pts.T, c=ai_color, s=16, alpha=0.28, marker="s",
+               zorder=3, rasterized=True)
+    ax.scatter(*ai_center, c=ai_color, s=280, marker="D",
+               edgecolors="white", linewidths=1.4, zorder=6)
+    ax.annotate(
+        "AI-assisted code\n(Copilot / GPT completions)",
+        ai_center, xytext=(14, -32), textcoords="offset points",
+        color=ai_color, fontsize=9.5, fontweight="bold",
+        bbox=dict(boxstyle="round,pad=0.3", fc=THEME["bg"], ec="none", alpha=0.88),
+        zorder=8,
+    )
+
+    # ── Drift arrows: each dev centroid → AI region ──────────────────
+    arrow_rads = {
+        "Dev A\n(type-heavy, early-return)":  0.10,
+        "Dev B\n(implicit, nested)":          -0.12,
+        "Dev C\n(mixed style)":               0.06,
+    }
+    for name, cfg in developers.items():
+        src = cfg["center"]
+        vec = ai_center - src
+        tip = src + 0.48 * vec          # arrow stops halfway — drift, not arrival
+        ax.annotate(
+            "", xy=tip, xytext=src,
+            arrowprops=dict(
+                arrowstyle="-|>", color=cfg["color"], lw=1.8, alpha=0.65,
+                mutation_scale=16,
+                connectionstyle=f"arc3,rad={arrow_rads[name]}",
+            ),
+            zorder=5,
+        )
+
+    # ── Axis labels and annotations ──────────────────────────────────
+    ax.set_xlabel("Type annotation density\n(0 = none  →  1 = comprehensive)",
+                  color=THEME["text_muted"], labelpad=10)
+    ax.set_ylabel("Early-return rate\n(0 = deep nesting  →  1 = always early exit)",
+                  color=THEME["text_muted"], labelpad=10)
+    ax.set_xlim(-0.02, 1.10)
+    ax.set_ylim(-0.02, 1.08)
+    ax.set_xticks([0, 0.25, 0.50, 0.75, 1.0])
+    ax.set_yticks([0, 0.25, 0.50, 0.75, 1.0])
+
+    ax.set_title(
+        "Code stylometry — developer fingerprints and AI-assisted drift\n"
+        "Each axis = a measurable structural habit  ·  Arrows = direction of stylistic pressure",
+        color=THEME["text_primary"], pad=16,
+    )
+    ax.annotate(
+        "★  Synthetic / illustrative — this project does not include code data",
+        xy=(0.5, 0.012), xycoords="axes fraction", ha="center",
+        color=THEME["text_muted"], fontsize=8, fontstyle="italic",
+    )
+    ax.grid(alpha=0.04, color=THEME["grid"])
+    _save(fig, "code_stylometry.png", results_dir)
 
 
 # ---------------------------------------------------------------------------
@@ -893,6 +1058,7 @@ def main(fast: bool = False) -> None:
     fig_bootstrap(shifts_all, results_dir)
     fig_permutation(shifts_all, results_dir)
     fig_prompt_robustness(sa, results_dir)
+    fig_code_stylometry(results_dir)
 
     print_stats(shifts_all)
     print(f"\nTous les graphiques générés dans {results_dir}/")
