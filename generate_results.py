@@ -1096,7 +1096,7 @@ def fig_hero(sa: StyleAnalyzer, shifts_all: dict, results_dir: Path) -> None:
               "A stylometric experiment",
               color="#FF7B72", fontsize=15, fontweight="semibold", va="top")
     ax_t.text(0.02, 0.26,
-              "4 models  ·  80 French passages  ·  57 function words\n"
+              "4 models  ·  80 French passages  ·  41 function words\n"
               "shift = cosine distance, original → rewrite",
               color=THEME["text_muted"], fontsize=10.5, va="top",
               linespacing=1.45, fontstyle="italic")
@@ -1106,53 +1106,87 @@ def fig_hero(sa: StyleAnalyzer, shifts_all: dict, results_dir: Path) -> None:
     ax.set_facecolor(THEME["bg"])
     _ax_style(ax)
 
-    # Human cloud + ellipse
-    ax.scatter(*coords[human_mask].T, c=THEME["text_muted"], s=8, alpha=0.18,
+    # ── Centroid-based zoom — ignore raw scatter outliers ─────────────
+    all_cx = [human_centroid[0]] + [llm_centroids[l][0] for l in llm_labels]
+    all_cy = [human_centroid[1]] + [llm_centroids[l][1] for l in llm_labels]
+    span_x = max(all_cx) - min(all_cx)
+    span_y = max(all_cy) - min(all_cy)
+    pad    = max(span_x, span_y) * 0.60
+    xlim   = (min(all_cx) - pad * 0.55, max(all_cx) + pad * 1.0)
+    ylim   = (min(all_cy) - pad * 1.1,  max(all_cy) + pad * 0.90)
+    ax.set_xlim(xlim); ax.set_ylim(ylim)
+
+    # Human cloud — only in-view points (clip scatter to zoomed window)
+    h_pts = coords[human_mask]
+    in_view = (
+        (h_pts[:, 0] >= xlim[0]) & (h_pts[:, 0] <= xlim[1]) &
+        (h_pts[:, 1] >= ylim[0]) & (h_pts[:, 1] <= ylim[1])
+    )
+    ax.scatter(*h_pts[in_view].T, c=THEME["text_muted"], s=18, alpha=0.20,
                zorder=2, rasterized=True)
-    cov = np.cov(coords[human_mask].T)
+
+    # 1-σ ellipse around human centroid
+    cov = np.cov(h_pts.T)
     vals, vecs = np.linalg.eigh(cov)
     order = vals.argsort()[::-1]; vals, vecs = vals[order], vecs[:, order]
     angle = np.degrees(np.arctan2(*vecs[:, 0][::-1]))
     w, h_ = 2 * np.sqrt(np.maximum(vals, 0))
     ax.add_patch(_Ell(xy=human_centroid, width=w, height=h_, angle=angle,
-                      fc=THEME["text_muted"], alpha=0.05, ec=THEME["text_muted"],
-                      lw=1.0, ls="--", zorder=2))
+                      fc=THEME["text_muted"], alpha=0.07, ec=THEME["text_muted"],
+                      lw=1.2, ls="--", zorder=2))
 
-    # Human star
-    ax.scatter(*human_centroid, c="white", s=380, marker="*",
-               edgecolors=THEME["text_muted"], linewidths=1.0, zorder=8)
+    # Human star — label goes below to avoid overlap with nearby centroids
+    ax.scatter(*human_centroid, c="white", s=600, marker="*",
+               edgecolors=THEME["text_muted"], linewidths=1.2, zorder=8)
+    ax.annotate("★ Baseline humain",
+                xy=human_centroid, xytext=(0, -32), textcoords="offset points",
+                color=THEME["text_muted"], fontsize=9, fontstyle="italic",
+                ha="center", va="top",
+                bbox=dict(boxstyle="round,pad=0.22", fc=THEME["bg"], ec="none", alpha=0.85),
+                zorder=9)
 
-    arrow_rads   = {"GPT-4": 0.18, "Claude 3": -0.15, "Mistral 7B": 0.28, "Gemini Pro": -0.22}
+    arrow_rads = {"GPT-4": 0.25, "Claude 3": -0.30, "Mistral 7B": 0.35, "Gemini Pro": -0.20}
     label_offsets = {
-        "GPT-4":      ( 10, -22),
-        "Claude 3":   (-10,  18),
-        "Mistral 7B": ( 14,  16),
-        "Gemini Pro": (-12, -22),
+        "GPT-4":      (-72,  10),
+        "Claude 3":   ( 60,  -8),
+        "Mistral 7B": ( 16,  22),
+        "Gemini Pro": (-16,  22),
+    }
+    label_ha = {
+        "GPT-4":      "right",
+        "Claude 3":   "left",
+        "Mistral 7B": "left",
+        "Gemini Pro": "right",
     }
     for label in llm_labels:
-        color  = PALETTE.get(label, "#AAAAAA")
-        cx, cy = llm_centroids[label]
-        rad    = arrow_rads.get(label, 0.20)
+        color      = PALETTE.get(label, "#AAAAAA")
+        cx, cy     = llm_centroids[label]
+        rad        = arrow_rads.get(label, 0.20)
         mean_shift = float(np.mean(shifts_all[label]))
+
         ax.annotate("", xy=(cx, cy), xytext=human_centroid,
-                    arrowprops=dict(arrowstyle="-|>", color=color, lw=2.4,
+                    arrowprops=dict(arrowstyle="-|>", color=color, lw=3.0,
                                     connectionstyle=f"arc3,rad={rad}",
-                                    mutation_scale=18),
+                                    mutation_scale=22),
                     zorder=7)
-        ax.scatter([cx], [cy], c=color, s=220, marker="X",
-                   edgecolors="white", linewidths=1.2, zorder=10)
-        dx, dy = label_offsets.get(label, (12, 6))
+        ax.scatter([cx], [cy], c=color, s=320, marker="X",
+                   edgecolors="white", linewidths=1.6, zorder=10)
+        dx, dy = label_offsets.get(label, (14, 8))
+        ha = label_ha.get(label, "left")
         ax.annotate(f"{label}\nΔ = {mean_shift:.3f}", (cx, cy),
-                    color=color, fontsize=8.5, fontweight="bold",
+                    color=color, fontsize=10, fontweight="bold", ha=ha,
                     xytext=(dx, dy), textcoords="offset points",
-                    bbox=dict(boxstyle="round,pad=0.28", fc=THEME["bg"],
-                              ec="none", alpha=0.88),
+                    bbox=dict(boxstyle="round,pad=0.32", fc=THEME["bg"],
+                              ec="none", alpha=0.92),
                     zorder=11)
 
     ax.set_xticks([]); ax.set_yticks([])
     for sp in ax.spines.values():
         sp.set_visible(False)
-    ax.grid(alpha=0.03, color=THEME["grid"])
+    ax.grid(alpha=0.02, color=THEME["grid"])
+    ax.text(0.02, 0.02, "PCA · function-word space",
+            transform=ax.transAxes, color=THEME["text_muted"],
+            fontsize=7.5, fontstyle="italic", va="bottom")
 
     _save(fig, "hero.png", results_dir)
 
