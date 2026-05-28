@@ -4,8 +4,6 @@ url: "https://riadmaouchi.github.io"
 baseurl: "/llm-style-fingerprints"
 
 theme: minima
-minima:
-  skin: dark
 
 plugins:
   - jekyll-seo-tag

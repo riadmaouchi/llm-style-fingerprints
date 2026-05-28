@@ -1,25 +1,38 @@
 ---
 ---
 
-@import "minima/skins/dark";
-@import "minima/initialize";
+// Override minima 2.5.1 variables BEFORE import
+$background-color:   #0D1117;
+$brand-color:        #58A6FF;
+$text-color:         #E6EDF3;
+$grey-color:         #8B949E;
+$grey-color-light:   #21262D;
+$grey-color-dark:    #30363D;
+
+@import "minima";
+
+// ── Header ──────────────────────────────────────────────
+.site-header {
+  background-color: #161B22;
+  border-top: 4px solid $brand-color;
+  border-bottom: 1px solid $grey-color-dark;
+}
+.site-title, .site-title:visited { color: $text-color; }
+.site-nav .page-link { color: $grey-color; }
 
 // ── Layout ──────────────────────────────────────────────
 .wrapper { max-width: 780px; }
 
-// ── Hero image ──────────────────────────────────────────
-.post-content img:first-of-type {
-  width: 100%;
-  border-radius: 6px;
-  margin-bottom: 2rem;
-}
+// ── Post header ─────────────────────────────────────────
+.post-header { border-bottom: 1px solid $grey-color-dark; padding-bottom: 1rem; margin-bottom: 1.5rem; }
+.post-title  { font-size: 2rem; line-height: 1.2; }
 
-// ── All figures ─────────────────────────────────────────
+// ── Images ──────────────────────────────────────────────
 .post-content img {
   max-width: 100%;
-  border-radius: 4px;
+  border-radius: 6px;
   display: block;
-  margin: 1.6rem auto;
+  margin: 1.8rem auto;
 }
 
 // ── Tables ──────────────────────────────────────────────
@@ -31,31 +44,33 @@
 }
 .post-content th,
 .post-content td {
-  border: 1px solid #30363d;
-  padding: 0.5rem 0.75rem;
+  border: 1px solid $grey-color-dark;
+  padding: 0.5rem 0.8rem;
   text-align: left;
 }
-.post-content th { background: #161b22; font-weight: 600; }
-.post-content tr:nth-child(even) td { background: #0d1117; }
+.post-content th { background-color: #161B22; font-weight: 600; }
+.post-content tr:nth-child(even) td { background-color: #0d1117; }
 
-// ── Code blocks ─────────────────────────────────────────
+// ── Code ────────────────────────────────────────────────
 .post-content pre {
   border-radius: 6px;
-  font-size: 0.85rem;
+  font-size: 0.84rem;
   overflow-x: auto;
 }
 
-// ── Blockquotes ─────────────────────────────────────────
+// ── Blockquote ──────────────────────────────────────────
 .post-content blockquote {
-  border-left: 3px solid #58a6ff;
-  padding-left: 1rem;
-  color: #8b949e;
+  border-left: 3px solid $brand-color;
+  color: $grey-color;
   font-style: italic;
 }
 
 // ── HR ──────────────────────────────────────────────────
 .post-content hr {
   border: none;
-  border-top: 1px solid #21262d;
+  border-top: 1px solid $grey-color-dark;
   margin: 2.5rem 0;
 }
+
+// ── Footer ──────────────────────────────────────────────
+.site-footer { border-top: 1px solid $grey-color-dark; }
