@@ -17,6 +17,10 @@ detectable across 80 French literary texts with two distinct rewriting prompts.
 
 > *"LLMs don't erase literary style. They replace it with their own."*
 
+![How LLMs transform writing style — hero](results/hero.png)
+
+![Mean stylistic shift per model — summary card](results/summary_card.png)
+
 | ![Drift trajectories (PCA)](results/drift_trajectories.png) | ![LDA stylistic fingerprints](results/pca_clusters.png) |
 |:---:|:---:|
 | *Drift trajectoires — chaque LLM déplace le texte dans des directions distinctes* | *Fingerprints stylistiques — LDA sur vecteurs de shift* |
@@ -58,13 +62,14 @@ detectable across 80 French literary texts with two distinct rewriting prompts.
 
 **Résultat principal :** Gemini introduit le shift stylistique le plus fort et se distingue significativement des trois autres modèles (p < 0.01, Bonferroni). GPT-4 et Mistral restent statistiquement indistinguables (p = 1.0). Le classement entre modèles est stable sur deux prompts distincts, mais la corrélation texte-par-texte entre P1 et P2 est faible ou nulle pour tous les modèles — les IC bootstrap incluent zéro pour 3 modèles sur 4.
 
-| Méthode | Accuracy | Baseline |
-|---------|:--------:|:--------:|
-| Shift + stats de surface (combiné) | **43.8 %** | 25 % |
-| Stats de surface seules | **41.9 %** | 25 % |
-| Shift vectors (mots-outils) | **40.6 %** | 25 % |
-| Char n-grams TF-IDF (3–6) | **33.1 %** | 25 % |
-| Centroïde LOO | **30.9 %** | 25 % |
+| Méthode | Dim | Accuracy | Baseline |
+|---------|:---:|:--------:|:--------:|
+| **Stats de surface ext. + shift scalaire ★** | 16 | **57.5 %** | 25 % |
+| Stats de surface étendue (15 feat) | 15 | **56.2 %** | 25 % |
+| Shift + stats de surface basique | 46 | 43.8 % | 25 % |
+| Shift vectors (mots-outils) | 41 | 40.6 % | 25 % |
+| Char n-grams TF-IDF (3–6) | 5000 | 33.1 % | 25 % |
+| Baseline aléatoire | — | 25.0 % | — |
 
 ---
 
@@ -195,7 +200,7 @@ GPT-4 et Mistral sont **indistinguables** (p = 1.0) — même shift moyen (~0.13
 
 **Profil stylistique par modèle (écart vs baseline humain) :**
 
-![Heatmap profils](results/radar_profiles.png)
+![Heatmap profils](results/function_word_heatmap.png)
 
 | Modèle | Signature caractéristique |
 |--------|---------------------------|
@@ -225,19 +230,21 @@ Classifieur par centroïde, Leave-One-Out, 4 classes :
 
 ![Matrice de confusion](results/confusion_matrix.png)
 
-Six méthodes comparées en Leave-One-Out sur 320 exemples (80 textes × 4 modèles) :
+Huit configurations comparées en Leave-One-Out sur 320 exemples (80 textes × 4 modèles), régression logistique :
 
-| Méthode | Accuracy |
-|---------|:--------:|
-| Shift + stats de surface (combiné) | **43.8 %** |
-| Stats de surface seules | **41.9 %** |
-| Shift vectors (mots-outils) | **40.6 %** |
-| Fréquences brutes réécriture | 39.4 % |
-| Char n-grams TF-IDF (3–6) | 33.1 % |
-| Vecteur texte original (sanity) | 0.0 % |
-| Baseline aléatoire | 25.0 % |
+| Méthode | Dim | Accuracy |
+|---------|:---:|:--------:|
+| **Stats de surface ext. + shift scalaire ★** | 16 | **57.5 %** |
+| Stats de surface étendue (15 feat) | 15 | 56.2 % |
+| Shift + stats surface basique | 46 | 43.8 % |
+| Stats de surface basique (5 feat) | 5 | 41.9 % |
+| Shift vectors (mots-outils) | 41 | 40.6 % |
+| Fréquences brutes réécriture | 41 | 39.4 % |
+| Char n-grams TF-IDF (3–6) | 5000 | 33.1 % |
+| Vecteur texte original (sanity) | 41 | 0.0 % |
+| Baseline aléatoire | — | 25.0 % |
 
-Trois observations : (1) toutes les méthodes plafonnent entre 33–44 % — le signal est présent mais faible ; (2) la soustraction shift n'apporte que +1.3 pp sur les fréquences brutes ; (3) les stats de surface (longueur de phrases, TTR, densité de ponctuation) sont aussi compétitives que les mots-outils, ce qui suggère que les LLMs laissent des traces à plusieurs niveaux simultanément. La confusion principale reste **GPT-4 ↔ Mistral** dans toutes les conditions.
+Quatre observations : (1) les **statistiques de surface** (rythme des phrases, TTR, ponctuation, longueur des mots) dominent les mots-outils — 56,2 % seules vs 40,6 % pour shift vectors ; (2) le **shift cosinus scalaire** (+1,3 pp) encode l'intensité de transformation, absent des features de surface ; (3) les n-grams de caractères ne généralisent pas (trop de features, overfitting LOO) ; (4) la confusion principale reste **GPT-4 ↔ Mistral** dans toutes les conditions (p = 1.0 au test de permutation Bonferroni).
 
 ![Mots-outils discriminants](results/feature_importance.png)
 
@@ -290,7 +297,7 @@ GPT-4 et Mistral sont **indistinguables** dans ce protocole (p = 1.0).
 |-------------|--------|
 | "GPT-4 et Mistral ont des styles différents" | ✗ non supporté (p=1.0 après correction) |
 | "Ces résultats se généralisent à l'anglais" | ✗ non testé |
-| "On peut identifier un LLM en pratique" | ⚠️ accuracy 40.6% avec 4 classes → insuffisant |
+| "On peut identifier un LLM en pratique" | ⚠️ accuracy 57.5% avec 4 classes — au-dessus du hasard, insuffisant pour l'attribution individuelle |
 | "Le signal est robuste sur des textes très courts" | ⚠️ dégradation observée sous 80 mots |
 | "La signature est stable texte-par-texte entre prompts" | ✗ corrélations faibles ou nulles pour tous les modèles (IC bootstrap incluent 0 pour 3/4) — seul le classement agrégé est stable |
 

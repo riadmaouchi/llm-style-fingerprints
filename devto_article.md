@@ -2,6 +2,8 @@
 
 *Measuring stylistic drift in LLM rewrites — not detecting AI, but fingerprinting it*
 
+![How LLMs transform writing style — drift in PCA function-word space, 4 models, 80 French passages](https://raw.githubusercontent.com/riadmaouchi/llm-style-fingerprints/main/results/hero.png)
+
 ---
 
 Four models. One Zola paragraph. Eighty texts.
@@ -91,6 +93,8 @@ The ranking is consistent. But the raw numbers understate the structure in the d
 
 ![Mean stylistic shift per model with 95% CI — horizontal bars sorted by displacement. Gemini stands apart; GPT-4 and Mistral overlap entirely](https://raw.githubusercontent.com/riadmaouchi/llm-style-fingerprints/main/results/bootstrap_ci.png)
 
+![At-a-glance — mean cosine shift and bootstrap 95% CI for each model](https://raw.githubusercontent.com/riadmaouchi/llm-style-fingerprints/main/results/summary_card.png)
+
 The CIs do not overlap between Gemini and the other three. Between GPT-4 and Mistral, the CIs nearly coincide. This already suggests the story is not "four distinct fingerprints" — it is something more constrained.
 
 ---
@@ -145,7 +149,7 @@ The aggregate shifts conceal the directional structure. Looking at which specifi
 
 The heatmap below shows the deviation from the human baseline per function word, in percent. Red = overuse relative to human baseline, blue = underuse. Reading across a row gives the model's stylistic pressure; reading down a column shows which models agree or diverge on a specific marker.
 
-![Stylistic profiles — % deviation from human baseline per function word. Gemini's row shows the strongest positive deviations](https://raw.githubusercontent.com/riadmaouchi/llm-style-fingerprints/main/results/radar_profiles.png)
+![Stylistic profiles — % deviation from human baseline per function word. Gemini's row shows the strongest positive deviations](https://raw.githubusercontent.com/riadmaouchi/llm-style-fingerprints/main/results/function_word_heatmap.png)
 
 ![SVM feature importance — most discriminative function words between models](https://raw.githubusercontent.com/riadmaouchi/llm-style-fingerprints/main/results/feature_importance.png)
 
@@ -157,27 +161,29 @@ These profiles are qualitatively consistent with what an attentive reader would 
 
 Given that there are measurable differences, can a classifier reliably attribute a rewrite to its model?
 
-Six feature representations tested with leave-one-out cross-validation on 320 examples (80 texts × 4 models), 4-class problem, random baseline 25%:
+Eight feature configurations tested with leave-one-out cross-validation (LOO) on 320 examples (80 texts × 4 models), 4-class logistic regression, random baseline 25%:
 
-| Method | Accuracy |
-|--------|:--------:|
-| Shift + surface stats (combined) | **43.8%** |
-| Surface stats alone | **41.9%** |
-| Shift vectors (function words) | **40.6%** |
-| Raw rewrite FW vectors | 39.4% |
-| Char n-grams TF-IDF (3–6) | 33.1% |
-| Original text vector (sanity) | 0.0% |
-| Random baseline | 25.0% |
+| Method | Dim | Accuracy |
+|--------|:---:|:--------:|
+| **Surface stats extended + cosine shift ★** | 16 | **57.5%** |
+| Surface stats extended (15 features) | 15 | 56.2% |
+| Shift vectors (function words) | 41 | 40.6% |
+| Surface stats basic (5 features) | 5 | 41.9% |
+| Shift + surface basic | 46 | 43.8% |
+| Raw rewrite FW vectors | 41 | 39.4% |
+| Char n-grams TF-IDF (3–6) | 5000 | 33.1% |
+| Original text vector (sanity) | 41 | 0.0% |
+| Random baseline | — | 25.0% |
 
-Three findings worth examining separately:
+Four findings worth examining separately:
 
-**The ceiling is low.** All methods plateau between 33–44%. Above chance, clearly — but not approaching the accuracy needed for practical attribution. The signal is real and weak simultaneously.
+**Surface statistics dominate.** Mean sentence length, type-token ratio, punctuation density, comma frequency, em-dash usage, average word length — 15 structural features with zero grammatical sophistication — reach 56.2% alone. This is a striking result: the structural footprint of each model is more discriminative than its function-word signature.
 
-**The shift subtraction adds almost nothing.** Shift vectors (rewrite minus original) outperform raw rewrite frequencies by +1.3 percentage points. This is a sobering result for the methodology: most of the stylistic fingerprint is already visible in the raw rewrite, without subtracting the original. The delta captures something, but not much that the absolute vector does not.
+**The scalar cosine shift adds +1.3 points.** A single number — the distance between the original and the rewrite in function-word space — lifts the combined accuracy to 57.5%. It encodes the *intensity* of the stylistic transformation, a signal absent from surface features.
 
-**Surface statistics are competitive.** Mean sentence length, type-token ratio, punctuation density — features with zero linguistic sophistication — score 41.9%, barely below the best method. LLMs apparently leave traces simultaneously at the grammatical level (function words) and the structural level (sentence length distributions). The two signals are partially redundant.
+**The shift subtraction over function words adds marginal value.** Shift vectors (rewrite minus original in 41-dim function-word space) score 40.6% vs 39.4% for raw rewrite frequencies. The delta helps slightly, but the scalar summary does most of the work.
 
-The dominant confusion in the matrix: GPT-4 ↔ Mistral, consistently, across all methods.
+**The dominant confusion is structural: GPT-4 ↔ Mistral.** This pair confuses the classifier across all methods, consistent with the permutation test result (p = 1.0 after Bonferroni correction). They produce structurally similar texts in this corpus.
 
 ![Confusion matrix — LOO classification, 4 classes. The GPT-4 / Mistral off-diagonal entries are the most frequent errors](https://raw.githubusercontent.com/riadmaouchi/llm-style-fingerprints/main/results/confusion_matrix.png)
 
@@ -294,7 +300,7 @@ The finding that survives the caveats most clearly: **LLMs appear to transform l
 
 The original text's function-word distribution — its particular balance of *et*, *que*, *dans*, *pourtant*, *néanmoins* — does not survive the rewrite. But it is not simply deleted. It is displaced: moved to a region of style-space characteristic of the model doing the rewriting. Different models move it to different regions. The regions partially overlap. The displacement is consistent at the aggregate level across 80 texts.
 
-The fingerprints are weak. At 44% accuracy over 4 classes, they do not support reliable individual attribution. They are, as the analysis shows, better understood as **statistical attractors** — tendencies in the direction of drift — than as unique identifiers.
+The fingerprints are real but limited. At 57.5% accuracy over 4 classes — more than double the 25% random baseline — they do not support reliable individual attribution. They are, as the analysis shows, better understood as **statistical attractors** — tendencies in the direction of drift — than as unique identifiers. The signal lives in surface structure (sentence rhythm, vocabulary richness, punctuation habits), not only in grammatical function words.
 
 What makes this interesting is not the classification number. It is that the drift exists at all, that it is directional, and that it is consistent enough to survive across two distinct prompts at the aggregate level. Each model appears to have preferred regions of style-space it moves text toward, independently of what the original text was.
 

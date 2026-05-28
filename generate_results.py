@@ -44,7 +44,6 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.manifold import TSNE
 from sklearn.metrics import confusion_matrix
 from sklearn.model_selection import LeaveOneOut
-from sklearn.neighbors import NearestCentroid
 from sklearn.preprocessing import StandardScaler
 from sklearn.svm import SVC
 from scipy.cluster.hierarchy import dendrogram, linkage
@@ -60,7 +59,7 @@ sys.path.insert(0, str(ROOT))
 from src.stylometry import StyleAnalyzer, PALETTE
 from src.stats import bootstrap_ci, permutation_test, pairwise_tests, intra_variance
 from src.data import load_corpus, load_originals, load_llm_corpora, load_single_model_aligned
-from src.features import extra_features, extra_feature_names
+from src.features import extra_features, extra_feature_names, surface_extended, SURFACE_EXTENDED_NAMES
 
 # ---------------------------------------------------------------------------
 # Design system — single source of truth for all visual constants
@@ -74,23 +73,63 @@ THEME = {
     "text_muted":   "#8B949E",   # labels axes
     "spine":        "#30363D",   # bordures axes
     "tick":         "#484F58",   # tirets axes
-    "dpi":          150,
-    "title_size":   13,
+    "credit":       "#5C636B",   # discrete footer credit
+    "dpi":          200,         # retina-sharp on HiDPI screens (~2× legacy 150)
+    "title_size":   14,
+    "subtitle_size": 11,
     "label_size":   10,
     "tick_size":    9,
-    "annot_size":   9,
+    "annot_size":   9.5,
 }
 BG = THEME["bg"]  # alias backward-compat
 plt.style.use("dark_background")
+
+# Global typography — single rcParams setup so every figure inherits the
+# same hierarchy (title bold, label regular muted, monospaced numbers).
+plt.rcParams.update({
+    "font.family":       ["Inter", "IBM Plex Sans", "Helvetica Neue", "Helvetica", "Arial", "sans-serif"],
+    "font.size":         THEME["tick_size"],
+    "axes.titlesize":    THEME["title_size"],
+    "axes.titleweight":  "semibold",
+    "axes.titlepad":     14,
+    "axes.labelsize":    THEME["label_size"],
+    "axes.labelweight":  "regular",
+    "axes.labelcolor":   THEME["text_muted"],
+    "xtick.labelsize":   THEME["tick_size"],
+    "ytick.labelsize":   THEME["tick_size"],
+    "xtick.color":       THEME["tick"],
+    "ytick.color":       THEME["tick"],
+    "axes.edgecolor":    THEME["spine"],
+    "axes.linewidth":    0.8,
+    "figure.facecolor":  THEME["bg"],
+    "savefig.facecolor": THEME["bg"],
+    "savefig.dpi":       THEME["dpi"],
+    "legend.frameon":    True,
+    "legend.facecolor":  THEME["surface"],
+    "legend.edgecolor":  THEME["spine"],
+    "legend.labelcolor": THEME["text_primary"],
+    "legend.fontsize":   THEME["annot_size"],
+})
 
 
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
 
+CREDIT = "llm-style-fingerprints  ·  n=80 texts  ·  shift = cosine distance in 57-D function-word space"
+
+
 def _save(fig: plt.Figure, name: str, results_dir: Path) -> None:
+    # Discreet footer credit so embedded images carry context off-site.
+    fig.text(
+        0.5, 0.012, CREDIT,
+        ha="center", va="bottom",
+        color=THEME["credit"], fontsize=7.5, fontstyle="italic",
+        alpha=0.85,
+    )
     path = results_dir / name
-    fig.savefig(path, dpi=THEME["dpi"], bbox_inches="tight", facecolor=THEME["bg"])
+    fig.savefig(path, dpi=THEME["dpi"], bbox_inches="tight",
+                facecolor=THEME["bg"], pad_inches=0.18)
     plt.close(fig)
     print(f"  ✓ {name}")
 
@@ -297,39 +336,68 @@ def fig_fingerprint(sa: StyleAnalyzer, corpus: dict, results_dir: Path) -> None:
     _save(fig, "fingerprint_comparison.png", results_dir)
 
 
-def fig_confusion(sa: StyleAnalyzer, llm_corpora: dict, results_dir: Path) -> tuple[np.ndarray, float]:
-    model_names = list(llm_corpora.keys())
-    X = np.vstack([sa.fit_transform(texts) for texts in llm_corpora.values()])
-    n_per_class = [len(texts) for texts in llm_corpora.values()]
-    y = np.concatenate([np.full(n, i) for i, n in enumerate(n_per_class)])
+def fig_confusion(sa: StyleAnalyzer, llm_corpora: dict, results_dir: Path) -> tuple[np.ndarray, np.ndarray]:
+    """Confusion matrix using the best LOO classifier: surface (15 feat) + scalar cosine shift.
 
+    Returns (X_fw, y) — raw function-word vectors and labels — for downstream
+    feature importance figures that still operate in function-word space.
+    """
+    model_names   = list(llm_corpora.keys())
+    originals     = load_originals()
+    all_rewrites  = [t for texts in llm_corpora.values() for t in texts]
+    n_per_class   = [len(texts) for texts in llm_corpora.values()]
+    y             = np.concatenate([np.full(n, i) for i, n in enumerate(n_per_class)])
+
+    # Raw FW vectors (returned for downstream use only)
+    X_fw = np.vstack([sa.fit_transform(texts) for texts in llm_corpora.values()])
+
+    # Best feature set: surface extended (15) + scalar cosine shift (1) = 16 features, C=3
+    scalar_shift = np.array([[sa.shift(o, r)] for o, r in zip(originals * len(model_names), all_rewrites)])
+    X_best       = np.hstack([surface_extended(all_rewrites), scalar_shift])
+
+    scaler = StandardScaler()
+    X_sc   = scaler.fit_transform(X_best)
     preds, trues = [], []
-    for tr, te in LeaveOneOut().split(X):
-        clf = NearestCentroid()
-        clf.fit(X[tr], y[tr])
-        preds.append(clf.predict(X[te])[0])
+    for tr, te in LeaveOneOut().split(X_sc):
+        clf = LogisticRegression(C=3.0, max_iter=2000, solver="lbfgs")
+        clf.fit(X_sc[tr], y[tr])
+        preds.append(clf.predict(X_sc[te])[0])
         trues.append(y[te][0])
 
-    acc    = float(np.mean(np.array(preds) == np.array(trues)))
-    cm     = confusion_matrix(trues, preds)
+    acc     = float(np.mean(np.array(preds) == np.array(trues)))
+    cm      = confusion_matrix(trues, preds)
     cm_norm = cm.astype(float) / cm.sum(axis=1, keepdims=True)
 
-    fig, ax = plt.subplots(figsize=(7, 5.5))
-    fig.patch.set_facecolor(BG)
-    ax.set_facecolor(BG)
-    sns.heatmap(cm_norm, annot=True, fmt=".2f", cmap="Blues",
-                xticklabels=model_names, yticklabels=model_names,
-                ax=ax, linewidths=0.5, linecolor="#333333", cbar_kws={"shrink": 0.8})
-    ax.set_xlabel("Prédit", color="#AAAAAA", labelpad=10)
-    ax.set_ylabel("Réel", color="#AAAAAA", labelpad=10)
-    ax.set_title(f"Matrice de confusion — centroïde (LOO)\nAccuracy : {acc:.1%}  |  Baseline : {1/len(model_names):.0%}",
-                 color="white", pad=12)
-    ax.tick_params(colors="#AAAAAA")
+    fig, ax = plt.subplots(figsize=(7.4, 6))
+    fig.patch.set_facecolor(THEME["bg"])
+    ax.set_facecolor(THEME["bg"])
+    chance = 1.0 / len(model_names)
+    sns.heatmap(
+        cm_norm, annot=True, fmt=".2f",
+        cmap="RdBu_r", center=chance, vmin=0.0, vmax=1.0,
+        xticklabels=model_names, yticklabels=model_names,
+        ax=ax, linewidths=0.6, linecolor=THEME["bg"],
+        annot_kws={"fontsize": 10, "fontweight": "semibold"},
+        cbar_kws={"shrink": 0.7, "label": "Predicted-class probability"},
+    )
+    for i in range(len(model_names)):
+        ax.add_patch(mpatches.Rectangle(
+            (i, i), 1, 1, fill=False,
+            edgecolor=THEME["text_primary"], lw=1.6, zorder=5,
+        ))
+    ax.set_xlabel("Predicted", color=THEME["text_muted"], labelpad=10)
+    ax.set_ylabel("Actual",    color=THEME["text_muted"], labelpad=10)
+    ax.set_title(
+        f"Confusion matrix — logistic regression LOO\n"
+        f"Features: surface statistics + cosine shift  ·  Accuracy {acc:.1%}  ·  chance {chance:.0%}",
+        color=THEME["text_primary"], pad=14,
+    )
+    ax.tick_params(colors=THEME["text_muted"])
     plt.setp(ax.get_xticklabels(), rotation=30, ha="right")
     plt.setp(ax.get_yticklabels(), rotation=0)
     _save(fig, "confusion_matrix.png", results_dir)
     print(f"       accuracy={acc:.1%}")
-    return X, y
+    return X_fw, y
 
 
 def fig_feature_importance(
@@ -557,7 +625,13 @@ def fig_radar(sa: StyleAnalyzer, corpus: dict, top_idx: np.ndarray, results_dir:
     plt.setp(ax.get_yticklabels(), rotation=0,
              color=THEME["text_muted"], fontsize=10)
     ax.tick_params(colors=THEME["tick"])
-    _save(fig, "radar_profiles.png", results_dir)
+    # Save under the honest name (it is a heatmap, not a radar) and also under
+    # the legacy name for backward-compat with paper / Zenodo links.
+    _save(fig, "function_word_heatmap.png", results_dir)
+    # legacy alias
+    import shutil
+    shutil.copyfile(results_dir / "function_word_heatmap.png",
+                    results_dir / "radar_profiles.png")
 
 
 def fig_drift_trajectories(
@@ -971,6 +1045,168 @@ def fig_code_stylometry(results_dir: Path) -> None:
 
 
 # ---------------------------------------------------------------------------
+# Hero & summary card — high-impact assets for the dev.to article
+# ---------------------------------------------------------------------------
+
+def fig_hero(sa: StyleAnalyzer, shifts_all: dict, results_dir: Path) -> None:
+    """1920×1080 cover image for the dev.to article.
+
+    PCA-projected drift arrows from human centroid to each model centroid,
+    composed with a large left-side title block.  Designed to read at thumb
+    size on social previews and full-resolution on screen.
+    """
+    from matplotlib.patches import Ellipse as _Ell
+
+    originals   = load_originals()
+    llm_corpora = load_llm_corpora()
+
+    all_vecs, all_lbls = [], []
+    orig_vecs = sa.fit_transform(originals)
+    for v in orig_vecs:
+        all_vecs.append(v); all_lbls.append("Humain")
+    for lbl, rewrites in llm_corpora.items():
+        for v in sa.fit_transform(rewrites):
+            all_vecs.append(v); all_lbls.append(lbl)
+
+    X       = np.array(all_vecs)
+    lbl_arr = np.array(all_lbls)
+    pca     = PCA(n_components=2, random_state=42)
+    coords  = pca.fit_transform(X)
+
+    human_mask     = lbl_arr == "Humain"
+    human_centroid = coords[human_mask].mean(axis=0)
+    llm_labels     = list(llm_corpora.keys())
+    llm_centroids  = {l: coords[lbl_arr == l].mean(axis=0) for l in llm_labels}
+
+    # 1920×1080 at 200 dpi → figsize 9.6 × 5.4
+    fig = plt.figure(figsize=(9.6, 5.4))
+    fig.patch.set_facecolor(THEME["bg"])
+    gs  = fig.add_gridspec(1, 2, width_ratios=[1.0, 1.25], wspace=0.04,
+                           left=0.04, right=0.97, top=0.94, bottom=0.08)
+
+    # ── Left: title block ─────────────────────────────────────────────
+    ax_t = fig.add_subplot(gs[0, 0])
+    ax_t.set_facecolor(THEME["bg"])
+    ax_t.axis("off")
+    ax_t.text(0.02, 0.78,
+              "How LLMs\ntransform\nwriting style",
+              color=THEME["text_primary"], fontsize=34, fontweight="bold",
+              linespacing=1.05, va="top")
+    ax_t.text(0.02, 0.34,
+              "A stylometric experiment",
+              color="#FF7B72", fontsize=15, fontweight="semibold", va="top")
+    ax_t.text(0.02, 0.26,
+              "4 models  ·  80 French passages  ·  57 function words\n"
+              "shift = cosine distance, original → rewrite",
+              color=THEME["text_muted"], fontsize=10.5, va="top",
+              linespacing=1.45, fontstyle="italic")
+
+    # ── Right: drift plot ─────────────────────────────────────────────
+    ax = fig.add_subplot(gs[0, 1])
+    ax.set_facecolor(THEME["bg"])
+    _ax_style(ax)
+
+    # Human cloud + ellipse
+    ax.scatter(*coords[human_mask].T, c=THEME["text_muted"], s=8, alpha=0.18,
+               zorder=2, rasterized=True)
+    cov = np.cov(coords[human_mask].T)
+    vals, vecs = np.linalg.eigh(cov)
+    order = vals.argsort()[::-1]; vals, vecs = vals[order], vecs[:, order]
+    angle = np.degrees(np.arctan2(*vecs[:, 0][::-1]))
+    w, h_ = 2 * np.sqrt(np.maximum(vals, 0))
+    ax.add_patch(_Ell(xy=human_centroid, width=w, height=h_, angle=angle,
+                      fc=THEME["text_muted"], alpha=0.05, ec=THEME["text_muted"],
+                      lw=1.0, ls="--", zorder=2))
+
+    # Human star
+    ax.scatter(*human_centroid, c="white", s=380, marker="*",
+               edgecolors=THEME["text_muted"], linewidths=1.0, zorder=8)
+
+    arrow_rads   = {"GPT-4": 0.18, "Claude 3": -0.15, "Mistral 7B": 0.28, "Gemini Pro": -0.22}
+    label_offsets = {
+        "GPT-4":      ( 10, -22),
+        "Claude 3":   (-10,  18),
+        "Mistral 7B": ( 14,  16),
+        "Gemini Pro": (-12, -22),
+    }
+    for label in llm_labels:
+        color  = PALETTE.get(label, "#AAAAAA")
+        cx, cy = llm_centroids[label]
+        rad    = arrow_rads.get(label, 0.20)
+        mean_shift = float(np.mean(shifts_all[label]))
+        ax.annotate("", xy=(cx, cy), xytext=human_centroid,
+                    arrowprops=dict(arrowstyle="-|>", color=color, lw=2.4,
+                                    connectionstyle=f"arc3,rad={rad}",
+                                    mutation_scale=18),
+                    zorder=7)
+        ax.scatter([cx], [cy], c=color, s=220, marker="X",
+                   edgecolors="white", linewidths=1.2, zorder=10)
+        dx, dy = label_offsets.get(label, (12, 6))
+        ax.annotate(f"{label}\nΔ = {mean_shift:.3f}", (cx, cy),
+                    color=color, fontsize=8.5, fontweight="bold",
+                    xytext=(dx, dy), textcoords="offset points",
+                    bbox=dict(boxstyle="round,pad=0.28", fc=THEME["bg"],
+                              ec="none", alpha=0.88),
+                    zorder=11)
+
+    ax.set_xticks([]); ax.set_yticks([])
+    for sp in ax.spines.values():
+        sp.set_visible(False)
+    ax.grid(alpha=0.03, color=THEME["grid"])
+
+    _save(fig, "hero.png", results_dir)
+
+
+def fig_summary_card(shifts_all: dict, results_dir: Path) -> None:
+    """Compact 4-up stat card — drop-in near the article TL;DR."""
+    model_names = list(shifts_all.keys())
+    # Sort so Gemini (largest shift) reads first left-to-right
+    ordered = sorted(model_names, key=lambda m: -np.mean(shifts_all[m]))
+
+    fig, axes = plt.subplots(1, 4, figsize=(13.2, 3.6))
+    fig.patch.set_facecolor(THEME["bg"])
+    fig.suptitle(
+        "Mean stylistic shift per model  ·  bootstrap 95 % CI, n = 80",
+        color=THEME["text_primary"], fontsize=THEME["title_size"], y=0.99,
+    )
+
+    for ax, name in zip(axes, ordered):
+        color = PALETTE[name]
+        mean  = float(np.mean(shifts_all[name]))
+        lo, hi = bootstrap_ci(shifts_all[name])
+        ax.set_facecolor(THEME["surface"])
+        for sp in ax.spines.values():
+            sp.set_edgecolor(THEME["spine"])
+            sp.set_linewidth(0.6)
+        ax.set_xticks([]); ax.set_yticks([])
+
+        # Color band at top
+        ax.add_patch(mpatches.Rectangle((0, 0.92), 1, 0.08,
+                                         transform=ax.transAxes,
+                                         fc=color, ec="none", zorder=2))
+        # Model name
+        ax.text(0.5, 0.78, name, transform=ax.transAxes,
+                ha="center", va="center", color=THEME["text_primary"],
+                fontsize=13, fontweight="bold")
+        # Big number
+        ax.text(0.5, 0.46, f"{mean:.3f}", transform=ax.transAxes,
+                ha="center", va="center", color=color,
+                fontsize=44, fontweight="bold")
+        # CI
+        ax.text(0.5, 0.18, f"95 % CI  [{lo:.3f}, {hi:.3f}]",
+                transform=ax.transAxes, ha="center", va="center",
+                color=THEME["text_muted"], fontsize=9.5, fontstyle="italic")
+        # Caption
+        ax.text(0.5, 0.06, "cosine shift  ·  original → rewrite",
+                transform=ax.transAxes, ha="center", va="center",
+                color=THEME["credit"], fontsize=8)
+
+    fig.subplots_adjust(left=0.025, right=0.975, top=0.86, bottom=0.10,
+                        wspace=0.10)
+    _save(fig, "summary_card.png", results_dir)
+
+
+# ---------------------------------------------------------------------------
 # Résumé statistique
 # ---------------------------------------------------------------------------
 
@@ -998,13 +1234,6 @@ def print_stats(shifts_all: dict) -> None:
 def main(fast: bool = False) -> None:
     results_dir = ROOT / "results"
     results_dir.mkdir(exist_ok=True)
-
-    plt.rcParams.update({
-        "font.family":    "sans-serif",
-        "font.size":      THEME["tick_size"],
-        "axes.titlesize": THEME["title_size"],
-        "axes.labelsize": THEME["label_size"],
-    })
 
     sa          = StyleAnalyzer()
     corpus      = load_corpus()
@@ -1036,7 +1265,7 @@ def main(fast: bool = False) -> None:
     X, y = fig_confusion(sa, llm_corpora, results_dir)
     top_idx = fig_feature_importance(sa, X, y, results_dir)
 
-    # Baseline LOO accuracy with function words only
+    # LOO baseline with raw function-word vectors (for comparison in logistic figure)
     _scaler_b = StandardScaler()
     _X_b = _scaler_b.fit_transform(X)
     _preds_b = []
@@ -1046,10 +1275,10 @@ def main(fast: bool = False) -> None:
         _preds_b.append(_clf_b.predict(_X_b[_te])[0])
     acc_baseline = float(np.mean(np.array(_preds_b) == np.array(y)))
 
-    # Extended feature matrix: function-word vectors + hedge/burstiness/punctuation
-    all_texts  = [t for texts in llm_corpora.values() for t in texts]
-    X_ext      = np.hstack([X, extra_features(all_texts)])
-    feat_names_ext = list(sa.function_words) + extra_feature_names()
+    # Best feature matrix: surface extended (15 feat) + hedge/burstiness/punct_entropy (3)
+    all_texts      = [t for texts in llm_corpora.values() for t in texts]
+    X_ext          = np.hstack([surface_extended(all_texts), extra_features(all_texts)])
+    feat_names_ext = SURFACE_EXTENDED_NAMES + extra_feature_names()
     fig_logistic(sa, X_ext, y, feat_names_ext, llm_corpora, results_dir, acc_baseline=acc_baseline)
     fig_shift_by_source(shifts_all, results_dir, n_zola=25)
     fig_dendrogram(sa, corpus, results_dir)
@@ -1059,6 +1288,8 @@ def main(fast: bool = False) -> None:
     fig_permutation(shifts_all, results_dir)
     fig_prompt_robustness(sa, results_dir)
     fig_code_stylometry(results_dir)
+    fig_hero(sa, shifts_all, results_dir)
+    fig_summary_card(shifts_all, results_dir)
 
     print_stats(shifts_all)
     print(f"\nTous les graphiques générés dans {results_dir}/")
