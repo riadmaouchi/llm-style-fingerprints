@@ -41,7 +41,7 @@ The hypothesis this project tests: **do LLMs have analogous stylistic habits?** 
 
 A second prompt — simpler register, aimed at a general audience — was applied to the same 80 texts to test whether stylistic signatures hold across different instructions.
 
-**Representation**: each text mapped to a 57-dimensional vector of L2-normalised function-word frequencies. No embeddings. No transformers. No fine-tuning. The 57 words are grammatical particles: *le, la, les, un, une, et, ou, que, qui, dans, sur, il, elle, ne, pas, bien, tout, tandis, pourtant, néanmoins, notamment, afin…*
+**Representation**: each text mapped to a 41-dimensional vector of L2-normalised function-word frequencies. No embeddings. No transformers. No fine-tuning. The 41 words are grammatical particles: *le, la, les, un, une, et, ou, que, qui, dans, sur, il, elle, ne, pas, bien, tout, tandis, pourtant, néanmoins, notamment, afin…*
 
 The list includes some words — *tandis*, *pourtant*, *néanmoins*, *notamment* — that were hypothesised to be characteristic of formal LLM output. This is a methodological choice worth noting: it introduces a prior toward detecting formally-inclined models. The limitations section returns to this.
 
@@ -80,7 +80,7 @@ A careful reader would notice the differences without any measurement. GPT-4 eva
 
 ## Measuring the drift
 
-Each rewrite lands at a measurable distance from its original in the 57-dimensional function-word space. Averaged across 80 texts, with bootstrap confidence intervals (5,000 resamples):
+Each rewrite lands at a measurable distance from its original in the 41-dimensional function-word space. Averaged across 80 texts, with bootstrap confidence intervals (5,000 resamples):
 
 | Model | Mean shift | 95% CI |
 |-------|:----------:|:------:|
@@ -124,7 +124,7 @@ GPT-4 ≈ Mistral 7B  ←————————————→  Gemini Pro
      not distinguishable from either cluster
 ```
 
-The drift trajectories plot makes this spatial: arrows go from the human centroid (★) to each model's centroid in PCA-projected style-space. Arrow length is proportional to mean shift. The visual confirms what the statistics say — Gemini's arrow is approximately 70% longer than GPT-4's; GPT-4 and Mistral point in similar directions at similar distances.
+The drift trajectories plot makes this spatial: arrows go from the human centroid (★) to each model's centroid in PCA-projected style-space. Arrow length is proportional to mean shift. The visual confirms what the statistics say — Gemini's arrow is ~75% longer than GPT-4's; GPT-4 and Mistral point in similar directions at similar distances.
 
 ![Drift trajectories in PCA function-word space — ★ = human centroid, ✕ = LLM centroid. Arrows show direction and magnitude of stylistic displacement. Gemini's arrow is ~75% longer than GPT-4's](https://raw.githubusercontent.com/riadmaouchi/llm-style-fingerprints/main/results/drift_trajectories.png)
 
@@ -134,7 +134,7 @@ The LDA cluster plot and the dendrogram both reinforce the same structure: two e
 
 ![Dendrogram — hierarchical clustering of individual shift vectors. The tree resolves into 2–3 groups, not 4](https://raw.githubusercontent.com/riadmaouchi/llm-style-fingerprints/main/results/dendrogram.png)
 
-This does not mean GPT-4 and Mistral produce identical texts. Their function-word profiles differ in specific markers. What it means is that their *total displacement* from the human baseline — across 57 dimensions, averaged over 80 texts — is within noise at this corpus size.
+This does not mean GPT-4 and Mistral produce identical texts. Their function-word profiles differ in specific markers. What it means is that their *total displacement* from the human baseline — across 41 dimensions, averaged over 80 texts — is within noise at this corpus size.
 
 ---
 
@@ -261,7 +261,7 @@ These results come from a narrow experimental setup. Several constraints matter:
 
 **Single language and register.** 19th-century French literary prose. Signals in this register may not transfer to contemporary French, English, technical writing, or conversational text. Stylometric signals are known to degrade across domain boundaries.
 
-**The function-word list introduces a prior.** The 57-word vocabulary was assembled with LLM stylistic markers in mind. Words like *tandis*, *pourtant*, *néanmoins*, *notamment* were selected partly because they were hypothesised to be characteristic of formal LLM output. This structurally advantages detection of models that skew formal — Gemini's strong showing may partially reflect vocabulary design, not only model behaviour.
+**The function-word list introduces a prior.** The 41-word vocabulary was assembled with LLM stylistic markers in mind. Words like *tandis*, *pourtant*, *néanmoins*, *notamment* were selected partly because they were hypothesised to be characteristic of formal LLM output. This structurally advantages detection of models that skew formal — Gemini's strong showing may partially reflect vocabulary design, not only model behaviour.
 
 **Corpus size limits resolution.** 80 originals × 4 models = 320 examples. The classification results are directionally meaningful but noisy at this scale. The wide bootstrap CIs on the Pearson correlations document their own uncertainty; they should be read as ranges, not point estimates.
 
@@ -304,7 +304,7 @@ The fingerprints are real but limited. At 57.5% accuracy over 4 classes — more
 
 What makes this interesting is not the classification number. It is that the drift exists at all, that it is directional, and that it is consistent enough to survive across two distinct prompts at the aggregate level. Each model appears to have preferred regions of style-space it moves text toward, independently of what the original text was.
 
-Whether this reflects training data composition, instruction-tuning objectives, or something else is an open question. What this experiment does is establish that it is measurable — with a 57-word vocabulary, cosine distance, and 80 public-domain literary texts.
+Whether this reflects training data composition, instruction-tuning objectives, or something else is an open question. What this experiment does is establish that it is measurable — with a 41-word vocabulary, cosine distance, and 80 public-domain literary texts.
 
 ---
 
