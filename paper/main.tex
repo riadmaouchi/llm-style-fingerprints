@@ -31,8 +31,8 @@ Prompt Sensitivity in French Literary Rewrites}
 \begin{abstract}
 We study stylistic drift in LLM-rewritten French literary texts using
 function-word frequency vectors.
-For each original–rewrite pair, we define \emph{shift} as the cosine
-distance between their L2-normalised 57-dimensional style vectors, and
+For each original--rewrite pair, we define \emph{shift} as the cosine
+distance between their L2-normalised 41-dimensional style vectors, and
 compare four commercial models (GPT-4o, Claude Sonnet~4.6,
 Mistral Small, Gemini~2.5~Flash) across 80 texts from Zola and Maupassant
 and two rewriting prompts.
@@ -40,9 +40,12 @@ Three findings emerge.
 First, Gemini produces significantly larger stylistic drift than the other
 models ($\Delta = 0.23$, $p < 0.001$ after Bonferroni correction);
 GPT-4 and Mistral are statistically indistinguishable ($p = 1.0$).
-Second, a linear classifier trained on shift vectors reaches only 40.6\%
-accuracy (baseline 25\%), confirming that the signal is weak at the
-individual-text level.
+Second, surface structure is a stronger discriminative signal than
+function-word shift for model attribution: 15 surface features (sentence
+length, type-token ratio, punctuation density) yield 56.2\% leave-one-out
+(LOO) accuracy on a 4-class problem (baseline 25\%), outperforming
+41-dimensional shift vectors (40.6\%); combining both representations
+reaches 57.5\%, $2.3\times$ the random baseline.
 Third, inter-prompt robustness is weak across all models:
 per-text Pearson correlations between P1 and P2 shift series are
 non-significant for Gemini and Claude ($r < 0.07$, $p > 0.6$) and
@@ -97,10 +100,14 @@ Our main contributions are:
     (bootstrap CIs include zero for three out of four),
     suggesting that stylistic fingerprints are distributional descriptors
     of models rather than stable per-document properties.
-  \item A negative result: a logistic classifier on shift vectors
-    reaches only 40.6\% accuracy on a 4-class problem (baseline 25\%),
-    suggesting that individual-text stylometric fingerprinting of
-    LLMs remains unreliable at current corpus sizes.
+  \item A classification analysis across eight feature configurations
+    showing that surface statistics (sentence rhythm, type-token ratio,
+    punctuation patterns) outperform function-word shift vectors for
+    4-class model attribution (56.2\% vs.\ 40.6\% LOO accuracy);
+    the combined 16-feature representation reaches 57.5\%, $2.3\times$
+    the random baseline.
+    The primary confusion is structural (GPT-4 $\leftrightarrow$ Mistral),
+    consistent with their statistically indistinguishable shift magnitudes.
 \end{enumerate}
 
 % ─────────────────────────────────────────────
@@ -135,8 +142,8 @@ Both factors make their task easier, and their results should not
 be taken as an upper bound for our problem.
 \citet{sadasivan2023} prove that detection accuracy degrades
 fundamentally under paraphrasing, which is consistent with our
-modest 40.6\% accuracy: rewrites are by design closer to the original
-than freely generated text.
+40.6\% accuracy for shift vectors alone: rewrites are by design closer
+to the original than freely generated text.
 \citet{liang2024} demonstrate that surface-level stylometric detectors
 produce false positives for non-native speakers, a bias our
 function-word approach may share when applied to contemporary text.
@@ -192,7 +199,7 @@ are archived in the repository.
 \subsection{Style Vectors and Shift}
 
 Following the function-word tradition \citep{burrows1987,stamatatos2009},
-we represent each text as a 57-dimensional vector of relative
+we represent each text as a 41-dimensional vector of relative
 function-word frequencies (articles, pronouns, prepositions, conjunctions,
 and a curated set of discourse markers associated with formal register:
 \textit{tandis, pourtant, néanmoins, notamment, afin}).
@@ -212,9 +219,29 @@ which captures the \emph{direction} of the stylistic change
 in addition to its magnitude.
 Shift vectors are used as features for the LDA projection and classifier.
 
+\subsection{Surface Features}
+
+Beyond function-word shift, we extract two families of surface features.
+
+\textbf{Surface basic} (5 features): mean sentence length, sentence
+length standard deviation, type-token ratio, punctuation density,
+and word count.
+
+\textbf{Surface extended} (15 features): the five basic features plus
+comma rate, semicolon rate, average word length, ellipsis density,
+em-dash density, French guillemet density, parenthesis rate, letter
+density, long-word ratio ($>$8 characters), and short-sentence ratio
+($<$5 words per sentence).
+
+We also define a \emph{scalar shift} feature: the single cosine
+distance $\delta(t, t')$ between original and rewrite, which encodes
+the intensity of the stylistic transformation independently of its
+direction.
+
 \subsection{Statistical Tests}
 
-Pairwise comparisons use Welch's $t$-test with Bonferroni correction
+Pairwise comparisons use permutation tests (10\,000 permutations,
+two-sided mean-difference statistic) with Bonferroni correction
 across all $\binom{4}{2} = 6$ pairs.
 Bootstrap confidence intervals (95\%) are computed with $n = 5\,000$
 resamples.
@@ -250,7 +277,7 @@ GPT-4o             & 0.132 & [0.113, 0.152] \\
 \label{tab:shifts}
 \end{table}
 
-Pairwise Bonferroni-corrected tests (Table~\ref{tab:pairwise}) show
+Pairwise permutation tests (Table~\ref{tab:pairwise}) show
 that Gemini is significantly different from all other models
 ($p < 0.01$ in all three comparisons), while GPT-4 and Mistral
 are indistinguishable ($p = 1.0$) and Claude occupies an
@@ -271,58 +298,79 @@ Claude    & vs Mistral & $0.262$  & \\
 GPT-4     & vs Mistral & $1.000$  & \\
 \bottomrule
 \end{tabular}
-\caption{Pairwise Welch $t$-tests, Bonferroni-corrected ($k = 6$).}
+\caption{Pairwise permutation tests (10\,000 permutations),
+  Bonferroni-corrected ($k = 6$).}
 \label{tab:pairwise}
 \end{table}
 
-\subsection{LDA Projection and Classification}
+\subsection{Feature Analysis and Classification}
 
 We project shift vectors onto the two leading Linear Discriminant
 Analysis (LDA) components.
-The LDA projection (Figure~\ref{fig:lda}) reveals that GPT-4 and
+The LDA projection reveals that GPT-4 and
 Mistral share an almost identical centroid, while Gemini occupies
 a clearly separated region.
 Claude is intermediate, with substantial overlap with both clusters.
 
 Table~\ref{tab:baselines} reports LOO logistic regression accuracy
-for six feature sets on the 4-class attribution problem ($n = 320$,
-80 texts $\times$ 4 models).
+for eight feature configurations on the 4-class attribution problem
+($n = 320$, 80 texts $\times$ 4 models).
 
 \begin{table}[h]
 \centering
 \small
-\begin{tabular}{lc}
+\begin{tabular}{lcc}
 \toprule
-\textbf{Feature set} & \textbf{Accuracy} \\
+\textbf{Feature set} & \textbf{Dim} & \textbf{Accuracy} \\
 \midrule
-Shift + surface (combined)       & 43.8\% \\
-Surface statistics only          & 41.9\% \\
-Shift vectors (ours)             & 40.6\% \\
-Raw rewrite FW vectors           & 39.4\% \\
-Char $n$-grams TF-IDF (3--6)     & 33.1\% \\
-Original FW vectors (sanity)     &  0.0\% \\
+Surface ext.\ + scalar shift $\star$ & 16   & \textbf{57.5\%} \\
+Surface extended (15 features)        & 15   & 56.2\% \\
+Shift + surface basic (combined)      & 46   & 43.8\% \\
+Surface statistics basic (5 feat.)    &  5   & 41.9\% \\
+Shift vectors (function words)        & 41   & 40.6\% \\
+Raw rewrite FW vectors                & 41   & 39.4\% \\
+Char $n$-grams TF-IDF (3--6)         & 5000 & 33.1\% \\
+Original FW vectors (sanity)          & 41   &  0.0\% \\
 \midrule
-Random baseline                  & 25.0\% \\
+Random baseline                       & ---  & 25.0\% \\
 \bottomrule
 \end{tabular}
-\caption{LOO logistic regression accuracy for 4-class model attribution.
-  FW = function-word. All methods above baseline; none approach the
-  80\%+ reported for human-vs-LLM detection on full-length texts
-  \citep{uchendu2023}.}
+\caption{LOO logistic regression accuracy for 4-class model attribution
+  ($n = 320$, LogReg $C = 3$).
+  FW = function-word; $\star$ = best configuration.
+  Surface statistics outperform function-word shift vectors at every
+  dimensionality tested.}
 \label{tab:baselines}
 \end{table}
 
-Three observations follow.
-First, all methods plateau between 33\% and 44\%,
-confirming that the task is inherently difficult at this corpus size
-and text length.
-Second, shift vectors (40.6\%) outperform raw rewrite function-word
-vectors (39.4\%) by only 1.3 percentage points, a modest validation
-of the shift-subtraction step.
-Third---and unexpectedly---simple surface statistics (sentence length,
-type-token ratio, punctuation density) reach 41.9\%, competitive with
-our function-word approach, suggesting that LLMs also leave
-surface-level traces beyond lexical function-word patterns.
+Four observations follow.
+
+\textbf{Surface structure dominates function-word space.}
+Extended surface features alone (15 measures: mean and standard deviation
+of sentence length, type-token ratio, punctuation density, comma and
+semicolon rates, average word length, ellipsis and em-dash density,
+French guillemet density, parenthesis rate, letter density,
+long-word ratio, short-sentence ratio) reach 56.2\% LOO accuracy,
+a 15.6-point gap over 41-dimensional shift vectors (40.6\%).
+This is the primary finding: the structural footprint of each model
+is more discriminative than its function-word signature.
+
+\textbf{Scalar shift adds complementary signal.}
+Adding a single feature---the cosine distance $\delta(t, t')$ between
+original and rewrite---to the 15 surface features lifts accuracy
+to 57.5\%, $2.3\times$ the 25\% random baseline.
+The scalar shift encodes the intensity of stylistic transformation,
+a signal that surface features do not capture.
+
+\textbf{Shift subtraction provides marginal gain alone.}
+Shift vectors (40.6\%) outperform raw rewrite function-word vectors
+(39.4\%) by only 1.3 percentage points, limiting the methodological
+claim for the subtraction step when used as the sole feature family.
+
+\textbf{High-dimensional methods overfit.}
+Char $n$-grams (5\,000 features, 33.1\%) underperform despite
+high dimensionality, consistent with overfitting in LOO on $n = 320$.
+
 The original-only condition reaches 0\%, confirming that the
 classification signal comes entirely from the rewrite, not the source text.
 The primary confusion in all conditions is between GPT-4 and Mistral,
@@ -331,9 +379,11 @@ consistent with their indistinguishable mean shift ($p = 1.0$).
 \begin{figure}[h]
   \centering
   \includegraphics[width=\columnwidth]{drift_trajectories.png}
-  \caption{Drift trajectories in LDA shift-vector space.
-    Arrows: origin $\to$ model centroid.
-    $\Delta$ = mean cosine shift. Ellipses: 1-$\sigma$ dispersion.}
+  \caption{Drift trajectories in PCA function-word space.
+    Star ($\star$): human centroid.
+    Crosses ($\times$): LLM centroids.
+    Arrows show direction and magnitude of stylistic displacement from
+    the human baseline. $\Delta$ = mean cosine shift.}
   \label{fig:lda}
 \end{figure}
 
@@ -392,19 +442,25 @@ essentially no reliable prediction for its shift under P2
 for any of the four models.
 
 \paragraph{On classification accuracy and feature choice.}
-All six feature sets plateau between 33\% and 44\% (Table~\ref{tab:baselines}).
-We treat this as a collective negative result: the signal is
-present but weak across all tested representations.
+The eight feature configurations reveal a clear hierarchy:
+surface statistics (sentence rhythm, lexical richness, punctuation
+patterns) consistently outperform function-word shift vectors at every
+dimensionality tested.
+Extended surface features alone reach 56.2\%---a 15.6-point gap over
+shift vectors (40.6\%)---with the combined 16-feature set peaking at
+57.5\%.
+This is the primary empirical finding: the structural footprint of each
+LLM (how it segments sentences, how it varies vocabulary, how it uses
+punctuation) is more discriminative than its function-word signature.
 Shift vectors provide only a 1.3 percentage-point improvement over
 raw rewrite vectors, which limits the methodological claim for the
-subtraction step.
-The competitive performance of surface statistics (41.9\%) suggests
-that LLMs leave traces at multiple levels simultaneously,
-and that no single feature family dominates.
-The gap between our best result (43.8\%) and the 80\%+ reported
-by \citet{uchendu2023} is explained by task design, not method quality:
+subtraction step when used as the sole feature family.
+The gap between our best result (57.5\%) and the 80\%+ reported
+by \citet{uchendu2023} is explained by task design:
 full-length generation tasks offer far more signal than short rewrites
-of existing texts.
+of existing texts, and our 4-class problem includes a structurally
+hard pair (GPT-4 $\leftrightarrow$ Mistral, $p = 1.0$) that
+suppresses overall accuracy.
 
 \paragraph{Limitations.}
 $n = 80$ excerpts from two 19th-century French authors limits
@@ -428,18 +484,26 @@ model updates may alter these signatures.
 \section{Conclusion}
 
 We measured stylistic drift in 640 LLM rewrites of French literary texts
-using cosine distance in function-word space.
+using cosine distance in 41-dimensional function-word space.
 Gemini produces the largest drift and is the only model clearly
 distinguishable from all others; GPT-4 and Mistral are statistically
 indistinguishable ($p = 1.0$).
 At the aggregate level, model rankings are stable across two prompts.
-At the individual-text level, however, per-text shift correlations are
-weak or null for all four models (bootstrap CIs all include or nearly
-include zero), and individual-text LLM identification reaches only
-40.6\% accuracy on a 4-class problem.
-We conclude that, at current corpus sizes, LLM stylistic fingerprints
-are reliable comparative descriptors of models but not reliable
-predictors for individual texts.
+A systematic feature comparison across eight configurations reveals
+that surface statistics (sentence rhythm, lexical richness, punctuation
+patterns) outperform function-word shift vectors for model attribution:
+56.2\% vs.\ 40.6\% LOO accuracy on 4 classes; combined features
+reach 57.5\%, $2.3\times$ the 25\% random baseline.
+The dominant attribution error is structural (GPT-4 $\leftrightarrow$
+Mistral), consistent with their indistinguishable shift magnitudes.
+At the individual-text level, per-text shift correlations across prompts
+are weak or null for all four models (bootstrap CIs include or nearly
+include zero).
+We conclude that LLM stylistic fingerprints are reliable comparative
+descriptors at the aggregate level, that surface structure is the
+more discriminative signal for attribution, and that individual-text
+prediction remains limited by corpus size and the structural similarity
+of some model pairs.
 
 % ─────────────────────────────────────────────
 \section*{Acknowledgements}
