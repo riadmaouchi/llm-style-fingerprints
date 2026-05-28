@@ -1,0 +1,61 @@
+---
+---
+
+@import "minima/skins/dark";
+@import "minima/initialize";
+
+// ── Layout ──────────────────────────────────────────────
+.wrapper { max-width: 780px; }
+
+// ── Hero image ──────────────────────────────────────────
+.post-content img:first-of-type {
+  width: 100%;
+  border-radius: 6px;
+  margin-bottom: 2rem;
+}
+
+// ── All figures ─────────────────────────────────────────
+.post-content img {
+  max-width: 100%;
+  border-radius: 4px;
+  display: block;
+  margin: 1.6rem auto;
+}
+
+// ── Tables ──────────────────────────────────────────────
+.post-content table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1.5rem 0;
+  font-size: 0.9rem;
+}
+.post-content th,
+.post-content td {
+  border: 1px solid #30363d;
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+}
+.post-content th { background: #161b22; font-weight: 600; }
+.post-content tr:nth-child(even) td { background: #0d1117; }
+
+// ── Code blocks ─────────────────────────────────────────
+.post-content pre {
+  border-radius: 6px;
+  font-size: 0.85rem;
+  overflow-x: auto;
+}
+
+// ── Blockquotes ─────────────────────────────────────────
+.post-content blockquote {
+  border-left: 3px solid #58a6ff;
+  padding-left: 1rem;
+  color: #8b949e;
+  font-style: italic;
+}
+
+// ── HR ──────────────────────────────────────────────────
+.post-content hr {
+  border: none;
+  border-top: 1px solid #21262d;
+  margin: 2.5rem 0;
+}
