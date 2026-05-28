@@ -672,10 +672,26 @@ def fig_drift_trajectories(
     fig.patch.set_facecolor(THEME["bg"])
     _ax_style(ax)
 
-    # ── Human scatter + 1-σ ellipse ─────────────────────────────────────
-    ax.scatter(*coords[human_mask].T, c=THEME["text_muted"], s=14, alpha=0.18,
+    # ── Centroid-based zoom — ignore raw scatter outliers ────────────────
+    all_cx = [human_centroid[0]] + [llm_centroids[l][0] for l in llm_labels]
+    all_cy = [human_centroid[1]] + [llm_centroids[l][1] for l in llm_labels]
+    span_x = max(all_cx) - min(all_cx)
+    span_y = max(all_cy) - min(all_cy)
+    pad    = max(span_x, span_y) * 0.65
+    xlim   = (min(all_cx) - pad * 0.55, max(all_cx) + pad * 1.05)
+    ylim   = (min(all_cy) - pad * 1.15, max(all_cy) + pad * 0.95)
+    ax.set_xlim(xlim); ax.set_ylim(ylim)
+
+    # ── Human scatter clipped to zoomed window ───────────────────────────
+    h_pts   = coords[human_mask]
+    in_view = (
+        (h_pts[:, 0] >= xlim[0]) & (h_pts[:, 0] <= xlim[1]) &
+        (h_pts[:, 1] >= ylim[0]) & (h_pts[:, 1] <= ylim[1])
+    )
+    ax.scatter(*h_pts[in_view].T, c=THEME["text_muted"], s=18, alpha=0.20,
                zorder=2, rasterized=True)
-    h_pts = coords[human_mask]
+
+    # ── 1-σ ellipse around human centroid ────────────────────────────────
     cov   = np.cov(h_pts.T)
     vals, vecs = np.linalg.eigh(cov)
     order = vals.argsort()[::-1]
@@ -683,39 +699,34 @@ def fig_drift_trajectories(
     angle = np.degrees(np.arctan2(*vecs[:, 0][::-1]))
     w, h_ = 2 * np.sqrt(np.maximum(vals, 0))
     ax.add_patch(_Ell(xy=human_centroid, width=w, height=h_, angle=angle,
-                      fc=THEME["text_muted"], alpha=0.06, ec=THEME["text_muted"],
+                      fc=THEME["text_muted"], alpha=0.07, ec=THEME["text_muted"],
                       lw=1.2, ls="--", zorder=2))
 
-    # ── LLM scatter (very light — centroids carry the story) ────────────
-    for label in llm_labels:
-        mask  = lbl_arr == label
-        color = PALETTE.get(label, "#AAAAAA")
-        ax.scatter(*coords[mask].T, c=color, s=10, alpha=0.15,
-                   zorder=3, rasterized=True)
-
     # ── Human centroid — star ─────────────────────────────────────────────
-    ax.scatter(*human_centroid, c="white", s=520, marker="*",
+    ax.scatter(*human_centroid, c="white", s=620, marker="*",
                edgecolors=THEME["text_muted"], linewidths=1.2, zorder=8)
     ax.annotate(
-        "Baseline humain (★)", human_centroid,
-        xytext=(12, -18), textcoords="offset points",
-        color=THEME["text_muted"], fontsize=9, fontstyle="italic",
-        bbox=dict(boxstyle="round,pad=0.25", fc=THEME["bg"], ec="none", alpha=0.80),
+        "★ Baseline humain", human_centroid,
+        xytext=(0, -34), textcoords="offset points",
+        color=THEME["text_muted"], fontsize=9.5, fontstyle="italic",
+        ha="center", va="top",
+        bbox=dict(boxstyle="round,pad=0.25", fc=THEME["bg"], ec="none", alpha=0.85),
+        zorder=9,
     )
 
-    # ── Arrows from human centroid → each LLM centroid ──────────────────
-    arrow_rads   = {"GPT-4": 0.18, "Claude 3": -0.15, "Mistral 7B": 0.28, "Gemini Pro": -0.22}
+    # ── Arrows + labels ───────────────────────────────────────────────────
+    arrow_rads   = {"GPT-4": 0.25, "Claude 3": -0.30, "Mistral 7B": 0.35, "Gemini Pro": -0.20}
     label_offsets = {
-        "GPT-4":      (-10, -44),
-        "Claude 3":   (-20,  28),
-        "Mistral 7B": ( 18,  28),
-        "Gemini Pro": (-20, -40),
+        "GPT-4":      (-78,  12),
+        "Claude 3":   ( 65,  -8),
+        "Mistral 7B": ( 18,  24),
+        "Gemini Pro": (-18,  24),
     }
-    delta_nudge = {
-        "GPT-4":      np.array([ 0.012, -0.035]),
-        "Claude 3":   np.array([-0.025,  0.018]),
-        "Mistral 7B": np.array([ 0.040,  0.022]),
-        "Gemini Pro": np.array([-0.022, -0.028]),
+    label_ha = {
+        "GPT-4":      "right",
+        "Claude 3":   "left",
+        "Mistral 7B": "left",
+        "Gemini Pro": "right",
     }
 
     for label in llm_labels:
@@ -724,38 +735,24 @@ def fig_drift_trajectories(
         mean_shift = float(np.mean(shifts_all[label]))
         rad        = arrow_rads.get(label, 0.20)
 
-        # Curved arrow
         ax.annotate(
             "", xy=(cx, cy), xytext=human_centroid,
             arrowprops=dict(
-                arrowstyle="-|>", color=color, lw=2.8,
-                connectionstyle=f"arc3,rad={rad}", mutation_scale=22,
+                arrowstyle="-|>", color=color, lw=3.0,
+                connectionstyle=f"arc3,rad={rad}", mutation_scale=24,
             ),
             zorder=7,
         )
+        ax.scatter([cx], [cy], c=color, s=380, marker="X",
+                   edgecolors="white", linewidths=1.6, zorder=10)
 
-        # Δ annotation near arrow midpoint
-        nudge = delta_nudge.get(label, np.array([0.02, 0.015]))
-        mid   = 0.5 * (human_centroid + np.array([cx, cy])) + nudge * (
-            np.array([cx, cy]) - human_centroid
-        ).mean()
+        dx, dy = label_offsets.get(label, (14, 8))
+        ha     = label_ha.get(label, "left")
         ax.annotate(
-            f"Δ = {mean_shift:.3f}", mid,
-            color=color, fontsize=8.5, fontstyle="italic", ha="center", va="center",
-            bbox=dict(boxstyle="round,pad=0.22", fc=THEME["bg"], ec=color, alpha=0.85, lw=0.6),
-            zorder=9,
-        )
-
-        # LLM centroid marker
-        ax.scatter([cx], [cy], c=color, s=360, marker="X",
-                   edgecolors="white", linewidths=1.5, zorder=10)
-
-        # Model label
-        dx, dy = label_offsets.get(label, (12, 6))
-        ax.annotate(
-            label, (cx, cy), color=color, fontsize=11, fontweight="bold",
+            f"{label}\nΔ = {mean_shift:.3f}", (cx, cy),
+            color=color, fontsize=11, fontweight="bold", ha=ha,
             xytext=(dx, dy), textcoords="offset points",
-            bbox=dict(boxstyle="round,pad=0.32", fc=THEME["bg"], ec="none", alpha=0.90),
+            bbox=dict(boxstyle="round,pad=0.32", fc=THEME["bg"], ec="none", alpha=0.92),
             zorder=11,
         )
 
@@ -766,7 +763,7 @@ def fig_drift_trajectories(
         "★ = human centroid  ·  ✕ = LLM centroid  ·  Δ = mean cosine shift",
         color=THEME["text_primary"], pad=16,
     )
-    ax.grid(alpha=0.03, color=THEME["grid"])
+    ax.grid(alpha=0.02, color=THEME["grid"])
     _save(fig, "drift_trajectories.png", results_dir)
 
 
